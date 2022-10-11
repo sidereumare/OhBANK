@@ -1,0 +1,10 @@
+[book]
+authors = ["Rewanth Tammana"]
+language = "en"
+multilingual = false
+src = "."
+title = "Damn Vulnerable Bank"
+
+[output.html]
+default-theme = "navy"
+google-analytics = "UA-198321670-3"

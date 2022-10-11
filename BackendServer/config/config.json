@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "password",
+    "database": "dvba",
+    "host": "mysql",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "password",
+    "database": "dvba",
+    "host": "mysql",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "password",
+    "database": "dvba",
+    "host": "mysql",
+    "dialect": "mysql"
+  }
+}
