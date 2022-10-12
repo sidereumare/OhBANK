@@ -42,6 +42,7 @@
         android:layout_marginLeft="90dp"
         android:text="제목"/>
     <TextView
+        android:id="@+id/subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -60,13 +61,14 @@
         android:text="첨부파일"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/benif"
+        android:id="@+id/files"
         android:layout_width="196dp"
         android:layout_height="34dp"
         android:translationX="150dp"
         android:translationY="145dp" />
 
     <TextView
+        android:id="@+id/content"
         android:layout_width="252dp"
         android:layout_height="278dp"
         android:layout_marginLeft="90dp"

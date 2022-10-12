@@ -112,7 +112,8 @@ public static final String beneficiary_account_number="beneficiary_account_numbe
                 HashMap headers=new HashMap();
                 headers.put("Authorization","Bearer "+retrivedToken);
                 return headers;
-            }};
+            }
+        };
 
         queue.add(jsonArrayRequest);
         queue.getCache().clear();
