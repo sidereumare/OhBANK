@@ -11,9 +11,9 @@
         android:id="@+id/imageView"
         android:layout_marginTop="200dp"
         android:layout_width="89dp"
-        android:layout_marginLeft="150dp"
+        android:layout_marginLeft="155dp"
         android:layout_height="61dp"
-        app:srcCompat="@drawable/person" />
+        app:srcCompat="@drawable/sends" />
 
 
     <TextView
@@ -53,10 +53,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/circle"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_below="@+id/edamt"
         android:layout_marginTop="12dp"
         android:onClick="Biometrics"
         android:layout_marginLeft="155dp"
         android:text="Send Money"/>
+    <ImageView
+        android:layout_width="118dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/bank"
+        android:translationX="145dp"
+        android:translationY="450dp" />
 </RelativeLayout>

@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/orange"
         android:textStyle="bold"
         android:layout_marginTop="192dp"
         android:layout_marginLeft="110dp"
@@ -23,14 +23,23 @@
         android:layout_marginLeft="150dp"/>
 
     <Button
-        android:layout_below="@+id/edt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/edt"
+        android:layout_marginLeft="140dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/circle"
-        android:text="Add Benificiary"
         android:onClick="addBeneficiary"
-        android:textColor="@color/white"
-        android:layout_marginLeft="140dp"/>
+        android:text="Add Benificiary"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:layout_width="118dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/bank"
+        android:translationX="145dp"
+        android:translationY="490dp" />
+
 
 </RelativeLayout>
