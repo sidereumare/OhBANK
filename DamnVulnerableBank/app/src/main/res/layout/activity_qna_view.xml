@@ -6,7 +6,24 @@
     android:layout_height="match_parent"
     android:background="@drawable/shadow"
     tools:context=".AddBeneficiary">
-
+    <Button
+        android:layout_width="62dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="215dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/circle"
+        android:onClick="addBeneficiary"
+        android:text="수정"
+        android:textColor="@color/black" />
+    <Button
+        android:layout_width="62dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/circle"
+        android:onClick="addBeneficiary"
+        android:text="삭제"
+        android:textColor="@color/black" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,26 +33,47 @@
         android:textColor="@color/orange"
         android:textSize="20sp"
         android:textStyle="bold" />
-
-
-
-    <Button
-        android:layout_width="50dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="290dp"
-        android:layout_marginTop="90dp"
-        android:background="@drawable/circle"
-        android:onClick="addBeneficiary"
-        android:text="글작성"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="90dp"
+        android:text="제목"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="120dp"
+        android:text="제목 변수"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="90dp"
+        android:text="첨부파일"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/benif"
-        android:layout_width="247dp"
-        android:layout_height="346dp"
-        android:translationX="70dp"
-        android:translationY="150dp" />
+        android:layout_width="196dp"
+        android:layout_height="34dp"
+        android:translationX="150dp"
+        android:translationY="145dp" />
 
+    <TextView
+        android:layout_width="252dp"
+        android:layout_height="278dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="200dp"
+        android:text="내용"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/empty_view"
         android:layout_width="match_parent"
