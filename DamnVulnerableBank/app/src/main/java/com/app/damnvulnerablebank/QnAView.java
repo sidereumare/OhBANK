@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +32,6 @@ public class QnAView extends AppCompatActivity{
         setContentView(R.layout.activity_qna_view);
         Intent intent = getIntent();
         String qnaID = intent.getStringExtra("qna_id");
-        
         SharedPreferences sharedPreferences = getSharedPreferences("jwt", Context.MODE_PRIVATE);
         final String retrivedToken  = sharedPreferences.getString("accesstoken",null);
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -39,6 +39,13 @@ public class QnAView extends AppCompatActivity{
         final String url  = sharedPreferences.getString("apiurl",null);
         String endpoint="/api/qna/view";
         String finalurl = url+endpoint;
+
+        // view qna
+        final TextView subjectView=findViewById(R.id.subject);
+        final TextView contentView=findViewById(R.id.content);
+        final TextView dateView=findViewById(R.id.date);
+        final TextView writerView=findViewById(R.id.writer);
+        final TextView fileView=findViewById(R.id.file);
 
         // create request body
         JSONObject requestData = new JSONObject();
@@ -59,9 +66,27 @@ public class QnAView extends AppCompatActivity{
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
-
-                            Toast.makeText(getApplicationContext(), decryptedResponse.toString(), Toast.LENGTH_SHORT).show();
                             
+                            // Check for error message
+                            if(decryptedResponse.getJSONObject("status").getInt("code") != 200) {
+                                Toast.makeText(getApplicationContext(), "Error: " + decryptedResponse.getJSONObject("data").getString("message"), Toast.LENGTH_SHORT).show();
+                                return;
+                                // This is buggy. Need to call Login activity again if incorrect credentials are given
+                            }
+
+                            JSONObject obj = decryptedResponse.getJSONObject("data");
+                            String subject=obj.getString("subject");
+                            String content=obj.getString("content");
+                            String writer=obj.getString("writer");
+                            String date=obj.getString("date");
+                            JSONArray fileNames=obj.getJSONArray("file_name");
+                            JSONArray fileIds=obj.getJSONArray("file_id");
+
+                            subjectView.setText(subject);
+                            contentView.setText(content);
+                            writerView.setText(writer);
+                            dateView.setText(date);
+                            fileView.setText(fileNames.toString());
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -82,5 +107,6 @@ public class QnAView extends AppCompatActivity{
         };
 
         requestQueue.add(jsonObjectRequest);
+
     }
 }
