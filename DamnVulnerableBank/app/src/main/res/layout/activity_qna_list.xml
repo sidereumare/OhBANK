@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PendingBeneficiary">
+    tools:context=".QnAlist">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pendb"
+        android:id="@+id/listb"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="142dp" />
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/empty_view"

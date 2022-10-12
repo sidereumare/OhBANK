@@ -9,10 +9,10 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_marginTop="200dp"
-        android:layout_width="89dp"
+        android:layout_width="100dp"
         android:layout_marginLeft="150dp"
-        android:layout_height="61dp"
-        app:srcCompat="@drawable/person" />
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/addben" />
 
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/accountid"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="120dp"
         android:hint="Enter Account ID Again"
         android:inputType="numberDecimal"
         android:textStyle="bold"
@@ -40,12 +40,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/circle"
-        android:textColor="@color/white"
         android:layout_below="@+id/accountid1"
+        android:layout_marginLeft="125dp"
         android:layout_marginTop="12dp"
+        android:background="@drawable/circle"
         android:onClick="approveBeneficiary"
-        android:layout_marginLeft="115dp"
-        android:text="Approve Benificiary "/>
-
+        android:text="Approve Benificiary "
+        android:textColor="@color/black" />
+    <ImageView
+        android:layout_width="118dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/bank"
+        android:translationX="145dp"
+        android:translationY="490dp" />
 </RelativeLayout>

@@ -6,33 +6,44 @@
     android:layout_height="match_parent"
     android:background="@drawable/shadow"
     tools:context=".AddBeneficiary">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="62dp"
+        android:text="QnA 게시판"
         android:textColor="@color/orange"
-        android:textStyle="bold"
-        android:layout_marginTop="192dp"
-        android:layout_marginLeft="110dp"
-        android:text="Enter Account Number"/>
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/edt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="220dp" />
+
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edt"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="90dp"
         android:background="@drawable/circle"
         android:onClick="addBeneficiary"
-        android:text="Add Benificiary"
+        android:text="글작성"
         android:textColor="@color/black" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/benif"
+        android:layout_width="247dp"
+        android:layout_height="346dp"
+        android:translationX="70dp"
+        android:translationY="150dp" />
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="30sp"
+        android:text="You have no active benificiaries to show" />
     <ImageView
         android:layout_width="118dp"
         android:layout_height="100dp"
