@@ -37,8 +37,6 @@ public class ViewBalance extends AppCompatActivity {
         String endpoint="/api/balance/view";
         String finalurl = url+endpoint;
 
-
-
         final JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, finalurl,null,
                 new Response.Listener<JSONObject>()  {
                     @Override
