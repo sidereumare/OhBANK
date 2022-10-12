@@ -1,6 +1,7 @@
 package com.app.damnvulnerablebank;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -25,10 +26,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class QnAView extends AppCompatActivity{
+    FileAdapter fadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +54,7 @@ public class QnAView extends AppCompatActivity{
         // view qna
         final TextView subjectView=findViewById(R.id.subject);
         final TextView contentView=findViewById(R.id.content);
-//        final TextView dateView=findViewById(R.id.date);
-//        final TextView writerView=findViewById(R.id.writer);
-//        final TextView fileView=findViewById(R.id.file);
-        final RecyclerView files = findViewById(R.id.files);
+        final RecyclerView recyclerView = findViewById(R.id.files);
 
         // create request body
         JSONObject requestData = new JSONObject();
@@ -90,13 +91,29 @@ public class QnAView extends AppCompatActivity{
                             String date=decryptedResponse.getString("date");
                             JSONArray fileNames=decryptedResponse.getJSONArray("file_name");
                             JSONArray fileIds=decryptedResponse.getJSONArray("file_id");
+                            //fileNames to list array
+                            List<String> fileNamesList = Arrays.asList(new String[fileNames.length()]);
+                            List<String> fileIdsList = Arrays.asList(new String[fileIds.length()]);
+                            for(int i=0;i<fileNames.length();i++){
+                                fileNamesList.set(i, fileNames.getString(i));
+                                fileIdsList.set(i, fileIds.getString(i));
+                            }
 
                             subjectView.setText(subject);
                             contentView.setText(content);
-                            
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            fadapter = new FileAdapter(getApplicationContext(), fileNamesList);
+                            recyclerView.setAdapter(fadapter);
+
+                            Integer count = fadapter.getItemCount();
+                            if(count == 0){
+                                recyclerView.setVisibility(View.GONE);
+                            }else{
+                                recyclerView.setVisibility(View.VISIBLE);
+                            }
                             //add recyclerview texts
                             //files.setAdapter(new FileAdapter(getApplicationContext(), fileNames, fileIds, retrivedToken, url));
-                            files.setHasFixedSize(true);
+                            recyclerView.setHasFixedSize(true);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -105,8 +122,6 @@ public class QnAView extends AppCompatActivity{
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-
                 Toast.makeText(getApplicationContext(), "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {
