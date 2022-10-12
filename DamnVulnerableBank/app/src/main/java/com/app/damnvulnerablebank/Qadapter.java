@@ -33,7 +33,7 @@ public class Qadapter extends RecyclerView.Adapter<Qadapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.custom_qna,parent,false);
+        View view = inflater.inflate(R.layout.custom_qna_list,parent,false);
         return new ViewHolder(view);
     }
 
