@@ -44,10 +44,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/benif"
-        android:layout_width="192dp"
-        android:layout_height="39dp"
+        android:layout_width="196dp"
+        android:layout_height="34dp"
         android:translationX="150dp"
-        android:translationY="140dp" />
+        android:translationY="145dp" />
 
     <TextView
         android:layout_width="252dp"
