@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/kuchbhiblue"
+    android:background="@color/white"
     tools:context=".Dashboard">
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,26 +19,28 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp">
-        <TextView
-            android:id="@+id/dasht"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dashboard"
-            android:padding="10dp"
-            android:textSize="30sp"
-            android:textAllCaps="true"
-            android:fontFamily="@font/muli_extrabold" />
+
+            <TextView
+                android:id="@+id/dasht"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_extrabold"
+                android:padding="10dp"
+                android:text="메뉴"
+                android:textAllCaps="true"
+                android:textColor="#FF9800"
+                android:textSize="30sp" />
 
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="290dp"
+                android:layout_marginLeft="280dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/circle"
                 android:onClick="logout"
                 android:text="Logout"
-                android:textColor="@color/white" />
+                android:textColor="@color/black" />
         </RelativeLayout>
 <GridLayout
     android:layout_width="match_parent"
@@ -75,11 +77,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:padding="2dp"
-                android:text="Add Benificiary"
+                android:text="계좌 등록"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -111,11 +113,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:padding="2dp"
-                android:text="View Benificiary"
+                android:text="계좌 확인"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -147,11 +149,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:padding="2dp"
-                android:text="My Balance"
+                android:text="자산현황"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -183,11 +185,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="65dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:padding="2dp"
-                android:text="Transfer Money"
+                android:text="이체"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -219,11 +221,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:padding="2dp"
-                android:text="Transactions"
+                android:text="이체내역"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -255,11 +257,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:padding="2dp"
-                android:text="Approve Benf"
+                android:text="계좌 승인"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -282,8 +284,8 @@
             android:onClick="getCurrencyRates"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:src="@drawable/rates"/>
 
@@ -291,11 +293,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:padding="2dp"
-                android:text="Currency Rates"
+                android:text="환전"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -314,12 +316,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:padding="16dp"
+            android:padding="20dp"
             android:onClick="resetPassword"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:src="@drawable/passrest"/>
 
@@ -327,11 +329,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="37dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:padding="2dp"
-                android:text="Password Reset"
+                android:text="공동인증"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -363,11 +365,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="45dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:padding="2dp"
-                android:text="My Profile"
+                android:text="내 정보"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
