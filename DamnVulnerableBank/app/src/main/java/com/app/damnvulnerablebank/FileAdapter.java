@@ -14,8 +14,12 @@ import java.util.List;
 public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> {
 
     LayoutInflater inflater;
-    List<String> records;
+    List<FileInfo> records;
     private OnItemClickListener mListener;
+
+    public FileInfo getItem(int position) {
+        return  records.get(position);
+    }
 
     public interface OnItemClickListener{
         void onItemClick(int position);
@@ -25,7 +29,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> {
         mListener = listener;
     }
 
-    public FileAdapter(Context ctx,List<String> records){
+    public FileAdapter(Context ctx,List<FileInfo> records){
         this.inflater=LayoutInflater.from(ctx);
         this.records=records;
     }
@@ -39,7 +43,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.fileName.setText(records.get(position));
+        holder.fileName.setText(records.get(position).getFileName());
     }
 
     @Override

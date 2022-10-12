@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/shadow"
     tools:context=".AddBeneficiary">
+
     <Button
         android:layout_width="62dp"
         android:layout_height="36dp"
         android:layout_marginLeft="215dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/circle"
-        android:onClick="addBeneficiary"
+        android:onClick="edit"
         android:text="수정"
         android:textColor="@color/black" />
     <Button
@@ -21,7 +22,7 @@
         android:layout_marginLeft="280dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/circle"
-        android:onClick="addBeneficiary"
+        android:onClick="delete"
         android:text="삭제"
         android:textColor="@color/black" />
     <TextView
