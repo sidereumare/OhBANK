@@ -63,6 +63,9 @@ public class Dashboard extends AppCompatActivity {
     public void getCurrencyRates(View v){
         startActivity(new Intent(getApplicationContext(), CurrencyRates.class));
     }
+    public void viewQnAList(View V){
+        startActivity(new Intent(getApplicationContext(), QnAlist.class));
+    }
 
 
     @Override

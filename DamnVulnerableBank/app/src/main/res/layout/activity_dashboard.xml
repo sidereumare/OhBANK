@@ -406,7 +406,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:onClick="myprofile"
+                    android:onClick="viewQnAList"
                     android:orientation="vertical"
                     android:padding="16dp">
 
