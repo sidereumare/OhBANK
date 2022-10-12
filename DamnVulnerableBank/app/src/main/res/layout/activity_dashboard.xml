@@ -414,7 +414,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/passrest" />
+                        android:src="@drawable/QnA" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -424,7 +424,7 @@
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/muli_extrabold"
                         android:padding="2dp"
-                        android:text="공동 인증서"
+                        android:text="QnA 게시판"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
