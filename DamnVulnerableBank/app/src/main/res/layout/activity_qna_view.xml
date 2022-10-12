@@ -6,7 +6,24 @@
     android:layout_height="match_parent"
     android:background="@drawable/shadow"
     tools:context=".AddBeneficiary">
-
+    <Button
+        android:layout_width="62dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="215dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/circle"
+        android:onClick="addBeneficiary"
+        android:text="수정"
+        android:textColor="@color/black" />
+    <Button
+        android:layout_width="62dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/circle"
+        android:onClick="addBeneficiary"
+        android:text="삭제"
+        android:textColor="@color/black" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
