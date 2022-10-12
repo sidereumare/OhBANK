@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="342dp"
         android:layout_height="155dp"
-        android:src="@drawable/myprofile" />
+        android:src="@drawable/addben" />
 
     <TextView
         android:id="@+id/textView"
@@ -77,5 +77,11 @@
         tools:layout_editor_absoluteX="78dp"
         tools:layout_editor_absoluteY="226dp" />
 
-
+    <ImageView
+        android:layout_width="118dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/bank"
+        android:translationX="145dp"
+        android:translationY="620dp" />
 </RelativeLayout>

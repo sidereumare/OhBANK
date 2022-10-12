@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp"
+    android:padding="10dp"
     tools:context=".RegisterBank">
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:fontFamily="@font/muli_extrabold"
             android:text="Signup"
             android:textAllCaps="true"
-            android:textColor="#000000"
+            android:textColor="@color/orange"
             android:textSize="40sp" />
 
 
@@ -102,8 +102,14 @@
             android:text="Signup"
             android:onClick="register"
             android:layout_gravity="center"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/black"/>
 
-
+        <ImageView
+            android:layout_width="118dp"
+            android:layout_height="100dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/bank"
+            android:translationX="145dp"
+            android:translationY="4dp" />
     </LinearLayout>
 </ScrollView>
