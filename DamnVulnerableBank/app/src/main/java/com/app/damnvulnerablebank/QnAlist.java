@@ -1,11 +1,11 @@
 package com.app.damnvulnerablebank;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -29,29 +29,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ViewBeneficiaryAdmin extends AppCompatActivity  implements Badapter.OnItemClickListener {
-public static final String beneficiary_account_number="beneficiary_account_number";
+public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickListener {
     RecyclerView recyclerView;
-    List<BeneficiaryRecords> brecords;
+    List<QnAlistRecords> qrecords;
     private TextView emptyView;
-    Badapter badapter;
+    Qadapter qadapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viewbenif);
-        recyclerView=findViewById(R.id.benif);
-        emptyView=findViewById(R.id.empty_view);
-        brecords=new ArrayList<>();
-        viewBeneficiaries();
+        setContentView(R.layout.activity_qna_list);
+        recyclerView=findViewById(R.id.listb);
+        qrecords = new ArrayList<>();
+        emptyView = findViewById(R.id.empty_view);
+        viewQnAlist();
     }
-    public void viewBeneficiaries(){
+
+    public void viewQnAlist(){
         SharedPreferences sharedPreferences = getSharedPreferences("apiurl", Context.MODE_PRIVATE);
         final String url = sharedPreferences.getString("apiurl",null);
-        String endpoint = "/api/beneficiary/view";
+        String endpoint = "/api/qna/list";
         final String finalurl = url+endpoint;
         RequestQueue queue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonArrayRequest=new JsonObjectRequest(Request.Method.POST, finalurl, null,
+        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.POST, finalurl, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -66,17 +66,20 @@ public static final String beneficiary_account_number="beneficiary_account_numbe
                                 // This is buggy. Need to call Login activity again if incorrect credentials are given
                             }
 
-                            JSONArray jsonArray=decryptedResponse.getJSONArray("data");
-                            for(int i=0;i<jsonArray.length();i++) {
-                                JSONObject transrecobject = jsonArray.getJSONObject(i);
-                                BeneficiaryRecords brecorder = new BeneficiaryRecords();
-                                String approved=transrecobject.getString("approved").toString();
-                                if(approved=="false")
-                                {continue;}
-                                else{
-                                brecorder.setBeneficiaryAccount(transrecobject.getString("beneficiary_account_number").toString());
-                                //brecorder.setIsapproved(transrecobject.getString("approved").toString());
-                                brecords.add(brecorder);}
+                            JSONArray jsonArray = decryptedResponse.getJSONArray("data");
+
+                            for(int i = 0; i<jsonArray.length(); i++){
+                                JSONObject qnalistobject = jsonArray.getJSONObject(i);
+                                QnAlistRecords qrecorder = new QnAlistRecords();
+                                String subject = qnalistobject.getString("subject").toString();
+                                String writer = qnalistobject.getString("writer").toString();
+                                String date = qnalistobject.getString("date").toString();
+                                String id = qnalistobject.getString("id").toString();
+
+                                qrecorder.setSubject(subject);
+                                qrecorder.setWriter(writer);
+                                qrecorder.setDate(date);
+                                qrecorder.setId(id);
                             }
 
                         } catch (JSONException e) {
@@ -84,11 +87,11 @@ public static final String beneficiary_account_number="beneficiary_account_numbe
                         }
 
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        badapter=new Badapter(getApplicationContext(),brecords);
-                        recyclerView.setAdapter(badapter);
+                        qadapter = new Qadapter(getApplicationContext(), qrecords);
+                        recyclerView.setAdapter(qadapter);
 
-                        Integer count=badapter.getItemCount();
-                        if (count == 0) {
+                        Integer count = qadapter.getItemCount();
+                        if(count==0){
                             recyclerView.setVisibility(View.GONE);
                             emptyView.setVisibility(View.VISIBLE);
                         }
@@ -96,9 +99,9 @@ public static final String beneficiary_account_number="beneficiary_account_numbe
                             recyclerView.setVisibility(View.VISIBLE);
                             emptyView.setVisibility(View.GONE);
                         }
-                        badapter.setOnItemClickListener(ViewBeneficiaryAdmin.this);
-                    }
+                        qadapter.setOnItemClickListener(QnAlist.this);
 
+                    }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -106,7 +109,7 @@ public static final String beneficiary_account_number="beneficiary_account_numbe
             }
         }){
             @Override
-            public Map getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 SharedPreferences sharedPreferences = getSharedPreferences("jwt", Context.MODE_PRIVATE);
                 final String retrivedToken  = sharedPreferences.getString("accesstoken",null);
                 HashMap headers=new HashMap();
@@ -119,12 +122,9 @@ public static final String beneficiary_account_number="beneficiary_account_numbe
         queue.getCache().clear();
     }
 
+
     @Override
     public void onItemClick(int position) {
-        Intent de=new Intent(this, SendMoney.class);
-        BeneficiaryRecords cf =brecords.get(position);
 
-        de.putExtra(beneficiary_account_number,cf.getBeneficiaryAccount());
-        startActivity(de);
     }
 }
