@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shadow"
     tools:context=".AddBeneficiary">
 
     <TextView
@@ -31,9 +30,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/benif"
-        android:layout_width="247dp"
-        android:layout_height="346dp"
-        android:translationX="70dp"
+        android:layout_width="397dp"
+        android:layout_height="369dp"
+        android:translationX="10dp"
         android:translationY="150dp" />
 
     <TextView

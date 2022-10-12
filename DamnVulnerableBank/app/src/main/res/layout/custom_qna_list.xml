@@ -19,16 +19,16 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
 
             <TextView
                 android:id="@+id/idd"
                 android:layout_width="37dp"
-                android:layout_height="37dp"
+                android:layout_height="36dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="355dp"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
                 android:layout_height="35dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="160dp"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,19 +54,20 @@
                 android:layout_height="35dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="80dp"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.142" />
+
             <TextView
                 android:id="@+id/date"
                 android:layout_width="74dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="3dp"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
