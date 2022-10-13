@@ -40,6 +40,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       onDelete: 'CASCADE'
     });
+    Users.hasMany(models.file, {
+      foreignKey: 'user_id',
+      sourceKey: 'id',
+      allowNull: false,
+      onDelete: 'CASCADE'
+    });
   };
 	return Users;
 };

@@ -1,7 +1,7 @@
 const users = require("./users");
 
 module.exports = function(sequelize, DataTypes) {
-    var QnA = sequelize.define("qna", {
+    var File = sequelize.define("file", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -11,31 +11,24 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        content: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        writer_id: {
+        qna_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        write_at: {
-            type: DataTypes.DATE,
+        user_id: {
+            type: DataTypes.INTEGER,
             allowNull: false
         }
     }, {
         timestamps: false
     });
-    QnA.associate = (models) => {
-        QnA.belongsTo(models.users, {
-            foreignKey: 'writer_id',
+    File.associate = (models) => {
+        File.belongsTo(models.users, {
+            foreignKey: 'user_id',
         });
-        QnA.hasMany(models.file, {
+        File.belongsTo(models.qna, {
             foreignKey: 'qna_id',
-            sourceKey: 'id',
-            allowNull: false,
-            onDelete: 'CASCADE'
         });
     };
-    return QnA;
-};
+    return File;
+}

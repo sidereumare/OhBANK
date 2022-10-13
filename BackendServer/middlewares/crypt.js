@@ -25,8 +25,8 @@ const encrypt = (input) => {
   return b64;
 }
 
-// console.log(encrypt('{"username":"user1", "password":"password1"}'));
-console.log(decrypt('Gk8SDggaEhJPWwFLDQgFCENAW15XTU8MHxodBgYIQ0BLPRICDgQJGkwaTU8FGx0PRVs2GlgdBxMNCENASxoOFQEES0tCRRYfCA4MMQYVT1tYW15VUUBRS0ReVjVdUUBZXl1RXU9KWV49Q0FDDxoLFUNXGlgACkVbXE1YHB0CEwMAFwxMXUMYEh8bX0UcEE0BSxoOFQEEWFNMEwgZDR9bTEtDGhMTHQs4ABlDQEtcV1NdTEpYQ1dQOVFKU15XW11RVFleVztPTVgcHQITT1sBSwcDQ1dQVksbFAQfDxsEC0VbTxQJDBxWQxAcJxQ='));
+console.log(encrypt('{"qna_id":"1"}'));
+console.log(decrypt('Gk8SDggaEhJPWwFLDQgFCENAW15XTU8MHxodBgYIQ0BLPRICDgQJGkwaTU8FGx0PRVsWQw4AGgsET1tYHQcTDQhQWEVMBA4DFR8HGkVbTwIVBxoCDxlQWEVMEBMEFR82DxNDV0NIWVxXTF1QV1lfRRwQ'));
 
 /**
  * Encryption middleware
