@@ -1,3 +1,5 @@
+const users = require("./users");
+
 module.exports = function(sequelize, DataTypes) {
     var QnA = sequelize.define("qna", {
         id: {
@@ -14,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         writer_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         write_at: {
@@ -24,5 +26,6 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         timestamps: false
     });
+    QnA.belongsTo(users, {foreignKey: 'writer_id'});
     return QnA;
 };

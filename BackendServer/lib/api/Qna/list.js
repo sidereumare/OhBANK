@@ -15,13 +15,17 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  */
 router.post("/", validateUserToken, (req, res) => {
     var r = new Response();
-    let { account_number } = req;
 
+    // qnd join id
     Model.qna.findAll({
+        include: [{
+            model: Model.users,
+            attributes: ['username']
+        }],
         where: {
-            account_number: account_number,
+            account_number: req.account_number,
         },
-        attributes: ["subject", "content", "date"],
+        attributes: ["title", "content", "write_at"],
     })
         .then((data) => {
             r.status = statusCodes.SUCCESS;
@@ -36,3 +40,5 @@ router.post("/", validateUserToken, (req, res) => {
             return res.json(encryptResponse(r));
         });
 });
+
+module.exports = router;

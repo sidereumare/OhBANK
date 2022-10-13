@@ -6,3 +6,4 @@ var statusCodes = require("../../statusCodes");
 var { validateUserToken } = require("../../../middlewares/validateToken");
 var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 
+module.exports = router;

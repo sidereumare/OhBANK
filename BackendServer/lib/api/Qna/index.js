@@ -15,3 +15,5 @@ router.use('/rewrite', rewrite);
 router.use('/view', view);
 router.use('/write', write);
 module.exports = router;
+
+module.exports = router;
