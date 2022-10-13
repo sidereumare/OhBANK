@@ -1,5 +1,7 @@
+const users = require("./users");
+
 module.exports = function(sequelize, DataTypes) {
-    var QnA = sequelize.define("qna", {
+    var QnA = sequelize.define("qnas", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -14,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         writer_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         write_at: {
@@ -24,5 +26,10 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         timestamps: false
     });
+    QnA.associate = (models) => {
+        QnA.belongsTo(models.users, {
+            foreignKey: 'writer_id',
+        });
+    };
     return QnA;
 };
