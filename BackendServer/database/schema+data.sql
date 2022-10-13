@@ -60,7 +60,16 @@ INSERT INTO `beneficiaries` values (default, 111111, 333333, true);
 INSERT INTO `beneficiaries` values (default, 111111, 444444, true);
 
 INSERT INTO `qnas` values (default, "title1", "content1", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "title2", "awerfwafsaf", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "134", "3243434234afdwae", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "제목이지롱", "tssaf", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "가나다람", "content2", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "tawefa", "awefewevasdf", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "title2", "content2", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "ㅇㄹ33", "content2", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "ㅌㅇㅈㄷㅍ", "content2", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "asdvcasv", "content2", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "test525", "content2", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "title3", "content2", 2, "2020-01-01");
 
 INSERT INTO `files` values (default, "file1", 1, 1);

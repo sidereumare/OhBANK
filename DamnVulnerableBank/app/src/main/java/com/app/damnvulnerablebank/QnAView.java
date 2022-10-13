@@ -91,19 +91,22 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
+
+                            Log.i("enc_data", decryptedResponse.toString());
 //                              JSONObject decryptedResponse = new JSONObject(response.get("enc_data").toString());
 
-                            String subject=decryptedResponse.getString("title");
-                            String content=decryptedResponse.getString("content");
-                            JSONArray fileNames=decryptedResponse.getJSONArray("file_name");
-                            JSONArray fileIds=decryptedResponse.getJSONArray("file_id");
-                            
+                            JSONObject data = decryptedResponse.getJSONObject("data");
+
+                            String subject=data.getString("title");
+                            String content=data.getString("content");
+                            JSONArray file=data.getJSONArray("file");
+
                             // make fileinfo list
                             List<FileInfo> fileInfoes = new ArrayList<>();
-                            for(int i=0; i<fileNames.length(); i++){
+                            for(int i=0; i<file.length(); i++){
                                 FileInfo fileInfo = new FileInfo();
-                                fileInfo.setFileName(fileNames.getString(i));
-                                fileInfo.setFileID(fileIds.getString(i));
+                                fileInfo.setFileName(file.getJSONObject(i).getString("file_name"));
+                                fileInfo.setFileID(file.getJSONObject(i).getString("id"));
                                 fileInfoes.add(fileInfo);
                             }
 
@@ -121,7 +124,7 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
                                 recyclerView.setVisibility(View.VISIBLE);
                             }
                             //add recyclerview texts
-                            //files.setAdapter(new FileAdapter(getApplicationContext(), fileNames, fileIds, retrivedToken, url));
+//                            files.setAdapter(new FileAdapter(getApplicationContext(), fileNames, fileIds, retrivedToken, url));
                             recyclerView.setHasFixedSize(true);
 
                         } catch (JSONException e) {
@@ -142,7 +145,6 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
             }
         };
         requestQueue.add(jsonObjectRequest);
-        requestQueue.getCache().clear();
 
     }
 
