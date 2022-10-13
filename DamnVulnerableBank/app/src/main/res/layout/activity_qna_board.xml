@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/shadow"
-    tools:context=".AddBeneficiary">
+    tools:context=".QnAlist">
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,12 +25,11 @@
         android:layout_marginLeft="290dp"
         android:layout_marginTop="90dp"
         android:background="@drawable/circle"
-        android:onClick="addBeneficiary"
         android:text="글작성"
         android:textColor="@color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/benif"
+        android:id="@+id/listb"
         android:layout_width="247dp"
         android:layout_height="346dp"
         android:translationX="70dp"

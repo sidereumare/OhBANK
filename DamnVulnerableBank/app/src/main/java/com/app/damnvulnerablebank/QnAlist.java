@@ -38,7 +38,7 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qna_list);
+        setContentView(R.layout.activity_qna_board);
         recyclerView=findViewById(R.id.listb);
         qrecords = new ArrayList<>();
         emptyView = findViewById(R.id.empty_view);
