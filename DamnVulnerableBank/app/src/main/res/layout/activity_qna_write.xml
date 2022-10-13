@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shadow"
     tools:context=".AddBeneficiary">
 
     <TextView
@@ -57,9 +56,9 @@
 
     <EditText
         android:id="@+id/content_write"
-        android:layout_width="271dp"
-        android:layout_height="228dp"
-        android:layout_marginLeft="70dp"
+        android:layout_width="396dp"
+        android:layout_height="426dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="190dp" />
 
     <TextView
@@ -85,8 +84,8 @@
         android:layout_height="100dp"
         android:layout_gravity="bottom"
         android:src="@drawable/bank"
-        android:translationX="145dp"
-        android:translationY="490dp" />
+        android:layout_alignParentBottom="true"
+        android:translationX="145dp" />
 
 
 </RelativeLayout>
