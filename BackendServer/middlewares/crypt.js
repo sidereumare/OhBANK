@@ -25,6 +25,9 @@ const encrypt = (input) => {
   return b64;
 }
 
+// console.log(encrypt('{"username":"user1", "password":"password1"}'));
+console.log(decrypt('Gk8SDggaEhJPWwFLDQgFCENAW15XTU8MHxodBgYIQ0BLPRICDgQJGkwaTU8FGx0PRVs2GlgdBxMNCENASxoOFQEES0tCRRYfCA4MMQYVT1tYW15VUUBRS0ReVjVdUUBZXl1RXU9KWV49Q0FDDxoLFUNXGlgACkVbXE1YHB0CEwMAFwxMXUMYEh8bX0UcEE0BSxoOFQEEWFNMEwgZDR9bTEtDGhMTHQs4ABlDQEtcV1NdTEpYQ1dQOVFKU15XW11RVFleVztPTVgcHQITT1sBSwcDQ1dQVksbFAQfDxsEC0VbTxQJDBxWQxAcJxQ='));
+
 /**
  * Encryption middleware
  * This middleware encrypts server response before forwarding to client
@@ -45,9 +48,11 @@ const encryptResponse = (input) => {
 const decryptRequest = function(req, res, next) {
   var r = new Response();
   try {
+    console.log(req.body);
     req.body = JSON.parse(decrypt(req.body.enc_data));
     next();
   } catch(err) {
+    
     r.status = statusCodes.BAD_INPUT;
     r.data = err;
     return res.json(r);
