@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -133,6 +134,10 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
 
     @Override
     public void onItemClick(int position) {
+        Intent de = new Intent(this, QnAView.class);
+        QnAlistRecords cf = qrecords.get(position);
 
+        de.putExtra("qna_id", cf.getId());
+        startActivity(de);
     }
 }

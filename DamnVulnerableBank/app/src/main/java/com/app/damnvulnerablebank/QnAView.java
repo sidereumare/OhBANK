@@ -55,7 +55,7 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
         setContentView(R.layout.activity_qna_view);
         Intent intent = getIntent();
 
-//        String qnaID = intent.getStringExtra("qna_id");
+        String qnaID = intent.getStringExtra("qna_id");
         qnaID = "123456";
 
         SharedPreferences sharedPreferences = getSharedPreferences("jwt", Context.MODE_PRIVATE);
