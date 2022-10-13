@@ -27,7 +27,24 @@ router.post("/", decryptRequest, (req, res) => {
     .then((data) => {
         r.status = statusCodes.SUCCESS;
         r.data = data;
-        return res.json(encryptResponse(r));
+
+        Model.file.findAll({
+            where: {
+                qna_id: qna_id
+            },
+            attributes: ["id", "file_name"]
+        })
+        .then((file_data) => {
+            r.data.dataValues.file = file_data;
+            console.log(r.data.dataValues);
+            return res.json(encryptResponse(r));
+        })
+        .catch((err) => {
+            r.status = statusCodes.SERVER_ERROR;
+            r.data = {
+                message: err.toString(),
+            };
+        });
     })
     .catch((err) => {
         r.status = statusCodes.SERVER_ERROR;
