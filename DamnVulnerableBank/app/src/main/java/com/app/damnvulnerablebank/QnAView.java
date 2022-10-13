@@ -56,7 +56,6 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
         Intent intent = getIntent();
 
         String qnaID = intent.getStringExtra("qna_id");
-        Log.i("qna_id", qnaID);
 
         SharedPreferences sharedPreferences = getSharedPreferences("jwt", Context.MODE_PRIVATE);
         retrivedToken = sharedPreferences.getString("accesstoken",null);
@@ -91,8 +90,6 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
-
-                            Log.i("enc_data", decryptedResponse.toString());
 //                              JSONObject decryptedResponse = new JSONObject(response.get("enc_data").toString());
 
                             JSONObject data = decryptedResponse.getJSONObject("data");
