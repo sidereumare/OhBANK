@@ -15,16 +15,15 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  */
 router.post("/", validateUserToken, (req, res) => {
     var r = new Response();
-
     // qnd join id
     Model.qna.findAll({
         include: [{
             model: Model.users,
-            attributes: ['username']
+            attributes: ['id', 'username'],
+            where: {
+                username: req.username
+            },
         }],
-        where: {
-            account_number: req.account_number,
-        },
         attributes: ["title", "content", "write_at"],
     })
         .then((data) => {
