@@ -16,6 +16,7 @@ import android.os.StrictMode;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
     String qnaID;
     TextView title;
     TextView content;
+    Button writeBtn;
     boolean rewrite;
 
     @Override
@@ -73,6 +75,11 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         title.setText(subject);
         content.setText(contents);
 
+        writeBtn = findViewById(R.id.writeBtn);
+        if(rewrite){
+            writeBtn.setText("수정");
+        }
+
         recyclerView = findViewById(R.id.files_write);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         fadapter = new FileAdapter(getApplicationContext(), new ArrayList<FileInfo>());
@@ -83,30 +90,41 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         retrivedToken = sharedPreferences.getString("token", null);
         
         sharedPreferences = getSharedPreferences("apiurl", MODE_PRIVATE);
-//        url = sharedPreferences.getString("apiurl", null);
-        url = "https://c0907315-9d56-485c-9837-59867dbd35f9.mock.pstmn.io";
+        url = sharedPreferences.getString("apiurl", null);
+//        url = "https://c0907315-9d56-485c-9837-59867dbd35f9.mock.pstmn.io";
 
         requestQueue = Volley.newRequestQueue(this);
     }
 
     public void writePost(View view) {
         String endpoint;
+        JSONObject requestData;
+        JSONObject requestDataEncrypted;
         if (rewrite) {
             endpoint = url + "/api/qna/rewrite";
-            Toast.makeText(getApplicationContext(), "수정함", Toast.LENGTH_SHORT).show();
+            requestData = new JSONObject();
+            requestDataEncrypted = new JSONObject();
+            try {
+                requestData.put("title", title.getText().toString());
+                requestData.put("content", content.getText().toString());
+                requestData.put("qna_id", qnaID);
+
+                requestDataEncrypted.put("enc_data", EncryptDecrypt.encrypt(requestData.toString()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         } else {
             endpoint = url + "/api/qna/write";
-            Toast.makeText(getApplicationContext(), "작성함", Toast.LENGTH_SHORT).show();
-        }
-        JSONObject requestData = new JSONObject();
-        JSONObject requestDataEncrypted = new JSONObject();
-        try {
-            requestData.put("title", title.getText().toString());
-            requestData.put("content", content.getText().toString());
+            requestData = new JSONObject();
+            requestDataEncrypted = new JSONObject();
+            try {
+                requestData.put("title", title.getText().toString());
+                requestData.put("content", content.getText().toString());
 
-            requestDataEncrypted.put("enc_data", EncryptDecrypt.encrypt(requestData.toString()));
-        } catch (JSONException e) {
-            e.printStackTrace();
+                requestDataEncrypted.put("enc_data", EncryptDecrypt.encrypt(requestData.toString()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, endpoint, requestDataEncrypted, new Response.Listener<JSONObject>() {

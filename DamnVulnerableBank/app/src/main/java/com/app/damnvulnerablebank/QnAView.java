@@ -151,8 +151,10 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
         Intent intent = new Intent(getApplicationContext(), QnAWrite.class);
         intent.putExtra("title", subject);
         intent.putExtra("content", content);
+        intent.putExtra("qna_id", qnaID);
         intent.putExtra("rewrite", true);
         startActivity(intent);
+        finish();
     }
 
     public void delete(View view){
