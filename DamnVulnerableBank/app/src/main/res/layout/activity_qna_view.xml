@@ -73,6 +73,7 @@
         android:layout_height="394dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="250dp"
+        android:background="@drawable/boxline"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
