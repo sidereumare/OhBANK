@@ -87,7 +87,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         recyclerView.setAdapter(fadapter);
 
         SharedPreferences sharedPreferences = getSharedPreferences("jwt", MODE_PRIVATE);
-        retrivedToken = sharedPreferences.getString("token", null);
+        retrivedToken = sharedPreferences.getString("accesstoken", null);
         
         sharedPreferences = getSharedPreferences("apiurl", MODE_PRIVATE);
         url = sharedPreferences.getString("apiurl", null);
@@ -159,7 +159,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", retrivedToken);
+                params.put("Authorization","Bearer "+retrivedToken);
                 return params;
             }
         };
