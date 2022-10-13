@@ -19,9 +19,6 @@ const s = new Readable();
 var fs = require('fs');
 const { response } = require("express");
 var file = fs.createReadStream('test1.png');
-router.get('/', function(req, res){
-    res.download(file); // Set disposition and send it.
-});
 router.post("/", decryptRequest, (req, res) => {
     var r = new Response();
     var file_id = req.body.file_id;
