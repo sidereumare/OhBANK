@@ -28,7 +28,7 @@ create table beneficiaries (
 create table qnas(
   id integer PRIMARY KEY auto_increment,
   title varchar(100) NOT NULL,
-  content varchar(100) NOT NULL,
+  content varchar(10000) NOT NULL,
   writer_id integer NOT NULL,
   write_at DATE NOT NULL,
   FOREIGN KEY(writer_id) REFERENCES users(id)
@@ -59,8 +59,8 @@ INSERT INTO `beneficiaries` values (default, 111111, 222222, true);
 INSERT INTO `beneficiaries` values (default, 111111, 333333, true);
 INSERT INTO `beneficiaries` values (default, 111111, 444444, true);
 
-INSERT INTO `qnas` values (default, "title1", "content1", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "title2", "awerfwafsaf", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "title1", "나는 자랑스런 태극기 앞에 조국과 민족의 무궁한 영광을 위하여 충성은 개뿔 아무거나 씁시다.\n가나다라 마바사 아니 이건 뭘 넣어서 쓸까요\n abcasdfawefksdfksadkfaskfkajwef \nwejfk3j2kfjasdkjfasjdfsadfsad", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "title2", "ㅁ낭러ㅏㅁㅈㄷ란아차추라ㅜㄷ람ㄴ\n가다아아아아두라ㅓ차ㅓ챠챠ㅓ챠ㅓ가ㅜㅏ구ㅏㅜ라ㅜ아ㅜ냐나 \nadsfaksjfkawheibfibcivbawib sdgtwkkasdjvg a\n a fiaw9ef9awfjsadfvfj3fnasdknva df", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "134", "3243434234afdwae", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "제목이지롱", "tssaf", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "가나다람", "content2", 1, "2020-01-01");
