@@ -44,6 +44,7 @@ router.post("/", decryptRequest, (req, res) => {
             r.data = {
                 message: err.toString(),
             };
+            return res.json(encryptResponse(r));
         });
     })
     .catch((err) => {
