@@ -56,13 +56,13 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
         Intent intent = getIntent();
 
         String qnaID = intent.getStringExtra("qna_id");
-        qnaID = "123456";
+        Log.i("qna_id", qnaID);
 
         SharedPreferences sharedPreferences = getSharedPreferences("jwt", Context.MODE_PRIVATE);
         retrivedToken = sharedPreferences.getString("accesstoken",null);
 
         sharedPreferences = getSharedPreferences("apiurl", Context.MODE_PRIVATE);
-        url  = "https://365bc10f-3036-4146-a776-e63e5f0748d5.mock.pstmn.io";//sharedPreferences.getString("apiurl",null);
+        url = sharedPreferences.getString("apiurl",null);
         String endpoint="/api/qna/view";
         String finalurl = url+endpoint;
         requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -90,13 +90,11 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-//                            JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
-                              JSONObject decryptedResponse = new JSONObject(response.get("enc_data").toString());
+                            JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
+//                              JSONObject decryptedResponse = new JSONObject(response.get("enc_data").toString());
 
-                            String subject=decryptedResponse.getString("subject");
+                            String subject=decryptedResponse.getString("title");
                             String content=decryptedResponse.getString("content");
-                            String writer=decryptedResponse.getString("writer");
-                            String date=decryptedResponse.getString("date");
                             JSONArray fileNames=decryptedResponse.getJSONArray("file_name");
                             JSONArray fileIds=decryptedResponse.getJSONArray("file_id");
                             
@@ -144,7 +142,6 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
             }
         };
         requestQueue.add(jsonObjectRequest);
-
 
     }
 
