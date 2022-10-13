@@ -92,7 +92,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
     public void writePost(View view) {
         String endpoint;
         if (rewrite) {
-            endpoint = url + "/api/qna/write";
+            endpoint = url + "/api/qna/rewrite";
             Toast.makeText(getApplicationContext(), "수정함", Toast.LENGTH_SHORT).show();
         } else {
             endpoint = url + "/api/qna/write";
