@@ -65,8 +65,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         retrivedToken = sharedPreferences.getString("token", null);
         
         sharedPreferences = getSharedPreferences("apiurl", MODE_PRIVATE);
-        // url = sharedPreferences.getString("apiurl", null);
-        url = "";
+        url = sharedPreferences.getString("apiurl", null);
 
         requestQueue = Volley.newRequestQueue(this);
     }
@@ -80,6 +79,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         try {
             requestData.put("title", title.getText().toString());
             requestData.put("content", content.getText().toString());
+            Toast.makeText(getApplicationContext(), title.getText().toString(), Toast.LENGTH_SHORT).show();
 
             requestDataEncrypted.put("enc_data", EncryptDecrypt.encrypt(requestData.toString()));
         } catch (JSONException e) {
@@ -91,20 +91,28 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
             public void onResponse(JSONObject response) {
                 try {
                     qnaID = response.getString("qna_id");
-                    if (fadapter.getItemCount() > 0) {
-                        // upload
-                    } else {
-                        Toast.makeText(getApplicationContext(), "QnA 게시글이 작성되었습니다.", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
+//                    if (fadapter.getItemCount() > 0) {
+//                        // upload
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "QnA 게시글이 작성되었습니다.", Toast.LENGTH_SHORT).show();
+//                        finish();
+//                    }
+                    // test
+                    Toast.makeText(getApplicationContext(), "QnA 게시글이 작성되었습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    // test
+                    Toast.makeText(getApplicationContext(), "QnA 게시글 작성에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), "QnA 게시글 작성에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                // test
+                finish();
             }
         }) {
             @Override
@@ -114,6 +122,9 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
                 return params;
             }
         };
+
+        requestQueue.add(jsonObjectRequest);
+        requestQueue.getCache().clear();
     }
     @Override
     public void onItemClick(int position) {

@@ -17,13 +17,13 @@
         android:textStyle="bold" />
 
 
-
     <Button
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="290dp"
         android:layout_marginTop="90dp"
         android:background="@drawable/circle"
+        android:onClick="write"
         android:text="글작성"
         android:textColor="@color/black" />
 

@@ -131,6 +131,10 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
         queue.getCache().clear();
     }
 
+    public void write(View view){
+        Intent de = new Intent(this, QnAWrite.class);
+        startActivity(de);
+    }
 
     @Override
     public void onItemClick(int position) {
