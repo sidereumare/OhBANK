@@ -127,11 +127,13 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
             }
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, endpoint, requestDataEncrypted, new Response.Listener<JSONObject>() {
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, endpoint, requestData, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    qnaID = response.getString("qna_id");
+                    JSONObject decrypt = new JSONObject(EncryptDecrypt.decrypt(response.getString("enc_data")).toString());
+                    Log.i("dec_data", decrypt.toString());
+                    qnaID = decrypt.getString("id");
 //                    if (fadapter.getItemCount() > 0) {
 //                        // upload
 //                    } else {
