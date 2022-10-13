@@ -34,6 +34,15 @@ create table qnas(
   FOREIGN KEY(writer_id) REFERENCES users(id)
 ) engine = innodb;
 
+create table files(
+  id integer PRIMARY KEY auto_increment,
+  file_name varchar(100) NOT NULL,
+  qna_id integer NOT NULL,
+  user_id integer NOT NULL,
+  FOREIGN KEY(qna_id) REFERENCES qnas(id),
+  FOREIGN KEY(user_id) REFERENCES users(id)
+) engine = innodb;
+
 
 INSERT INTO `users` values (default, "user1", "password1", 111111, default, default);
 INSERT INTO `users` values (default, "user2", "password2", 222222, default, default);
@@ -54,4 +63,6 @@ INSERT INTO `qnas` values (default, "title1", "content1", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "title2", "content2", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "title3", "content2", 2, "2020-01-01");
 
-
+INSERT INTO `files` values (default, "file1", 1, 1);
+INSERT INTO `files` values (default, "file2", 1, 1);
+INSERT INTO `files` values (default, "file3", 3, 2);
