@@ -72,7 +72,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
 
     public void writePost(View view) {
         String endpoint = url + "/api/qna/write";
-        TextView title = findViewById(R.id.title_write);
+        TextView title = findViewById(R.id.edt);
         TextView content = findViewById(R.id.content_write);
         JSONObject requestData = new JSONObject();
         JSONObject requestDataEncrypted = new JSONObject();
