@@ -142,6 +142,7 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
             }
         };
         requestQueue.add(jsonObjectRequest);
+        requestQueue.getCache().clear();
 
     }
 
