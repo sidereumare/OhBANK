@@ -4,7 +4,7 @@ var Model = require("../../../models/index");
 var Response = require("../../Response");
 var statusCodes = require("../../statusCodes");
 var { validateUserToken } = require("../../../middlewares/validateToken");
-var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
+var { encryptResponse, decryptRequest, decryptAuthRequest } = require("../../../middlewares/crypt");
 
 /**
  * QnA file list route
@@ -17,14 +17,15 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  * @return                           - isSuccess
 */
 
-router.post("/", decryptRequest, (req, res) => {
+router.post("/", decryptAuthRequest, (req, res) => {
     var r = new Response();
     var today = new Date();
     var now = today.getFullYear()+"-"+today.getMonth()+"-"+today.getDay()
+    console.log("dfjsalk")
     Model.qna.create({
         title: req.body.title,
         content: req.body.content,
-        writer_id: "1",
+        writer_id: req.user_id,
         write_at: now
     })
     .then((data) => {

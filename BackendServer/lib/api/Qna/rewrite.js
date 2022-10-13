@@ -4,22 +4,19 @@ var Model = require("../../../models/index");
 var Response = require("../../Response");
 var statusCodes = require("../../statusCodes");
 var { validateUserToken } = require("../../../middlewares/validateToken");
-var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
+var { encryptResponse, decryptRequest, decryptAuthRequest } = require("../../../middlewares/crypt");
 
 /**
  * QnA file list route
  * This endpoint allows to view list of files of a question
  * @path                             - /api/qna/write
  * @middleware
- * @param title
- * @param content
- * @param writer_id
+ * @param id
  * @return                           - isSuccess
 */
-router.post("/", validateUserToken, (req, res) => {
+router.post("/", decryptAuthRequest, (req, res) => {
     var r = new Response();
-    let qna_id = req.body.qna_id;
-
+    let qna_id = req.body.id;
     Model.qna.findOne({
         where: {
             id: qna_id
@@ -29,21 +26,21 @@ router.post("/", validateUserToken, (req, res) => {
     .then((data) => {
         r.status = statusCodes.SUCCESS;
         r.data = data;
-        return res.json(r);
+        return res.json(encryptResponse(r));
     })
     .catch((err) => {
         r.status = statusCodes.SERVER_ERROR;
         r.data = {
             message: err.toString(),
         };
-        return res.json(r);
+        return res.json(encryptResponse(r));
     });
 });
 
-router.post("/re", validateUserToken, (req, res) => {
+router.post("/re", decryptAuthRequest, (req, res) => {
     var r = new Response();
     var today = new Date();
-    let qna_id = req.body.qna_id;
+    let qna_id = req.body.id;
     var now = today.getFullYear()+"-"+today.getMonth()+"-"+today.getDay()
     Model.qna.update({
         title: req.body.title,
@@ -57,14 +54,14 @@ router.post("/re", validateUserToken, (req, res) => {
     .then((data) => {
         r.status = statusCodes.SUCCESS;
         r.data = data;
-        return res.json(r);
+        return res.json(encryptResponse(r));
     })
     .catch((err) => {
         r.status = statusCodes.SERVER_ERROR;
         r.data = {
             message: err.toString(),
         };
-        return res.json(r);
+        return res.json(encryptResponse(r));
     });
 });
 
