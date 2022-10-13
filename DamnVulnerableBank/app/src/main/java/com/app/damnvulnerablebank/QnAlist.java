@@ -75,7 +75,6 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
                             JSONArray jsonArray = response.getJSONArray("posts");
 
                             for(int i = 0; i<jsonArray.length(); i++){
-                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
                                 JSONObject qnalistobject = jsonArray.getJSONObject(i);
                                 QnAlistRecords qrecorder = new QnAlistRecords();
                                 String subject = qnalistobject.getString("subject");
