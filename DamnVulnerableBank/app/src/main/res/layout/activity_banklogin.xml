@@ -51,7 +51,7 @@
                 android:textColor="@color/black"
                 android:background="@drawable/circle"
                 android:onClick="loginPage"
-                android:text="Login" />
+                android:text="로그인" />
 
             <Button
                 android:id="@+id/signup1"
@@ -62,7 +62,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:onClick="signupPage"
-                android:text="Signup" />
+                android:text="회원가입" />
 
 
 

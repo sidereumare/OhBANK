@@ -7,13 +7,21 @@
     tools:context=".Myprofile">
 
     <ImageView
+        android:layout_width="65dp"
+        android:layout_height="74dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="342dp"
-        android:layout_height="155dp"
         android:src="@drawable/addben" />
 
+    <TextView
+        android:layout_width="75dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="72dp"
+        android:text="내 정보"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/textView"
         android:layout_width="214dp"

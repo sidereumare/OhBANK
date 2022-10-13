@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="72dp"
         android:layout_width="100dp"
         android:layout_marginLeft="150dp"
         android:layout_height="100dp"
@@ -26,12 +26,12 @@
 
     <EditText
         android:id="@+id/accountid1"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/accountid"
         android:layout_marginLeft="120dp"
-        android:hint="Enter Account ID Again"
+        android:hint="아이디를 재입력해주세요"
         android:inputType="numberDecimal"
         android:textStyle="bold"
         android:textSize="15sp"/>
@@ -41,11 +41,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/accountid1"
-        android:layout_marginLeft="125dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="22dp"
         android:background="@drawable/circle"
         android:onClick="approveBeneficiary"
-        android:text="Approve Benificiary "
+        android:text="확인"
         android:textColor="@color/black" />
     <ImageView
         android:layout_width="118dp"
