@@ -266,7 +266,7 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "다운로드 에러", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
