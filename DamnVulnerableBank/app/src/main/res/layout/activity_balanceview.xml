@@ -23,4 +23,12 @@
         tools:layout_editor_absoluteX="78dp"
         android:fontFamily="@font/muli_extrabold"
         tools:layout_editor_absoluteY="226dp" />
+    <ImageView
+        android:layout_width="118dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/bank"
+        android:layout_alignParentBottom="true"
+        android:translationX="145dp" />
+
 </RelativeLayout>

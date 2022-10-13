@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shadow"
     tools:context=".SendMoney">
+
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_marginTop="200dp"
         android:layout_width="89dp"
-        android:layout_marginLeft="155dp"
         android:layout_height="61dp"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="160dp"
         app:srcCompat="@drawable/sends" />
-
 
     <TextView
         android:id="@+id/actid"
@@ -39,7 +38,7 @@
 
     <EditText
         android:id="@+id/edamt"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edact"
@@ -55,15 +54,16 @@
         android:background="@drawable/circle"
         android:textColor="@color/black"
         android:layout_below="@+id/edamt"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="32dp"
         android:onClick="Biometrics"
         android:layout_marginLeft="155dp"
         android:text="Send Money"/>
+
     <ImageView
         android:layout_width="118dp"
         android:layout_height="100dp"
         android:layout_gravity="bottom"
         android:src="@drawable/bank"
-        android:translationX="145dp"
-        android:translationY="450dp" />
+        android:layout_alignParentBottom="true"
+        android:translationX="145dp" />
 </RelativeLayout>
