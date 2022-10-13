@@ -25,7 +25,7 @@
                 android:layout_width="385dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:text="From Account"
                 android:textSize="14sp"
                 android:textStyle="bold"
