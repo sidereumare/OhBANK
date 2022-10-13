@@ -25,12 +25,13 @@ create table beneficiaries (
   approved boolean default false NOT NULL
 ) engine = innodb;
 
-create table qna(
+create table qnas(
   id integer PRIMARY KEY auto_increment,
   title varchar(100) NOT NULL,
-  content varchar(100) NOT NULL
-  writer_id integer FOREIGN KEY REFERENCES users(id) NOT NULL,
-  
+  content varchar(100) NOT NULL,
+  writer_id integer NOT NULL,
+  write_at DATE NOT NULL,
+  FOREIGN KEY(writer_id) REFERENCES users(id)
 ) engine = innodb;
 
 
@@ -48,3 +49,9 @@ INSERT INTO `transactions` values (default, 111111, 444444, 100);
 INSERT INTO `beneficiaries` values (default, 111111, 222222, true);
 INSERT INTO `beneficiaries` values (default, 111111, 333333, true);
 INSERT INTO `beneficiaries` values (default, 111111, 444444, true);
+
+INSERT INTO `qnas` values (default, "title1", "content1", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "title2", "content2", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "title3", "content2", 2, "2020-01-01");
+
+
