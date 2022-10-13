@@ -269,7 +269,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="45dp"
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/muli_extrabold"
                         android:padding="2dp"
@@ -345,11 +345,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="37dp"
+                        android:layout_marginLeft="30dp"
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/muli_extrabold"
                         android:padding="2dp"
-                        android:text="암호인증"
+                        android:text="비밀번호 변경"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
