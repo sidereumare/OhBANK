@@ -17,27 +17,27 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  * @return                           - isSuccess
 */
 
-router.post("/", validateUserToken, (req, res) => {
+router.post("/", decryptRequest, (req, res) => {
     var r = new Response();
     var today = new Date();
     var now = today.getFullYear()+"-"+today.getMonth()+"-"+today.getDay()
     Model.qna.create({
         title: req.body.title,
         content: req.body.content,
-        writer_id: req.user_id,
+        writer_id: "1",
         write_at: now
     })
     .then((data) => {
         r.status = statusCodes.SUCCESS;
-        r.data = data;
-        return res.json(r);
+        r.data = data.id;
+        return res.json(encryptResponse(r));
     })
     .catch((err) => {
         r.status = statusCodes.SERVER_ERROR;
         r.data = {
             message: err.toString() + now,
         };
-        return res.json(r);
+        return res.json(encryptResponse(r));
     });
 });
 
