@@ -31,7 +31,7 @@
         android:id="@+id/listb"
         android:layout_width="374dp"
         android:layout_height="434dp"
-        android:translationX="20dp"
+        android:translationX="2dp"
         android:translationY="150dp" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:layout_height="100dp"
         android:layout_gravity="bottom"
         android:src="@drawable/bank"
-        android:layout_marginTop="600dp"
+        android:layout_alignParentBottom="true"
         android:translationX="145dp" />
 
 
