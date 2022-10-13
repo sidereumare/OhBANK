@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -75,7 +76,6 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
                             JSONArray jsonArray = response.getJSONArray("posts");
 
                             for(int i = 0; i<jsonArray.length(); i++){
-                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
                                 JSONObject qnalistobject = jsonArray.getJSONObject(i);
                                 QnAlistRecords qrecorder = new QnAlistRecords();
                                 String subject = qnalistobject.getString("subject");
@@ -131,9 +131,17 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
         queue.getCache().clear();
     }
 
+    public void write(View view){
+        Intent de = new Intent(this, QnAWrite.class);
+        startActivity(de);
+    }
 
     @Override
     public void onItemClick(int position) {
+        Intent de = new Intent(this, QnAView.class);
+        QnAlistRecords cf = qrecords.get(position);
 
+        de.putExtra("qna_id", cf.getId());
+        startActivity(de);
     }
 }
