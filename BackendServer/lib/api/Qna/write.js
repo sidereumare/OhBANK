@@ -11,33 +11,33 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  * This endpoint allows to view list of files of a question
  * @path                             - /api/qna/write
  * @middleware
- * @param file
+ * @param title
+ * @param content
+ * @param writer_id
  * @return                           - isSuccess
 */
 
 router.post("/", validateUserToken, (req, res) => {
     var r = new Response();
-    let uploadFile = req.files.file;
-    let uploadPath = req.files.file.name;
-    
+    var today = new Date();
+    var now = today.getFullYear()+"-"+today.getMonth()+"-"+today.getDay()
     Model.qna.create({
         title: req.body.title,
         content: req.body.content,
-        user_id: req.body.user_id,
-        write_at: req.body.write_at,
-        file_id: req.body.file_id
+        writer_id: req.user_id,
+        write_at: now
     })
     .then((data) => {
         r.status = statusCodes.SUCCESS;
         r.data = data;
-        return res.json(encryptResponse(r));
+        return res.json(r);
     })
     .catch((err) => {
         r.status = statusCodes.SERVER_ERROR;
         r.data = {
-            message: err.toString(),
+            message: err.toString() + now,
         };
-        return res.json(encryptResponse(r));
+        return res.json(r);
     });
 });
 
