@@ -26,7 +26,7 @@ const encrypt = (input) => {
 }
 
 // console.log(encrypt('{"username":"user1", "password":"password1"}'));
-// console.log(decrypt(''));
+console.log(decrypt('Gk8SDggaEhJPWwFLDQgFCENAW15XTU8MHxodBgYIQ0BLPRICDgQJGkwaTU8FGx0PRVs2GlgdBxMNCENASxoOFQEES0tCRQICDw4MABNDV0MZBgATBAMVS0tCRRYfCA4MMQYVT1tYW15VUUBRS0ReVjVdUUBZXl1RXU9KWV49Q0FDDxoLFUNXGlgACkVbXE1YHB0CEwMAFwxMXUMYEh8bX0UcEE0BSxoOFQEEWFNMEwgZDR9bTEtDDg4UHQsJFU9bWAoBCRUIDw5bTEtDGhMTHQs4ABlDQEtcV1NdTEpYQ1dQOVFKU15XW11RVFleVztPTVgcHQITT1sBSwcDQ1dQVksbFAQfDxsEC0VbTxQJDBxWQxAcJxQ='));
 
 /**
  * Encryption middleware

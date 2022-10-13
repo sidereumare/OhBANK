@@ -1,7 +1,7 @@
 const users = require("./users");
 
 module.exports = function(sequelize, DataTypes) {
-    var QnA = sequelize.define("qnas", {
+    var QnA = sequelize.define("qna", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,

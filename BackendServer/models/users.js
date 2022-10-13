@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Users.associate = (models) => {
-    Users.hasMany(models.qnas, {
+    Users.hasMany(models.qna, {
       foreignKey: 'writer_id',
       sourceKey: 'id',
       allowNull: false,
