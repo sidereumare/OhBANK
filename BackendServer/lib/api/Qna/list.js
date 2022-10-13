@@ -19,12 +19,12 @@ router.post("/", validateUserToken, (req, res) => {
     Model.qna.findAll({
         include: [{
             model: Model.users,
-            attributes: ['id', 'username'],
+            attributes: ['username'],
             where: {
                 username: req.username
             },
         }],
-        attributes: ["title", "content", "write_at"],
+        attributes: ["title", "write_at"],
     })
         .then((data) => {
             r.status = statusCodes.SUCCESS;
