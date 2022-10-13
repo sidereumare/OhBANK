@@ -65,7 +65,8 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         retrivedToken = sharedPreferences.getString("token", null);
         
         sharedPreferences = getSharedPreferences("apiurl", MODE_PRIVATE);
-        url = sharedPreferences.getString("apiurl", null);
+//        url = sharedPreferences.getString("apiurl", null);
+        url = "https://c0907315-9d56-485c-9837-59867dbd35f9.mock.pstmn.io";
 
         requestQueue = Volley.newRequestQueue(this);
     }
@@ -103,16 +104,13 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
                 } catch (JSONException e) {
                     e.printStackTrace();
                     // test
-                    Toast.makeText(getApplicationContext(), "QnA 게시글 작성에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                    finish();
+                    Toast.makeText(getApplicationContext(), "QnA 게시글 작성에 실패1", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), "QnA 게시글 작성에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                // test
-                finish();
             }
         }) {
             @Override

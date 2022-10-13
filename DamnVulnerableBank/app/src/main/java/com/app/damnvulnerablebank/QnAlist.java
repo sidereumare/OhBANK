@@ -48,6 +48,7 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
 
     public void viewQnAlist(){
         SharedPreferences sharedPreferences = getSharedPreferences("apiurl", Context.MODE_PRIVATE);
+//        final String url = sharedPreferences.getString("apiurl", null);
         final String url = "https://c0907315-9d56-485c-9837-59867dbd35f9.mock.pstmn.io";
         String endpoint = "/api/qna/list";
         final String finalurl = url+endpoint;

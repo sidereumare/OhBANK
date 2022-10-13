@@ -149,7 +149,7 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
     }
 
     public void edit(View view){
-        Intent intent = new Intent(getApplicationContext(), BankLogin.class);
+        Intent intent = new Intent(getApplicationContext(), QnAWrite.class);
         startActivity(intent);
     }
 
