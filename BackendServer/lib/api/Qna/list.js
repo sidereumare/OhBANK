@@ -24,7 +24,7 @@ router.post("/", validateUserToken, (req, res) => {
                 username: req.username
             },
         }],
-        attributes: ["title", "write_at"],
+        attributes: ["id","title", "write_at"],
     })
         .then((data) => {
             r.status = statusCodes.SUCCESS;

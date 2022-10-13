@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,13 +54,8 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
         String endpoint = "/api/qna/list";
         final String finalurl = url+endpoint;
         RequestQueue queue = Volley.newRequestQueue(this);
-        JSONObject requests = new JSONObject();
-        try{
-            requests.put("enc_data", "123456");
-        }catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.POST, finalurl, requests,
+
+        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.POST, finalurl, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -74,14 +70,14 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
                                 // This is buggy. Need to call Login activity again if incorrect credentials are given
                             }
 
-                            JSONArray jsonArray = response.getJSONArray("data");
+                            JSONArray jsonArray = decryptedResponse.getJSONArray("data");
 
                             for(int i = 0; i<jsonArray.length(); i++){
                                 JSONObject qnalistobject = jsonArray.getJSONObject(i);
                                 QnAlistRecords qrecorder = new QnAlistRecords();
                                 String subject = qnalistobject.getString("title");
-                                String writer = qnalistobject.getString("writer");
-                                String date = qnalistobject.getString("date");
+                                String writer = qnalistobject.getJSONObject("user").getString("username");
+                                String date = qnalistobject.getString("write_at");
                                 String id = qnalistobject.getString("id");
 
                                 qrecorder.setSubject(subject);
