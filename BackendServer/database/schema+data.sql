@@ -61,16 +61,22 @@ INSERT INTO `beneficiaries` values (default, 111111, 444444, true);
 
 INSERT INTO `qnas` values (default, "title1", "나는 자랑스런 태극기 앞에 조국과 민족의 무궁한 영광을 위하여 충성은 개뿔 아무거나 씁시다.\n가나다라 마바사 아니 이건 뭘 넣어서 쓸까요\n abcasdfawefksdfksadkfaskfkajwef \nwejfk3j2kfjasdkjfasjdfsadfsad", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "title2", "ㅁ낭러ㅏㅁㅈㄷ란아차추라ㅜㄷ람ㄴ\n가다아아아아두라ㅓ차ㅓ챠챠ㅓ챠ㅓ가ㅜㅏ구ㅏㅜ라ㅜ아ㅜ냐나 \nadsfaksjfkawheibfibcivbawib sdgtwkkasdjvg a\n a fiaw9ef9awfjsadfvfj3fnasdknva df", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "134", "3243434234afdwae", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "제목이지롱", "tssaf", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "가나다람", "content2", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "tawefa", "awefewevasdf", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "title2", "content2", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "ㅇㄹ33", "content2", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "134", "3243434234afdwae", 3, "2020-01-01");
+INSERT INTO `qnas` values (default, "제목이지롱", "tssaf", 3, "2020-01-01");
+INSERT INTO `qnas` values (default, "가나다람", "content2", 2, "2020-01-01");
+INSERT INTO `qnas` values (default, "tawefa", "awefewevasdf", 2, "2020-01-01");
+INSERT INTO `qnas` values (default, "title2", "content2", 2, "2020-01-01");
+INSERT INTO `qnas` values (default, "ㅇㄹ33", "content2", 2, "2020-01-01");
 INSERT INTO `qnas` values (default, "ㅌㅇㅈㄷㅍ", "content2", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "asdvcasv", "content2", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "test525", "content2", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "title3", "content2", 2, "2020-01-01");
+INSERT INTO `qnas` values (default, "333333", "content2", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "342", "content2", 1, "2020-01-01");
+INSERT INTO `qnas` values (default, "234", "content2", 2, "2020-01-01");
+INSERT INTO `qnas` values (default, "233", "ㅁ낭러ㅏㅁㅈㄷ란아차추라ㅜㄷ람ㄴ\n가다아아아아두라ㅓ차ㅓ챠챠ㅓ챠ㅓ가ㅜㅏ구ㅏㅜ라ㅜ아ㅜ냐나 \nadsfaksjfkawheibfibcivbawib sdgtwkkasdjvg a\n a fiaw9ef9awfjsadfvfj3fnasdknva df", 2, "2020-01-01");
+INSERT INTO `qnas` values (default, "343", "ㅁ낭러ㅏㅁㅈㄷ란아차추라ㅜㄷ람ㄴ\n가다아아아아두라ㅓ차ㅓ챠챠ㅓ챠ㅓ가ㅜㅏ구ㅏㅜ라ㅜ아ㅜ냐나 \nadsfaksjfkawheibfibcivbawib sdgtwkkasdjvg a\n a fiaw9ef9awfjsadfvfj3fnasdknva df", 3, "2020-01-01");
+
 
 INSERT INTO `files` values (default, "file1", 1, 1);
 INSERT INTO `files` values (default, "file2", 1, 1);
