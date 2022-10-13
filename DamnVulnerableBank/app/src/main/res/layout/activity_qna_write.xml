@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shadow"
+    tools:context=".AddBeneficiary">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="62dp"
+        android:text="QnA 작성"
+        android:textColor="@color/orange"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+
+
+    <TextView
+        android:id="@+id/title_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="110dp"
+        android:text="제목"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edt"
+        android:layout_width="185dp"
+        android:layout_height="31dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="105dp" />
+
+    <Button
+        android:layout_width="62dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/circle"
+        android:onClick="addBeneficiary"
+        android:text="첨부파일"
+        android:textColor="@color/black" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/files_write"
+        android:layout_width="220dp"
+        android:layout_height="39dp"
+        android:translationX="120dp"
+        android:translationY="140dp" />
+
+    <EditText
+        android:id="@+id/content_write"
+        android:layout_width="271dp"
+        android:layout_height="228dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="190dp" />
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="30sp"
+        android:text="You have no active benificiaries to show" />
+
+    <Button
+        android:layout_width="62dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/circle"
+        android:onClick="writePost"
+        android:text="등록"
+        android:textColor="@color/black" />
+    <ImageView
+        android:layout_width="118dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/bank"
+        android:translationX="145dp"
+        android:translationY="490dp" />
+
+
+</RelativeLayout>

@@ -11,7 +11,7 @@
         android:layout_marginLeft="20dp"
         android:layout_width="342dp"
         android:layout_height="155dp"
-        android:src="@drawable/wall" />
+        android:src="@drawable/balance" />
 
     <TextView
         android:id="@+id/textView"

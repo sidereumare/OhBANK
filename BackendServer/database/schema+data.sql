@@ -25,6 +25,14 @@ create table beneficiaries (
   approved boolean default false NOT NULL
 ) engine = innodb;
 
+create table qna(
+  id integer PRIMARY KEY auto_increment,
+  title varchar(100) NOT NULL,
+  content varchar(100) NOT NULL
+  writer_id integer FOREIGN KEY REFERENCES users(id) NOT NULL,
+  
+) engine = innodb;
+
 
 INSERT INTO `users` values (default, "user1", "password1", 111111, default, default);
 INSERT INTO `users` values (default, "user2", "password2", 222222, default, default);
