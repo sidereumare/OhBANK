@@ -63,10 +63,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/files"
-        android:layout_width="196dp"
-        android:layout_height="34dp"
+        android:layout_width="197dp"
+        android:layout_height="16dp"
         android:translationX="150dp"
-        android:translationY="145dp" />
+        android:translationY="149dp" />
 
     <TextView
         android:id="@+id/content"
