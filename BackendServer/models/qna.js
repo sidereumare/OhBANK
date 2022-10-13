@@ -17,9 +17,9 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        file: {
-            type: DataTypes.STRING,
-            allowNull: true
+        write_at: {
+            type: DataTypes.DATE,
+            allowNull: false
         }
     }, {
         timestamps: false
