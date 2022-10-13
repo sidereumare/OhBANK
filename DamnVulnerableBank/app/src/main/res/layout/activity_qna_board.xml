@@ -29,7 +29,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listb"
-        android:layout_width="374dp"
+        android:layout_width="411dp"
         android:layout_height="434dp"
         android:translationX="2dp"
         android:translationY="150dp" />

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,39 +49,34 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
 
     public void viewQnAlist(){
         SharedPreferences sharedPreferences = getSharedPreferences("apiurl", Context.MODE_PRIVATE);
-        final String url = "https://c0907315-9d56-485c-9837-59867dbd35f9.mock.pstmn.io";
+        final String url = sharedPreferences.getString("apiurl", null);
         String endpoint = "/api/qna/list";
         final String finalurl = url+endpoint;
         RequestQueue queue = Volley.newRequestQueue(this);
-        JSONObject requests = new JSONObject();
-        try{
-            requests.put("enc_data", "123456");
-        }catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.POST, finalurl, requests,
+
+        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.POST, finalurl, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
                         try {
-//                            JSONObject decryptedResponse = new JSONObject(response.get("posts").toString());
-//
-//                            // Check for error message
-//                            if(decryptedResponse.getJSONObject("status").getInt("code") != 200) {
-//                                Toast.makeText(getApplicationContext(), "Error: " + decryptedResponse.getJSONObject("data").getString("message"), Toast.LENGTH_SHORT).show();
-//                                return;
-//                                // This is buggy. Need to call Login activity again if incorrect credentials are given
-//                            }
+                            JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
 
-                            JSONArray jsonArray = response.getJSONArray("posts");
+                            // Check for error message
+                            if(decryptedResponse.getJSONObject("status").getInt("code") != 200) {
+                                Toast.makeText(getApplicationContext(), "Error: " + decryptedResponse.getJSONObject("data").getString("message"), Toast.LENGTH_SHORT).show();
+                                return;
+                                // This is buggy. Need to call Login activity again if incorrect credentials are given
+                            }
+
+                            JSONArray jsonArray = decryptedResponse.getJSONArray("data");
 
                             for(int i = 0; i<jsonArray.length(); i++){
                                 JSONObject qnalistobject = jsonArray.getJSONObject(i);
                                 QnAlistRecords qrecorder = new QnAlistRecords();
-                                String subject = qnalistobject.getString("subject");
-                                String writer = qnalistobject.getString("writer");
-                                String date = qnalistobject.getString("date");
+                                String subject = qnalistobject.getString("title");
+                                String writer = qnalistobject.getJSONObject("user").getString("username");
+                                String date = qnalistobject.getString("write_at");
                                 String id = qnalistobject.getString("id");
 
                                 qrecorder.setSubject(subject);

@@ -47,6 +47,8 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
     RecyclerView recyclerView;
     String url;
     String retrivedToken;
+    String subject;
+    String content;
     RequestQueue requestQueue;
     String qnaID;
     @Override
@@ -56,13 +58,12 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
         Intent intent = getIntent();
 
         String qnaID = intent.getStringExtra("qna_id");
-        qnaID = "123456";
 
         SharedPreferences sharedPreferences = getSharedPreferences("jwt", Context.MODE_PRIVATE);
         retrivedToken = sharedPreferences.getString("accesstoken",null);
 
         sharedPreferences = getSharedPreferences("apiurl", Context.MODE_PRIVATE);
-        url  = "https://365bc10f-3036-4146-a776-e63e5f0748d5.mock.pstmn.io";//sharedPreferences.getString("apiurl",null);
+        url = sharedPreferences.getString("apiurl",null);
         String endpoint="/api/qna/view";
         String finalurl = url+endpoint;
         requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -90,22 +91,21 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-//                            JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
-                              JSONObject decryptedResponse = new JSONObject(response.get("enc_data").toString());
+                            JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
+//                              JSONObject decryptedResponse = new JSONObject(response.get("enc_data").toString());
 
-                            String subject=decryptedResponse.getString("subject");
-                            String content=decryptedResponse.getString("content");
-                            String writer=decryptedResponse.getString("writer");
-                            String date=decryptedResponse.getString("date");
-                            JSONArray fileNames=decryptedResponse.getJSONArray("file_name");
-                            JSONArray fileIds=decryptedResponse.getJSONArray("file_id");
-                            
+                            JSONObject data = decryptedResponse.getJSONObject("data");
+
+                            subject=data.getString("title");
+                            content=data.getString("content");
+                            JSONArray file=data.getJSONArray("file");
+
                             // make fileinfo list
                             List<FileInfo> fileInfoes = new ArrayList<>();
-                            for(int i=0; i<fileNames.length(); i++){
+                            for(int i=0; i<file.length(); i++){
                                 FileInfo fileInfo = new FileInfo();
-                                fileInfo.setFileName(fileNames.getString(i));
-                                fileInfo.setFileID(fileIds.getString(i));
+                                fileInfo.setFileName(file.getJSONObject(i).getString("file_name"));
+                                fileInfo.setFileID(file.getJSONObject(i).getString("id"));
                                 fileInfoes.add(fileInfo);
                             }
 
@@ -123,7 +123,7 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
                                 recyclerView.setVisibility(View.VISIBLE);
                             }
                             //add recyclerview texts
-                            //files.setAdapter(new FileAdapter(getApplicationContext(), fileNames, fileIds, retrivedToken, url));
+//                            files.setAdapter(new FileAdapter(getApplicationContext(), fileNames, fileIds, retrivedToken, url));
                             recyclerView.setHasFixedSize(true);
 
                         } catch (JSONException e) {
@@ -145,11 +145,13 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
         };
         requestQueue.add(jsonObjectRequest);
 
-
     }
 
     public void edit(View view){
-        Intent intent = new Intent(getApplicationContext(), BankLogin.class);
+        Intent intent = new Intent(getApplicationContext(), QnAWrite.class);
+        intent.putExtra("title", subject);
+        intent.putExtra("content", content);
+        intent.putExtra("rewrite", true);
         startActivity(intent);
     }
 
@@ -269,7 +271,7 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "다운로드 에러", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

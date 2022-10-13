@@ -82,6 +82,6 @@
         android:layout_height="100dp"
         android:layout_gravity="bottom"
         android:src="@drawable/bank"
-        android:translationX="145dp"
-        android:translationY="620dp" />
+        android:layout_alignParentBottom="true"
+        android:translationX="145dp" />
 </RelativeLayout>
