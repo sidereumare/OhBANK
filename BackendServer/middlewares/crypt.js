@@ -25,8 +25,8 @@ const encrypt = (input) => {
   return b64;
 }
 
-console.log(encrypt('{"qna_id":"1"}'));
-console.log(decrypt('Gk8SDggaEhJPWwFLDQgFCENAW15XTU8MHxodBgYIQ0BLPRICDgQJGkwaTU8FGx0PRVsWQw4AGgsET1tYHQcTDQhQWEVMBA4DFR8HGkVbTwIVBxoCDxlQWEVMEBMEFR82DxNDV0NIWVxXTF1QV1lfRRwQ'));
+// console.log(encrypt('{"qna_id":"1"}'));
+// console.log(decrypt('Gk8SDggaEhJPWwFLDQgFCENAW15XTU8MHxodBgYIQ0BLPRICDgQJGkwaTU8FGx0PRVsWQw4AGgsET1tYHQcTDQhQWEVMBA4DFR8HGkVbTwIVBxoCDxlQWEVMEBMEFR82DxNDV0NIWVxXTF1QV1lfRU1PBxMFC0VbNhpYAApFW1xNWA8HCwQyDxsEC0VbTwcTBQtWQxBNAUsHA0NXU1ZLCA4NCD4UCAMCQ1dDHAACAlNPHCcUEw=='));
 
 /**
  * Encryption middleware

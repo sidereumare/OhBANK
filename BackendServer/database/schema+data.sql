@@ -36,7 +36,7 @@ create table qnas(
 
 create table files(
   id integer PRIMARY KEY auto_increment,
-  title varchar(100) NOT NULL,
+  file_name varchar(100) NOT NULL,
   qna_id integer NOT NULL,
   user_id integer NOT NULL,
   FOREIGN KEY(qna_id) REFERENCES qnas(id),
