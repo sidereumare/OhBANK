@@ -47,6 +47,8 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
     RecyclerView recyclerView;
     String url;
     String retrivedToken;
+    String subject;
+    String content;
     RequestQueue requestQueue;
     String qnaID;
     @Override
@@ -94,8 +96,8 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
 
                             JSONObject data = decryptedResponse.getJSONObject("data");
 
-                            String subject=data.getString("title");
-                            String content=data.getString("content");
+                            subject=data.getString("title");
+                            content=data.getString("content");
                             JSONArray file=data.getJSONArray("file");
 
                             // make fileinfo list
@@ -147,6 +149,9 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
 
     public void edit(View view){
         Intent intent = new Intent(getApplicationContext(), QnAWrite.class);
+        intent.putExtra("title", subject);
+        intent.putExtra("content", content);
+        intent.putExtra("rewrite", true);
         startActivity(intent);
     }
 

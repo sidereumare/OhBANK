@@ -48,13 +48,31 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
     FileAdapter fadapter;
     String url;
     String retrivedToken;
+    String subject;
+    String contents;
     RequestQueue requestQueue;
     String qnaID;
+    TextView title;
+    TextView content;
+    boolean rewrite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna_write);
+
+        title = findViewById(R.id.edt);
+        content = findViewById(R.id.content_write);
+
+        Intent intent = getIntent();
+
+        subject = intent.getStringExtra("title");
+        contents = intent.getStringExtra("content");
+        rewrite = intent.getBooleanExtra("rewrite",false);
+
+        title.setText(subject);
+        content.setText(contents);
+
         recyclerView = findViewById(R.id.files_write);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         fadapter = new FileAdapter(getApplicationContext(), new ArrayList<FileInfo>());
@@ -72,15 +90,19 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
     }
 
     public void writePost(View view) {
-        String endpoint = url + "/api/qna/write";
-        TextView title = findViewById(R.id.edt);
-        TextView content = findViewById(R.id.content_write);
+        String endpoint;
+        if (rewrite) {
+            endpoint = url + "/api/qna/write";
+            Toast.makeText(getApplicationContext(), "수정함", Toast.LENGTH_SHORT).show();
+        } else {
+            endpoint = url + "/api/qna/write";
+            Toast.makeText(getApplicationContext(), "작성함", Toast.LENGTH_SHORT).show();
+        }
         JSONObject requestData = new JSONObject();
         JSONObject requestDataEncrypted = new JSONObject();
         try {
             requestData.put("title", title.getText().toString());
             requestData.put("content", content.getText().toString());
-            Toast.makeText(getApplicationContext(), title.getText().toString(), Toast.LENGTH_SHORT).show();
 
             requestDataEncrypted.put("enc_data", EncryptDecrypt.encrypt(requestData.toString()));
         } catch (JSONException e) {
@@ -99,8 +121,9 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
 //                        finish();
 //                    }
                     // test
-                    Toast.makeText(getApplicationContext(), "QnA 게시글이 작성되었습니다.", Toast.LENGTH_SHORT).show();
                     finish();
+                    writeComplete();
+                    Toast.makeText(getApplicationContext(), "QnA 게시글이 작성되었습니다.", Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     // test
@@ -127,5 +150,12 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
     @Override
     public void onItemClick(int position) {
 
+    }
+
+    void writeComplete(){
+        Intent de = new Intent(this, QnAView.class);
+
+        de.putExtra("qna_id", qnaID);
+        startActivity(de);
     }
 }
