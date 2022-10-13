@@ -63,6 +63,6 @@ INSERT INTO `qnas` values (default, "title1", "content1", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "title2", "content2", 1, "2020-01-01");
 INSERT INTO `qnas` values (default, "title3", "content2", 2, "2020-01-01");
 
-INSERT INTO `files` values (default, "file1", 1, 1);
+INSERT INTO `files` values (default, "test1.png", 1, 1);
 INSERT INTO `files` values (default, "file2", 1, 1);
 INSERT INTO `files` values (default, "file3", 3, 2);
