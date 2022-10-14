@@ -43,7 +43,6 @@ router.post("/", upload.single('file'), (req, res) => {
     //     console.log(filename);
     // });
 
-    // var qna_id = "1";
     Model.file.create({
         file_name: filename,
         saved_name: savedname,

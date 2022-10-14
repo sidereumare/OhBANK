@@ -38,7 +38,7 @@ create table files(
   id integer PRIMARY KEY auto_increment,
   file_name varchar(100) NOT NULL,
   saved_name varchar(100) NOT NULL,
-  qna_id integer NOT NULL,
+  qna_id integer,
   user_id integer NOT NULL,
   FOREIGN KEY(qna_id) REFERENCES qnas(id),
   FOREIGN KEY(user_id) REFERENCES users(id)
