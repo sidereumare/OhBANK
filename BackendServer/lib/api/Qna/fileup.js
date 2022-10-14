@@ -17,17 +17,17 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  * @return                           - Qna list
 */
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'uploads')
-    },
-    filename: function(req, file, cb){
-      cb(null, '')
-    }
-  });
-  const upload = multer({ storage: storage })
-
-router.post("/", upload.array('file'),(req, res) => {
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, 'uploads')
+//     },
+//     filename: function(req, file, cb){
+//       cb(null, '')
+//     }
+//   });
+//   const upload = multer({ storage: storage })
+var { upload } = require('../../../middlewares/s3Conn');
+router.post("/", upload.single('file'), (req, res) => {
     var r = new Response();
     let qna_id = req.body.qna_id;
     let user_id = req.body.user_id;
@@ -36,12 +36,12 @@ router.post("/", upload.array('file'),(req, res) => {
 
     console.log(filename);
 
-    req.files.map((data) => {
-        console.log(data);
-        filename = data.originalname;
-        savedname = data.filename;
-        console.log(filename);
-    });
+    // req.files.map((data) => {
+    //     console.log(data);
+    //     filename = data.originalname;
+    //     savedname = data.filename;
+    //     console.log(filename);
+    // });
 
     // var qna_id = "1";
     Model.file.create({
