@@ -17,6 +17,7 @@ const Readable = require('stream').Readable;
  */
 var fs = require('fs');
 const { response } = require("express");
+var { s3 } = require('../../../middlewares/s3Conn');
 
 router.get("/", validateUserToken, async (req, res) => {
     var r = new Response();
@@ -28,17 +29,25 @@ router.get("/", validateUserToken, async (req, res) => {
         },
         attributes: ["file_name", "saved_name"]
     })
-    .then((data) => {
+    .then(async (data) => {
+        var options = {
+            Bucket: 'oh-s3-bucket',
+            Key: data.saved_name
+        };
+
+        var fileStream = s3.getObject(options).createReadStream();
+        res.attachment(data.saved_name);
         // r.status = statusCodes.SUCCESS;
         // r.data = data;
-        res.attachment(data.file_name);
-        res.attachment(data.saved_name);
-        file_data = fs.readFileSync("./upload/"+data.saved_name);
-        s = new Readable();
-        // s.push(encryptResponse(file_data).enc_data);
-        s.push(file_data);
-        s.push(null);
-        s.pipe(res);
+        // res.attachment(data.file_name);
+        // res.attachment(data.saved_name);
+        // file_data = fs.readFileSync("./upload/"+data.saved_name);
+        // s = new Readable();
+        // // s.push(encryptResponse(file_data).enc_data);
+        // s.push(file_data);
+        // s.push(null);
+        // s.pipe(res);
+        fileStream.pipe(res);
     })
     .catch((err) => {
         r.status = statusCodes.SERVER_ERROR;
