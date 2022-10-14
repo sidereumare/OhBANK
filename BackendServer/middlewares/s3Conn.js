@@ -16,4 +16,4 @@ const upload = multer({
     })
 },'NONE');
 
-module.exports = {upload}
+module.exports = {upload, s3}
