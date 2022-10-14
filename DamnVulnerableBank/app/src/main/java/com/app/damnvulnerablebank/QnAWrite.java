@@ -108,7 +108,11 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
                 requestData.put("title", title.getText().toString());
                 requestData.put("content", content.getText().toString());
                 requestData.put("qna_id", qnaID);
-
+                JSONArray file_ids = new JSONArray();
+                for(int i = 0; i<fadapter.getItemCount(); i++){
+                    file_ids.put(fadapter.getItem(i).getFileID());
+                }
+                requestData.put("file_id_list", file_ids);
                 requestDataEncrypted.put("enc_data", EncryptDecrypt.encrypt(requestData.toString()));
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -120,7 +124,11 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
             try {
                 requestData.put("title", title.getText().toString());
                 requestData.put("content", content.getText().toString());
-
+                JSONArray file_ids = new JSONArray();
+                for(int i = 0; i<fadapter.getItemCount(); i++){
+                    file_ids.put(fadapter.getItem(i).getFileID());
+                }
+                requestData.put("file_id_list", file_ids);
                 requestDataEncrypted.put("enc_data", EncryptDecrypt.encrypt(requestData.toString()));
             } catch (JSONException e) {
                 e.printStackTrace();
