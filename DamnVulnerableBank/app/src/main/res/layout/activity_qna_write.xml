@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -33,9 +34,9 @@
     <EditText
         android:id="@+id/edt"
         android:layout_width="185dp"
-        android:layout_height="31dp"
+        android:layout_height="45dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="105dp" />
+        android:layout_marginTop="95dp" />
 
     <Button
         android:layout_width="62dp"
@@ -58,7 +59,8 @@
         android:layout_width="396dp"
         android:layout_height="426dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="190dp" />
+        android:layout_marginTop="190dp"
+        android:background="@drawable/boxline" />
 
     <TextView
         android:id="@+id/empty_view"
@@ -70,20 +72,22 @@
         android:text="You have no active benificiaries to show" />
 
     <Button
+        android:id="@+id/writeBtn"
         android:layout_width="62dp"
         android:layout_height="36dp"
         android:layout_marginLeft="280dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/circle"
         android:onClick="writePost"
-        android:text="등록"
+        android:text="작성"
         android:textColor="@color/black" />
+
     <ImageView
         android:layout_width="118dp"
         android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:src="@drawable/bank"
-        android:layout_alignParentBottom="true"
         android:translationX="145dp" />
 
 
