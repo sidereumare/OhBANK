@@ -32,13 +32,13 @@ router.post("/", decryptAuthRequest, (req, res) => {
         .then((data) => {
             r.status = statusCodes.SUCCESS;
             r.data = data.id;
-            for(var i=1; i<=req.body.file_id_list.length; i++){
+            for(var i=0; i<req.body.file_id_list.length; i++){
                 console.log(req.body.file_id_list.length);
                 Model.file.update({
                     qna_id : data.id
                 },
                 {where:{
-                    id : i
+                    id : req.body.file_id_list[i]
                     }
                 })
             }
