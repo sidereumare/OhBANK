@@ -4,33 +4,27 @@ var Model = require("../../../models/index");
 var Response = require("../../Response");
 var statusCodes = require("../../statusCodes");
 var { validateUserToken } = require("../../../middlewares/validateToken");
-var { encryptResponse, decryptRequest, decryptAuthRequest } = require("../../../middlewares/crypt");
+var { decryptAuthRequest,encryptResponse } = require("../../../middlewares/crypt");
 
 /**
  * QnA file list route
  * This endpoint allows to view list of files of a question
  * @path                             - /api/qna/write
  * @middleware
- * @param title
- * @param content
- * @param writer_id
+ * @param id
  * @return                           - isSuccess
 */
-
 router.post("/", decryptAuthRequest, (req, res) => {
     var r = new Response();
-    var today = new Date();
-    var now = today.getFullYear()+"-"+today.getMonth()+"-"+today.getDay()
-    console.log("dfjsalk")
-    Model.qna.create({
-        title: req.body.title,
-        content: req.body.content,
-        writer_id: req.user_id,
-        write_at: now
-    })
+    let qna_id = req.body.qna_id;
+    console.log(qna_id);
+    Model.qna.destroy({
+        where:{
+            id : qna_id
+        }})
     .then((data) => {
         r.status = statusCodes.SUCCESS;
-        r.data = data.id;
+        r.data = data;
         return res.json(encryptResponse(r));
     })
     .catch((err) => {

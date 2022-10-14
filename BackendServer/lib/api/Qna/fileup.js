@@ -17,8 +17,7 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 
 router.post("/", validateUserToken, (req, res) => {
     var r = new Response();
-    let uploadFile = req.files.file;
-    let uploadPath = req.files.file.name;
+
     uploadFile.mv(uploadPath, function (err) {
         if (err) {
             r.status = statusCodes.SERVER_ERROR;
@@ -28,5 +27,28 @@ router.post("/", validateUserToken, (req, res) => {
             return res.json(encryptResponse(r));
         }
     });
+
+    var filename = "1.txt";
+    var qna_id = "1";
+    Model.file.create({
+        filename: filename,
+        qna_id: qna_id,
+        user_id: user_id
+        })
+        .then((data) => {
+            r.status = statusCodes.SUCCESS;
+            r.data = data;
+            return res.json(encryptResponse(r));
+        })
+        .catch((err) => {
+            r.status = statusCodes.SERVER_ERROR;
+            r.data = {
+                message: err.toString(),
+            };
+            return res.json(encryptResponse(r));
+        });
+
+
+    
 });
 module.exports = router;
