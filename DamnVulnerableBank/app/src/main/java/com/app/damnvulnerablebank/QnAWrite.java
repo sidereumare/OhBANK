@@ -69,7 +69,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
     String subject;
     String contents;
     RequestQueue requestQueue;
-    String qnaID="-1";
+    String qnaID;
     TextView title;
     TextView content;
     Button writeBtn;
@@ -89,6 +89,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
 
         subject = intent.getStringExtra("title");
         contents = intent.getStringExtra("content");
+        qnaID = intent.getStringExtra("qna_id");
         rewrite = intent.getBooleanExtra("rewrite",false);
         fileInfoArray = (ArrayList<FileInfo>) intent.getSerializableExtra("file_id_list");
         title.setText(subject);

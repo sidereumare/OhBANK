@@ -27,7 +27,7 @@ const encrypt = (input) => {
 }
 
 // console.log(encrypt('{"id":"4","title":"22", "content":"2222", "file_id_list": [1,2]}'));
-// console.log(decrypt("Gk8VEx0CAkNXQwkNCAYSCQdYRUwEDgMVHwcaRVtPBxsaCgYSCQdYRUwBCAEEJQAKOA0EEg5LVDxDFj1YAAo7Q1dTTEUyRQcEDR82AAYMCD1YUzJFUF9SVB0WEz1PTSZLHQYXCAUlBw8KBDFDQDVMVldbVE1fXlFWXVVCXkATGRk9WEUyRRQeBAg2BwM9T1tLFEw6HA=="));
+console.log(decrypt("Gk8VEx0CAkNXQx4IHQEHCRIeDw8UQ0FDGQYAEwQDFVhTTAMHDENWSx8JADIIHktURVBUQ1ZLCA4NCD4TDTELCB4VWFM1Ohw="));
 
 /**
  * Encryption middleware

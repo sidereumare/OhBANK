@@ -40,7 +40,8 @@ var { encryptResponse, decryptRequest, decryptAuthRequest } = require("../../../
 router.post("/", decryptAuthRequest, (req, res) => {
     var r = new Response();
     var today = new Date();
-    var now = today.getFullYear()+"-"+today.getMonth()+"-"+today.getDay()
+    var now = today.getFullYear()+"-"+today.getMonth()+"-"+today.getDay();
+
     if(req.body.file_id_list){
         Model.qna.update({
             title: req.body.title,
@@ -49,7 +50,7 @@ router.post("/", decryptAuthRequest, (req, res) => {
             write_at: now
         },{where:
             {
-                id : req.body.id
+                id : req.body.qna_id
             }})
         .then((data) => {
             r.status = statusCodes.SUCCESS;
@@ -58,7 +59,7 @@ router.post("/", decryptAuthRequest, (req, res) => {
             for(var i=0; i<req.body.file_id_list.length; i++){
                 console.log(req.body.file_id_list[i]);
                 Model.file.update({
-                    qna_id : req.body.id
+                    qna_id : req.body.qna_id
                 },
                 {where:{
                     id : req.body.file_id_list[i]
@@ -83,7 +84,7 @@ router.post("/", decryptAuthRequest, (req, res) => {
             write_at: now
         },{where:
             {
-                id : qna_id
+                id : req.body.qna_id
             }})
         .then((data) => {
             r.status = statusCodes.SUCCESS;
