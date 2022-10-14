@@ -155,6 +155,11 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
         intent.putExtra("title", subject);
         intent.putExtra("content", content);
         intent.putExtra("qna_id", qnaID);
+        ArrayList<FileInfo> file_list = new ArrayList<>();
+        for(int i = 0; i<fadapter.getItemCount(); i++){
+            file_list.add(fadapter.getItem(i));
+        }
+        intent.putExtra("file_id_list", file_list);
         intent.putExtra("rewrite", true);
         startActivity(intent);
         finish();

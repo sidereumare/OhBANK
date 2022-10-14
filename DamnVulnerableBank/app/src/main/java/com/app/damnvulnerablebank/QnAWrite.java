@@ -56,6 +56,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
     TextView title;
     TextView content;
     Button writeBtn;
+    ArrayList<FileInfo> fileInfoArray;
     boolean rewrite;
 
     @Override
@@ -71,7 +72,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         subject = intent.getStringExtra("title");
         contents = intent.getStringExtra("content");
         rewrite = intent.getBooleanExtra("rewrite",false);
-
+        fileInfoArray = (ArrayList<FileInfo>) intent.getSerializableExtra("file_id_list");
         title.setText(subject);
         content.setText(contents);
 
@@ -82,9 +83,13 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
 
         recyclerView = findViewById(R.id.files_write);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        fadapter = new FileAdapter(getApplicationContext(), new ArrayList<FileInfo>());
+        if(fileInfoArray==null){
+            fileInfoArray = new ArrayList<FileInfo>();
+        }
+        fadapter = new FileAdapter(getApplicationContext(), fileInfoArray);
         fadapter.setOnItemClickListener(QnAWrite.this);
         recyclerView.setAdapter(fadapter);
+
 
         SharedPreferences sharedPreferences = getSharedPreferences("jwt", MODE_PRIVATE);
         retrivedToken = sharedPreferences.getString("accesstoken", null);

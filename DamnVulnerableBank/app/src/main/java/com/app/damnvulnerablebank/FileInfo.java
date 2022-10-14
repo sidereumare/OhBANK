@@ -1,6 +1,8 @@
 package com.app.damnvulnerablebank;
 
-public class FileInfo {
+import java.io.Serializable;
+
+public class FileInfo implements Serializable {
     private String fileName;
     private String fileID;
 
