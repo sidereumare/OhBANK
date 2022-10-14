@@ -26,13 +26,14 @@ router.get("/", validateUserToken, async (req, res) => {
         where: {
             id: file_id
         },
-        attributes: ["file_name"]
+        attributes: ["file_name", "saved_name"]
     })
     .then((data) => {
         // r.status = statusCodes.SUCCESS;
         // r.data = data;
         res.attachment(data.file_name);
-        file_data = fs.readFileSync("./upload/"+data.file_name);
+        res.attachment(data.saved_name);
+        file_data = fs.readFileSync("./upload/"+data.saved_name);
         s = new Readable();
         // s.push(encryptResponse(file_data).enc_data);
         s.push(file_data);

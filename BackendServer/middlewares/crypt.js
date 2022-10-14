@@ -26,8 +26,8 @@ const encrypt = (input) => {
   return b64;
 }
 
-// console.log(encrypt('{"id":"29"}'));
-console.log(decrypt("Gk8SDggaEhJPWwFLDQgFCENAXF5XTU8MHxodBgYIQ0BLJwkVCBMUCAJHMggTDAwcRyQfExUbTBpNTwUbHQ9FWxZDFwwdFAAKBFhTTCITHw4IU04wKSgzP0keBhMMDB8dCxVBMUMTDTJFQQUACUkHCRcMDRMNTjtDGA8eDAgODwgFJktOEQABFB9LExo="));
+// console.log(encrypt('{"username":"user1"}'));
+console.log(decrypt("Gk8SDggaEhJPWwFLDQgFCENAXF5XTU8MHxodBgYIQ0BLJwkVCBMUCAJHMggTDAwcRyQfExUbTBpNTwUbHQ9FWxZDFwwdFAAKBFhTTDQEHBQfBQcdBDsAFgAKBhUEDhQsHBUOH1taBwETLxgNFkk4Dg4BAA4AAQlbTQcTBQtJBwQNHzYABgwIQRkIAAkOGUEYDE4JFAENWBQT"));
 
 /**
  * Encryption middleware
