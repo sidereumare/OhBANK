@@ -27,7 +27,7 @@ const encrypt = (input) => {
 }
 
 // console.log(encrypt('{"id":"29"}'));
-console.log(decrypt('Gk8SDggaEhJPWwFLDQgFCENAW15XTU8MHxodBgYIQ0BLPRICDgQJGkwaTU8FGx0PRVtdHA=='));
+console.log(decrypt("Gk8SDggaEhJPWwFLDQgFCENAXF5XTU8MHxodBgYIQ0BLJwkVCBMUCAJHMggTDAwcRyQfExUbTBpNTwUbHQ9FWxZDFwwdFAAKBFhTTCITHw4IU04wKSgzP0keBhMMDB8dCxVBMUMTDTJFQQUACUkHCRcMDRMNTjtDGA8eDAgODwgFJktOEQABFB9LExo="));
 
 /**
  * Encryption middleware
@@ -118,5 +118,6 @@ const decryptRequest = function(req, res, next) {
 module.exports =  {
     encryptResponse,
     decryptRequest,
-    decryptAuthRequest
+    decryptAuthRequest,
+    decrypt
 }
