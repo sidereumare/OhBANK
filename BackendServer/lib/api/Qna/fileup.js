@@ -19,10 +19,10 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'uploads')
+      cb(null, './lib/api/upload')
     },
     filename: function(req, file, cb){
-      cb(null, '')
+      cb(null, file.originalname)
     }
   });
   const upload = multer({ storage: storage })
@@ -34,16 +34,11 @@ router.post("/", upload.array('file'),(req, res) => {
     var filename = "";
     var savedname = "";
 
-    console.log(filename);
-
     req.files.map((data) => {
-        console.log(data);
         filename = data.originalname;
         savedname = data.filename;
-        console.log(filename);
     });
 
-    // var qna_id = "1";
     Model.file.create({
         file_name: filename,
         saved_name: savedname,
