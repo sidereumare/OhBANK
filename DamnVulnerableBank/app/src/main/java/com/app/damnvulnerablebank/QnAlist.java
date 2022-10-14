@@ -37,6 +37,7 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
     private TextView emptyView;
     Qadapter qadapter;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +131,7 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
     public void write(View view){
         Intent de = new Intent(this, QnAWrite.class);
         startActivity(de);
+        finish();
     }
 
     @Override
@@ -139,5 +141,15 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
 
         de.putExtra("qna_id", cf.getId());
         startActivity(de);
+        finish();
+    }
+
+    void refresh(){
+        finish();
+        overridePendingTransition(0, 0);
+        Intent intent = getIntent();
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+        Toast.makeText(getApplicationContext(), "refresh",Toast.LENGTH_SHORT).show();
     }
 }
