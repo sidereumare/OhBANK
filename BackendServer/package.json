@@ -10,13 +10,16 @@
   "author": "Rewanth Tammana",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1232.0",
     "debug": "~2.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.5-lts.1",
+    "multer-s3": "^3.0.1",
     "mysql2": "^2.2.1",
+    "pdf-creator-node": "^2.2.4",
     "pm2": "^2.1.6",
-    "sequelize": "^6.3.5",
-    "pdf-creator-node": "^2.2.4"
+    "sequelize": "^6.3.5"
   },
   "repository": {
     "type": "git",
