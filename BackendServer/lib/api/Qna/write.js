@@ -31,6 +31,7 @@ router.post("/", decryptAuthRequest, (req, res) => {
     .then((data) => {
         r.status = statusCodes.SUCCESS;
         r.data = data.id;
+        console.log(r.data);
         return res.json(encryptResponse(r));
     })
     .catch((err) => {

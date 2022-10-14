@@ -16,7 +16,8 @@ var { decryptAuthRequest,encryptResponse } = require("../../../middlewares/crypt
 */
 router.post("/", decryptAuthRequest, (req, res) => {
     var r = new Response();
-    let qna_id = req.body.id;
+    let qna_id = req.body.qna_id;
+    console.log(qna_id);
     Model.qna.destroy({
         where:{
             id : qna_id

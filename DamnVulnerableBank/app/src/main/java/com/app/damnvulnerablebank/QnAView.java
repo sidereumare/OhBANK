@@ -57,7 +57,7 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
         setContentView(R.layout.activity_qna_view);
         Intent intent = getIntent();
 
-        String qnaID = intent.getStringExtra("qna_id");
+        qnaID = intent.getStringExtra("qna_id");
 
         SharedPreferences sharedPreferences = getSharedPreferences("jwt", Context.MODE_PRIVATE);
         retrivedToken = sharedPreferences.getString("accesstoken",null);
@@ -177,18 +177,9 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
                 new Response.Listener<JSONObject>()  {
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {
-                            JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
-                            String status=decryptedResponse.getString("status");
-                            if(status.equals("success")){
-                                Toast.makeText(getApplicationContext(), "QnA deleted successfully", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }else{
-                                Toast.makeText(getApplicationContext(), "QnA delete failed", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        Toast.makeText(getApplicationContext(), "QnA deleted successfully", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), QnAlist.class));
                     }
                 }, new Response.ErrorListener() {
             @Override
