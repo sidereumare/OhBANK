@@ -7,14 +7,24 @@
     tools:context=".SendMoney">
 
 
+
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="89dp"
-        android:layout_height="61dp"
-        android:layout_marginLeft="155dp"
-        android:layout_marginTop="160dp"
-        app:srcCompat="@drawable/sends" />
+        android:layout_width="65dp"
+        android:layout_height="74dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/sends" />
 
+    <TextView
+        android:layout_width="75dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="72dp"
+        android:text="계좌이체"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/actid"
         android:layout_width="wrap_content"
@@ -26,15 +36,15 @@
 
     <EditText
         android:id="@+id/edact"
-        android:layout_marginTop="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/actid"
-        android:layout_marginLeft="100dp"
-        android:hint="Enter Account Number Again"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="72dp"
+        android:hint="계좌번호를 입력해주세요"
         android:inputType="numberDecimal"
-        android:textStyle="bold"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/edamt"
@@ -42,22 +52,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edact"
-        android:layout_marginLeft="140dp"
-        android:hint="Enter Amount"
+        android:layout_marginLeft="110dp"
+        android:hint="이체 금액을 입력해주세요"
         android:inputType="numberDecimal"
         android:textStyle="bold"
         android:textSize="18sp"/>
+
     <Button
         android:id="@+id/sendbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/circle"
-        android:textColor="@color/black"
         android:layout_below="@+id/edamt"
-        android:layout_marginTop="32dp"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/circle"
         android:onClick="Biometrics"
-        android:layout_marginLeft="155dp"
-        android:text="Send Money"/>
+        android:text="이체"
+        android:textColor="@color/black" />
 
     <ImageView
         android:layout_width="118dp"
