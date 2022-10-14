@@ -3,6 +3,7 @@ var router = express.Router();
 var Model = require("../../../models/index");
 var Response = require("../../Response");
 var statusCodes = require("../../statusCodes");
+const multer = require("multer");
 var { validateUserToken } = require("../../../middlewares/validateToken");
 var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 
@@ -12,26 +13,39 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  * @path                             - /api/qna/list
  * @middleware
  * @param file
+ * @param qna_id
  * @return                           - Qna list
 */
 
-router.post("/", validateUserToken, (req, res) => {
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, 'uploads')
+//     },
+//     filename: function(req, file, cb){
+//       cb(null, '')
+//     }
+//   });
+//   const upload = multer({ storage: storage })
+var { upload } = require('../../../middlewares/s3Conn');
+router.post("/", upload.single('file'), (req, res) => {
     var r = new Response();
+    let qna_id = req.body.qna_id;
+    let user_id = req.body.user_id;
+    var filename = "";
+    var savedname = "";
 
-    uploadFile.mv(uploadPath, function (err) {
-        if (err) {
-            r.status = statusCodes.SERVER_ERROR;
-            r.data = {
-                message: err.toString(),
-            };
-            return res.json(encryptResponse(r));
-        }
-    });
+    console.log(filename);
 
-    var filename = "1.txt";
-    var qna_id = "1";
+    // req.files.map((data) => {
+    //     console.log(data);
+    //     filename = data.originalname;
+    //     savedname = data.filename;
+    //     console.log(filename);
+    // });
+
     Model.file.create({
-        filename: filename,
+        file_name: filename,
+        saved_name: savedname,
         qna_id: qna_id,
         user_id: user_id
         })
@@ -47,8 +61,6 @@ router.post("/", validateUserToken, (req, res) => {
             };
             return res.json(encryptResponse(r));
         });
-
-
     
 });
 module.exports = router;
