@@ -40,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -226,22 +227,31 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         }
     }
 
-    public void uploadFile(Uri uri){
+    public void uploadFile(Uri fileUri, byte[] fileData){
         // 파일 업로드
-        String endpoint = url + "/api/qna/fileup";
+        String endpoint = "/api/qna/fileup";
+        String finalurl = url + endpoint;
 
 
-        final String fileName = "123.txt";
-        String mimeType = "text/plain";
+        String[] flist = fileUri.getEncodedPath().split("%2F");
+        final String fileName = flist[flist.length-1];
+        String mimeType = URLConnection.guessContentTypeFromName(fileName);
+
+        // api 29 file load
+        if(Build.VERSION.SDK_INT >= 29){
+
+        }
+
+
+
         String d = "dfjaisladf";
         byte[] file = d.getBytes();
-
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("file", fileName, RequestBody.create(MediaType.parse(mimeType), file))
+                .addFormDataPart("file", fileName, RequestBody.create(MediaType.parse(mimeType), fileData))
                 .build();
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(endpoint)
+                .url(finalurl)
                 .addHeader("Authorization", "Bearer "+retrivedToken)
                 .post(requestBody)
                 .build();
@@ -277,15 +287,6 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
 
     }
 
-    private String getRealPathFromURI(Uri uri) {
-        String[] proj = { MediaStore.Images.Media.DATA };
-        CursorLoader loader = new CursorLoader(getApplicationContext(), uri, proj, null, null, null);
-        Cursor cursor = loader.loadInBackground();
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -293,8 +294,33 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
             Toast.makeText(QnAWrite.this, "파일 선택 성공", Toast.LENGTH_SHORT).show();
 
             Uri uri = data.getData();
-            uploadFile(uri);
 
+            InputStream inputStream = null;
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            int DEFAULT_BUFFER_SIZE = 1024*4;
+            try{
+                inputStream = getContentResolver().openInputStream(uri);
+
+                byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+                int len;
+                while((len = inputStream.read(buffer))>0){
+                    outputStream.write(buffer, 0, len);
+                }
+
+                uploadFile(uri, outputStream.toByteArray());
+                inputStream.close();
+                outputStream.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            } finally{
+                if(inputStream!= null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }else {
             Toast.makeText(QnAWrite.this, "파일 선택 실패", Toast.LENGTH_SHORT).show();
         }

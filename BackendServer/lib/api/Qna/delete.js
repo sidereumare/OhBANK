@@ -19,19 +19,48 @@ router.post("/", decryptAuthRequest, (req, res) => {
     let qna_id = req.body.qna_id;
     console.log(qna_id);
 
-    Model.file.destroy({
+    Model.file.findAll({
         where: {
             qna_id: qna_id
-            }})
+        },
+        attributes: ["saved_name"],
+    })
     .then((data) => {
-        Model.qna.destroy({
-            where:{
-                id : qna_id
-            }})
+        // s3에서 파일 삭제
+        data.forEach((file) => {
+            var options = {
+                Bucket: 'oh-s3-bucket',
+                Key: file.saved_name
+            };
+            s3.deleteObject(options, function(err, data) {
+                if(err){
+                    r.statusCodes = statusCodes.SERVER_ERROR;
+                    return res.json(encryptResponse(r));
+                }
+            });
+        })
+        // DB에서 파일 삭제
+        Model.file.destroy({
+            where: {
+                qna_id: qna_id
+                }})
         .then((data) => {
-            r.status = statusCodes.SUCCESS;
-            r.data = data;
-            return res.json(encryptResponse(r));
+            // QnA 삭제
+            Model.qna.destroy({
+                where:{
+                    id : qna_id
+                }})
+            .then((data) => {
+                r.status = statusCodes.SUCCESS;
+                return res.json(encryptResponse(r));
+            })
+            .catch((err) => {
+                r.status = statusCodes.SERVER_ERROR;
+                r.data = {
+                    message: err.toString(),
+                };
+                return res.json(encryptResponse(r));
+            });
         })
         .catch((err) => {
             r.status = statusCodes.SERVER_ERROR;
