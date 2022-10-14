@@ -38,7 +38,7 @@ create table files(
   id integer PRIMARY KEY auto_increment,
   file_name varchar(100) NOT NULL,
   saved_name varchar(100) NOT NULL,
-  qna_id integer NOT NULL,
+  qna_id integer,
   user_id integer NOT NULL,
   FOREIGN KEY(qna_id) REFERENCES qnas(id),
   FOREIGN KEY(user_id) REFERENCES users(id)
@@ -79,6 +79,6 @@ INSERT INTO `qnas` values (default, "233", "ㅁ낭러ㅏㅁㅈㄷ란아차추라
 INSERT INTO `qnas` values (default, "343", "ㅁ낭러ㅏㅁㅈㄷ란아차추라ㅜㄷ람ㄴ\n가다아아아아두라ㅓ차ㅓ챠챠ㅓ챠ㅓ가ㅜㅏ구ㅏㅜ라ㅜ아ㅜ냐나 \nadsfaksjfkawheibfibcivbawib sdgtwkkasdjvg a\n a fiaw9ef9awfjsadfvfj3fnasdknva df", 3, "2020-01-01");
 
 
-INSERT INTO `files` values (default, "test1.jpg", 1, 1);
-INSERT INTO `files` values (default, "file2", 1, 1);
-INSERT INTO `files` values (default, "file3", 3, 2);
+INSERT INTO `files` values (default, "test1.jpg", "123", 1, 1);
+INSERT INTO `files` values (default, "file2", "1213", 1, 1);
+INSERT INTO `files` values (default, "file3", "123465",3, 2);
