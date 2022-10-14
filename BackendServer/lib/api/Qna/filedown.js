@@ -32,11 +32,11 @@ router.get("/", validateUserToken, async (req, res) => {
     .then(async (data) => {
         var options = {
             Bucket: 'oh-s3-bucket',
-            Key: "test.txt"
+            Key: data.saved_name
         };
 
         var fileStream = s3.getObject(options).createReadStream();
-        res.attachment("test.txt");
+        res.attachment(data.saved_name);
         // r.status = statusCodes.SUCCESS;
         // r.data = data;
         // res.attachment(data.file_name);
