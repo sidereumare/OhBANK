@@ -292,8 +292,55 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
                             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                             startActivity(intent);
                         }
+                        else {
+                            String fileName = InputStreamVolleyRequest.responseHeaders.get("Content-Disposition").split("filename=")[1];
+                            fileName = fileName.substring(1, fileName.length()-1);
+                            File file = null;
+                            StringBuilder fileEncData = new StringBuilder();
+                            try{
+                                // 파일 있으면 다른 이름으로 저장
+                                file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
+                                if(file.exists()){
+                                    int i = 1;
+                                    while(file.exists()){
+                                        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "("+i+")"+fileName);
+                                        i++;
+                                    }
+                                }
 
+                                BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(file));
 
+                                long lengthOfFile = response.length;
+
+                                byte[] data = new byte[1024];
+                                InputStream input = new ByteArrayInputStream(response);
+                                long total = 0, count;
+                                while((count = input.read(data))!=-1){
+                                    total+=count;
+//                                fileEncData.append(new String(Arrays.copyOfRange(data, 0, (int) count)));
+                                    output.write(data, 0, (int) count);
+                                }
+                                output.flush();
+                                output.close();
+                                input.close();
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            // 권한 설정
+                            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                            StrictMode.setVmPolicy(builder.build());
+                            // 외부 앱으로 파일 열기
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            // 파일 타입 추론
+                            String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+                            // 외부 앱 실행
+                            intent.setDataAndType(Uri.fromFile(file), mimeType);
+                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                            startActivity(intent);
+                        }
 
                     }
                 }, new Response.ErrorListener() {
