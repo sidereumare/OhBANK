@@ -26,8 +26,8 @@ const encrypt = (input) => {
   return b64;
 }
 
-console.log(encrypt('{"id":"4","title":"22", "content":"2222", "file_id_list": [1,2]}'));
-// console.log(decrypt("Gk8SDggaEhJPWwFLDQgFCENAXF5XTU8MHxodBgYIQ0BLJwkVCBMUCAJHMggTDAwcRyQfExUbTBpNTwUbHQ9FWxZDFwwdFAAKBFhTTCITHw4IU04wKSgzP0keBhMMDB8dCxVBMUMTDTJFQQUACUkHCRcMDRMNTjtDGA8eDAgODwgFJktOEQABFB9LExo="));
+// console.log(encrypt('{"id":"4","title":"22", "content":"2222", "file_id_list": [1,2]}'));
+console.log(decrypt("Gk8VEx0CAkNXQx4IHQEHCRIeDw8UQ0FDGQYAEwQDFVhTTAMHDENWSx8JADIIHktURVBUQ1ZLCA4NCD4TDTELCB4VWFM1Ohw="));
 
 /**
  * Encryption middleware
