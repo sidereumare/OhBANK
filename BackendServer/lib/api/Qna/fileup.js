@@ -27,14 +27,12 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 //   });
 //   const upload = multer({ storage: storage })
 var { upload } = require('../../../middlewares/s3Conn');
-router.post("/", upload.single('file'), (req, res) => {
+router.post("/", upload.single('file'), validateUserToken, (req, res) => {
     var r = new Response();
-    let qna_id = req.body.qna_id;
-    let user_id = req.body.user_id;
-    var filename = "";
-    var savedname = "";
+    let user_id = req.user_id;
+    var filename = req.file.originalname;
+    var savedname = req.file.key;
 
-    console.log(filename);
 
     // req.files.map((data) => {
     //     console.log(data);
@@ -46,7 +44,6 @@ router.post("/", upload.single('file'), (req, res) => {
     Model.file.create({
         file_name: filename,
         saved_name: savedname,
-        qna_id: qna_id,
         user_id: user_id
         })
         .then((data) => {

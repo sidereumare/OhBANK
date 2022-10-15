@@ -44,6 +44,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="140dp"
         android:background="@drawable/circle"
+        android:onClick="selectFile"
         android:text="첨부파일"
         android:textColor="@color/black" />
 

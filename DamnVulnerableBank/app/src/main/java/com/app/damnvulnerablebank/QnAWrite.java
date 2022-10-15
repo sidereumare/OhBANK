@@ -2,20 +2,27 @@ package com.app.damnvulnerablebank;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.app.DownloadManager;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,16 +39,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 
 
 public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemClickListener{
@@ -72,6 +90,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
 
         subject = intent.getStringExtra("title");
         contents = intent.getStringExtra("content");
+        qnaID = intent.getStringExtra("qna_id");
         rewrite = intent.getBooleanExtra("rewrite",false);
         fileInfoArray = (ArrayList<FileInfo>) intent.getSerializableExtra("file_id_list");
         title.setText(subject);
@@ -184,7 +203,51 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
     }
     @Override
     public void onItemClick(int position) {
+        String endpoint;
+        endpoint = url + "/api/qna/filedel";
+        FileInfo fi = fileInfoArray.get(position);
 
+        JSONObject requestData;
+        JSONObject requestDataEncrypted;
+
+        requestData = new JSONObject();
+        requestDataEncrypted = new JSONObject();
+
+        try {
+            requestData.put("file_id", fi.getFileID());
+            requestDataEncrypted.put("enc_data", EncryptDecrypt.encrypt(requestData.toString()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, endpoint, requestDataEncrypted, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
+                    Toast.makeText(getApplicationContext(), decryptedResponse.getJSONObject("status").getInt("code"), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization","Bearer "+retrivedToken);
+                return params;
+            }
+        };
+
+        requestQueue.add(request);
+
+        Toast.makeText(getApplicationContext(),fi.getFileID() + "",Toast.LENGTH_SHORT).show();
     }
 
     void writeComplete(){
@@ -192,4 +255,119 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         de.putExtra("qna_id", qnaID);
         startActivity(de);
     }
+
+    public void selectFile(View view){
+
+        // 파일 선택
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        try {
+            startActivityForResult(
+                    Intent.createChooser(intent, "파일을 선택하세요."),
+                    0);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getApplicationContext(), "파일 관련 앱이 없습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void uploadFile(Uri fileUri, byte[] fileData){
+        // 파일 업로드
+        String endpoint = "/api/qna/fileup";
+        String finalurl = url + endpoint;
+
+
+        String[] flist = fileUri.getEncodedPath().split("%2F");
+        final String fileName = flist[flist.length-1];
+        String mimeType = URLConnection.guessContentTypeFromName(fileName);
+
+        // api 29 file load
+        if(Build.VERSION.SDK_INT >= 29){
+
+        }
+
+
+
+        String d = "dfjaisladf";
+        byte[] file = d.getBytes();
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", fileName, RequestBody.create(MediaType.parse(mimeType), fileData))
+                .build();
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(finalurl)
+                .addHeader("Authorization", "Bearer "+retrivedToken)
+                .post(requestBody)
+                .build();
+        OkHttpClient client = new OkHttpClient();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                if(response.isSuccessful()){
+
+                    try {
+                        JSONObject myResponse = new JSONObject(response.body().string());
+                        JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(myResponse.get("enc_data").toString()));
+                        JSONObject fileResponse = new JSONObject(decryptedResponse.getString("data"));
+                        fileInfoArray.add(new FileInfo(fileName, fileResponse.getString("id")));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                fadapter.notifyDataSetChanged();
+                            }
+                        });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0 && resultCode==RESULT_OK){
+            Toast.makeText(QnAWrite.this, "파일 선택 성공", Toast.LENGTH_SHORT).show();
+
+            Uri uri = data.getData();
+
+            InputStream inputStream = null;
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            int DEFAULT_BUFFER_SIZE = 1024*4;
+            try{
+                inputStream = getContentResolver().openInputStream(uri);
+
+                byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+                int len;
+                while((len = inputStream.read(buffer))>0){
+                    outputStream.write(buffer, 0, len);
+                }
+
+                uploadFile(uri, outputStream.toByteArray());
+                inputStream.close();
+                outputStream.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            } finally{
+                if(inputStream!= null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }else {
+            Toast.makeText(QnAWrite.this, "파일 선택 실패", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

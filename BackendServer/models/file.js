@@ -32,6 +32,7 @@ module.exports = function(sequelize, DataTypes) {
         });
         File.belongsTo(models.qna, {
             foreignKey: 'qna_id',
+            allowNull: true,
         });
     };
     return File;
