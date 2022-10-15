@@ -32,5 +32,20 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     timestamps: false
   });
+
+  Users.associate = (models) => {
+    Users.hasMany(models.qna, {
+      foreignKey: 'writer_id',
+      sourceKey: 'id',
+      allowNull: false,
+      onDelete: 'CASCADE'
+    });
+    Users.hasMany(models.file, {
+      foreignKey: 'user_id',
+      sourceKey: 'id',
+      allowNull: false,
+      onDelete: 'CASCADE'
+    });
+  };
 	return Users;
 };

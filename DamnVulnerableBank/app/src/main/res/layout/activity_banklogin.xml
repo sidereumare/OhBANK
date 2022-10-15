@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="30dp"
-    android:background="@color/kuchbhiblue"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -20,8 +20,9 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="270dp"
-            android:background="@color/blue"
-            android:src="@drawable/bn" />
+            android:background="@color/white"
+            android:src="@drawable/bank" />
+
 
         <TextView
             android:id="@+id/tet"
@@ -35,7 +36,6 @@
             android:textColor="#000000"
             android:textSize="35sp" />
 
-
         <LinearLayout
             android:layout_width="250dp"
             android:layout_height="wrap_content"
@@ -48,21 +48,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:background="@drawable/circle"
                 android:onClick="loginPage"
-                android:text="Login" />
+                android:text="로그인" />
 
             <Button
                 android:id="@+id/signup1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:onClick="signupPage"
-                android:text="Signup" />
+                android:text="회원가입" />
 
 
 
@@ -89,7 +89,7 @@
             android:background="@drawable/circle"
             android:onClick="healthCheck"
             android:text="Health Check"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
 
     </LinearLayout>

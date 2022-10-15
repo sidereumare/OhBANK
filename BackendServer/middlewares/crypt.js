@@ -1,6 +1,7 @@
 const Model = require("../models/index");
 const Response = require('../lib/Response');
 const statusCodes = require("../lib/statusCodes");
+const jwt = require("jsonwebtoken");
 
 const SECRET = 'amazing';
 const SECRET_LENGTH = SECRET.length;
@@ -25,6 +26,9 @@ const encrypt = (input) => {
   return b64;
 }
 
+// console.log(encrypt('{"id":"4","title":"22", "content":"2222", "file_id_list": [1,2]}'));
+console.log(decrypt("Gk8VEx0CAkNXQx4IHQEHCRIeDw8UQ0FDGQYAEwQDFVhTTAMHDENWSx8JADIIHktURVBUQ1ZLCA4NCD4TDTELCB4VWFM1Ohw="));
+
 /**
  * Encryption middleware
  * This middleware encrypts server response before forwarding to client
@@ -48,13 +52,72 @@ const decryptRequest = function(req, res, next) {
     req.body = JSON.parse(decrypt(req.body.enc_data));
     next();
   } catch(err) {
+    
     r.status = statusCodes.BAD_INPUT;
     r.data = err;
     return res.json(r);
   }
 };
 
+/**
+ * Decryption middleware
+ * This middleware decrypts user data after authorization check
+ * @return                           - Calls the next function on success
+ */
+ const decryptAuthRequest = function(req, res, next) {
+  var r = new Response();
+  try {
+    req.body = JSON.parse(decrypt(req.body.enc_data));
+    // next();
+  } catch(err) {
+    r.status = statusCodes.BAD_INPUT;
+    r.data = err;
+    return res.json(r);
+  }
+  
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    
+    if (token == null) {
+        r.status = statusCodes.NOT_AUTHORIZED;
+        r.data = {
+          "message": "Not authorized"
+        }
+        return res.json(encryptResponse(r));
+    }
+  
+    jwt.verify(token, "secret", (err, data) => {
+        if (err) {
+            r.status = statusCodes.FORBIDDEN;
+            r.data = {
+                "message": err.toString()
+            }
+            return res.json(encryptResponse(r));
+        }
+        
+        Model.users.findOne({
+            where: {
+                username: data.username
+            },
+            attributes: ["id", "username", "account_number"]
+        }).then((data) => {
+            req.account_number = data.account_number;
+            req.username = data.username;
+            req.user_id = data.id;
+            next();
+        }).catch((err) => {
+          r.status = statusCodes.SERVER_ERROR;
+          r.data = {
+              "message": err.toString()
+          };
+          return res.json(encryptResponse(r));
+      });
+    });
+};
+
 module.exports =  {
     encryptResponse,
-    decryptRequest
+    decryptRequest,
+    decryptAuthRequest,
+    decrypt
 }

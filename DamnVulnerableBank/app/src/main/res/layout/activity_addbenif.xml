@@ -4,33 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shadow"
     tools:context=".AddBeneficiary">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="72dp"
+        android:text="계좌번호 입력"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginTop="192dp"
-        android:layout_marginLeft="110dp"
-        android:text="Enter Account Number"/>
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/edt"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:layout_marginLeft="150dp"/>
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="220dp" />
 
     <Button
-        android:layout_below="@+id/edt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/edt"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/circle"
-        android:text="Add Benificiary"
         android:onClick="addBeneficiary"
-        android:textColor="@color/white"
-        android:layout_marginLeft="140dp"/>
+        android:text="등록"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:layout_width="118dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/bank"
+        android:layout_alignParentBottom="true"
+        android:translationX="145dp" />
+
+
 
 </RelativeLayout>

@@ -16,7 +16,7 @@ const validateUserToken = function(req, res, next) {
 
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
-
+  
   if (token == null) {
       r.status = statusCodes.NOT_AUTHORIZED;
       r.data = {
@@ -38,9 +38,11 @@ const validateUserToken = function(req, res, next) {
           where: {
               username: data.username
           },
-          attributes: ["account_number"]
+          attributes: ["id", "username", "account_number"]
       }).then((data) => {
           req.account_number = data.account_number;
+          req.username = data.username;
+          req.user_id = data.id;
           next();
       }).catch((err) => {
         r.status = statusCodes.SERVER_ERROR;

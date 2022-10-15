@@ -8,11 +8,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_marginTop="200dp"
-        android:layout_width="89dp"
+        android:layout_marginTop="72dp"
+        android:layout_width="100dp"
         android:layout_marginLeft="150dp"
-        android:layout_height="61dp"
-        app:srcCompat="@drawable/person" />
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/addben" />
 
 
     <TextView
@@ -26,12 +26,12 @@
 
     <EditText
         android:id="@+id/accountid1"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/accountid"
-        android:layout_marginLeft="100dp"
-        android:hint="Enter Account ID Again"
+        android:layout_marginLeft="120dp"
+        android:hint="아이디를 재입력해주세요"
         android:inputType="numberDecimal"
         android:textStyle="bold"
         android:textSize="15sp"/>
@@ -40,12 +40,19 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/circle"
-        android:textColor="@color/white"
         android:layout_below="@+id/accountid1"
-        android:layout_marginTop="12dp"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/circle"
         android:onClick="approveBeneficiary"
-        android:layout_marginLeft="115dp"
-        android:text="Approve Benificiary "/>
+        android:text="확인"
+        android:textColor="@color/black" />
+    <ImageView
+        android:layout_width="118dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/bank"
+        android:layout_alignParentBottom="true"
+        android:translationX="145dp" />
 
 </RelativeLayout>

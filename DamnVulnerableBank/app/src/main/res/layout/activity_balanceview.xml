@@ -7,11 +7,21 @@
     tools:context=".ViewBalance">
 
     <ImageView
+        android:layout_width="55dp"
+        android:layout_height="64dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_width="342dp"
-        android:layout_height="155dp"
-        android:src="@drawable/wall" />
+        android:src="@drawable/balance" />
+
+    <TextView
+        android:layout_width="108dp"
+        android:layout_height="46dp"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="65dp"
+        android:text="잔고 확인"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView"
@@ -23,4 +33,12 @@
         tools:layout_editor_absoluteX="78dp"
         android:fontFamily="@font/muli_extrabold"
         tools:layout_editor_absoluteY="226dp" />
+    <ImageView
+        android:layout_width="118dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/bank"
+        android:layout_alignParentBottom="true"
+        android:translationX="145dp" />
+
 </RelativeLayout>

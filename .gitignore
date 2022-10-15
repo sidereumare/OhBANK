@@ -24,3 +24,7 @@ hs_err_pid*
 
 # node modules
 node_modules/
+DamnVulnerableBank/.idea/compiler.xml
+DamnVulnerableBank/.idea/misc.xml
+DamnVulnerableBank/.idea/gradle.xml
+DamnVulnerableBank/.idea/runConfigurations.xml
