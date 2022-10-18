@@ -1,5 +1,7 @@
 package com.app.damnvulnerablebank;
 
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -222,15 +224,28 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
         downLoadFile(clickedItem.getFileName());
     }
 
-    public void downLoadFile(String FileID){
+    public void downLoadFile(String fileName){
         //download file
         String endpoint="/api/qna/filedown";
         String finalurl = url+endpoint;
 
+        DownloadManager downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
+
 
         // Encrypt the data before sending
-        String encryptedFileId = EncryptDecrypt.encrypt(FileID);
-        finalurl+="?filename=uploads/"+FileID;
+        finalurl+="?filename=upload/"+fileName;
+
+        File file = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS), fileName);
+
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(finalurl));
+
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationUri(Uri.fromFile(file));
+
+        downloadManager.enqueue(request);
+
+
+
 
 //
 //        InputStreamVolleyRequest inputStreamVolleyRequest = new InputStreamVolleyRequest(Request.Method.GET, finalurl,
