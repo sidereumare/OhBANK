@@ -220,7 +220,6 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
     public void onItemClick(int position) {
         //get item from adapter
         FileInfo clickedItem = fadapter.getItem(position);
-        Log.i("itemesss", clickedItem.getFileID());
         downLoadFile(clickedItem.getFileName());
     }
 
