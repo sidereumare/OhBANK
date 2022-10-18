@@ -23,9 +23,10 @@ router.get("/", async (req, res) => {
     var r = new Response();
     var filename = req.query.filename;
     console.log(filename);
+    // fs.exists
     try{
-        var file = fs.createReadStream(filename);
         var stat = fs.statSync(filename);
+        var file = fs.createReadStream(filename);
         res.setHeader('Content-Length', stat.size);
         res.setHeader('Content-Type', 'application/octet-stream');
         filename = filename.split('/');
@@ -33,7 +34,7 @@ router.get("/", async (req, res) => {
         res.setHeader('Content-Disposition', 'attachment; filename='+filename);
         file.pipe(res);
     }
-    catch{
+    catch (error){
         r.status = statusCodes.SERVER_ERROR;
         r.data = {
             message: "File not found",
