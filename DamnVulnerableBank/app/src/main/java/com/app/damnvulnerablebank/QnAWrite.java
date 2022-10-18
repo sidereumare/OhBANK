@@ -262,6 +262,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
         try {
             startActivityForResult(
                     Intent.createChooser(intent, "파일을 선택하세요."),
@@ -277,9 +278,38 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         String finalurl = url + endpoint;
 
 
-        String[] flist = fileUri.getEncodedPath().split("%2F");
-        final String fileName = flist[flist.length-1];
-        String mimeType = URLConnection.guessContentTypeFromName(fileName);
+        Log.e("enc_data", fileUri.getPath());
+
+//        String[] flist = fileUri.getEncodedPath().split("%2F");
+//        final String fileName = flist[flist.length-1];
+
+        String scheme = fileUri.getScheme();
+        String fileName = null;
+        switch (scheme) {
+            case "content":
+                String[] projection = {MediaStore.MediaColumns.DISPLAY_NAME};
+                Cursor cursor = getContentResolver()
+                        .query(fileUri, projection, null, null, null);
+                if (cursor != null) {
+                    if (cursor.moveToFirst()) {
+                        fileName = cursor.getString(
+                                cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME));
+                    }
+                    cursor.close();
+                }
+                break;
+
+            case "file":
+                fileName = new File(fileUri.getPath()).getName();
+                break;
+
+            default:
+                break;
+        }
+
+        Log.d("scheme", scheme);
+
+//        String mimeType = URLConnection.guessContentTypeFromName(fileName);
 
         // api 29 file load
         if(Build.VERSION.SDK_INT >= 29){
@@ -287,12 +317,14 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         }
 
 
+        final String filename2 = fileName;
 
         String d = "dfjaisladf";
         byte[] file = d.getBytes();
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("file", fileName, RequestBody.create(MediaType.parse(mimeType), fileData))
+                .addFormDataPart("path", "upload")
+                .addFormDataPart("file", fileName, RequestBody.create(MultipartBody.FORM, fileData))
                 .build();
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(finalurl)
@@ -314,7 +346,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
                         JSONObject myResponse = new JSONObject(response.body().string());
                         JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(myResponse.get("enc_data").toString()));
                         JSONObject fileResponse = new JSONObject(decryptedResponse.getString("data"));
-                        fileInfoArray.add(new FileInfo(fileName, fileResponse.getString("id")));
+                        fileInfoArray.add(new FileInfo(filename2, fileResponse.getString("id")));
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -351,6 +383,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
                     outputStream.write(buffer, 0, len);
                 }
 
+                Log.e("enc_data", uri.getLastPathSegment());
                 uploadFile(uri, outputStream.toByteArray());
                 inputStream.close();
                 outputStream.close();
