@@ -23,7 +23,6 @@ router.get("/", async (req, res) => {
     var r = new Response();
     var filename = req.query.filename;
     console.log(filename);
-    // fs.exists
     try{
         var stat = fs.statSync(filename);
         var file = fs.createReadStream(filename);
