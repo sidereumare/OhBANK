@@ -1,5 +1,7 @@
 package com.app.damnvulnerablebank;
 
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -222,143 +224,157 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
         downLoadFile(clickedItem.getFileName());
     }
 
-    public void downLoadFile(String FileID){
+    public void downLoadFile(String fileName){
         //download file
         String endpoint="/api/qna/filedown";
         String finalurl = url+endpoint;
 
+        DownloadManager downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
+
 
         // Encrypt the data before sending
-        String encryptedFileId = EncryptDecrypt.encrypt(FileID);
-        finalurl+="?filename=uploads/"+FileID;
+        finalurl+="?filename=upload/"+fileName;
 
-        InputStreamVolleyRequest inputStreamVolleyRequest = new InputStreamVolleyRequest(Request.Method.GET, finalurl,
-                new Response.Listener<byte[]>() {
-                    @Override
-                    public void onResponse(byte[] response) {
+        File file = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS), fileName);
 
-                        if(Build.VERSION.SDK_INT >= 29) {
-                            String fileName = InputStreamVolleyRequest.responseHeaders.get("Content-Disposition").split("filename=")[1]; //저장 이름
-                            fileName = fileName.substring(1, fileName.length()-1);
-                            String subDirectory = "myAppSubDirectory"; // Downloads/ {subDirectory}
-                            String mimeType = URLConnection.guessContentTypeFromName(fileName); //mimeType
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(finalurl));
 
-                            ContentValues values = new ContentValues();
-                            values.put(MediaStore.Downloads.MIME_TYPE, mimeType);
-                            values.put(MediaStore.Downloads.IS_PENDING, 0);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationUri(Uri.fromFile(file));
 
-                            if(subDirectory != null) {
-                                values.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + File.separator + subDirectory);
-                            }
-
-                            ContentResolver database = getBaseContext().getContentResolver();
-                            Uri uri = database.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values);
-
-                            try{
-
-                                OutputStream outputStream = getBaseContext().getContentResolver().openOutputStream(uri);
-
-                                byte[] data = new byte[1024];
-                                InputStream input = new ByteArrayInputStream(response);
-                                long count;
-
-                                while((count = input.read(data))!=-1){
-                                    outputStream.write(data, 0, (int) count);
-                                }
-
-                                outputStream.close();
-
-                            }catch(Exception e) {
-                                e.printStackTrace();
-                            }
-
-                            values.clear();
-                            values.put(MediaStore.Downloads.DISPLAY_NAME, fileName);
-                            values.put(MediaStore.Downloads.IS_PENDING, 0);
-
-                            database.update(uri, values, null, null);
+        downloadManager.enqueue(request);
 
 
-                            // 권한 설정
-                            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                            StrictMode.setVmPolicy(builder.build());
-                            // 외부 앱으로 파일 열기
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            // 파일 타입 추론
-                            String mimeType2 = URLConnection.guessContentTypeFromName(fileName);
-                            // 외부 앱 실행
-                            intent.setDataAndType(uri, mimeType2);
-                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                            startActivity(intent);
-                        }
-                        else {
-                            String fileName = InputStreamVolleyRequest.responseHeaders.get("Content-Disposition").split("filename=")[1];
-                            fileName = fileName.substring(1, fileName.length()-1);
-                            File file = null;
-                            StringBuilder fileEncData = new StringBuilder();
-                            try{
-                                // 파일 있으면 다른 이름으로 저장
-                                file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
-                                if(file.exists()){
-                                    int i = 1;
-                                    while(file.exists()){
-                                        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "("+i+")"+fileName);
-                                        i++;
-                                    }
-                                }
 
-                                BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(file));
 
-                                long lengthOfFile = response.length;
-
-                                byte[] data = new byte[1024];
-                                InputStream input = new ByteArrayInputStream(response);
-                                long total = 0, count;
-                                while((count = input.read(data))!=-1){
-                                    total+=count;
-//                                fileEncData.append(new String(Arrays.copyOfRange(data, 0, (int) count)));
-                                    output.write(data, 0, (int) count);
-                                }
-                                output.flush();
-                                output.close();
-                                input.close();
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            // 권한 설정
-                            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                            StrictMode.setVmPolicy(builder.build());
-                            // 외부 앱으로 파일 열기
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            // 파일 타입 추론
-                            String mimeType = URLConnection.guessContentTypeFromName(file.getName());
-                            // 외부 앱 실행
-                            intent.setDataAndType(Uri.fromFile(file), mimeType);
-                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                            startActivity(intent);
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // error
-                Log.e("Error.Response", error.toString());
-            }
-        }, null) {
-            @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers=new HashMap();
-                headers.put("Authorization","Bearer "+retrivedToken);
-                return headers;
-            }
-        };
-
-        requestQueue.add(inputStreamVolleyRequest);
-        
+//
+//        InputStreamVolleyRequest inputStreamVolleyRequest = new InputStreamVolleyRequest(Request.Method.GET, finalurl,
+//                new Response.Listener<byte[]>() {
+//                    @Override
+//                    public void onResponse(byte[] response) {
+//
+//                        if(Build.VERSION.SDK_INT >= 29) {
+//                            String fileName = InputStreamVolleyRequest.responseHeaders.get("Content-Disposition").split("filename=")[1]; //저장 이름
+//                            fileName = fileName.substring(1, fileName.length()-1);
+//                            String subDirectory = "myAppSubDirectory"; // Downloads/ {subDirectory}
+//                            String mimeType = URLConnection.guessContentTypeFromName(fileName); //mimeType
+//
+//                            ContentValues values = new ContentValues();
+//                            values.put(MediaStore.Downloads.MIME_TYPE, mimeType);
+//                            values.put(MediaStore.Downloads.IS_PENDING, 0);
+//
+//                            if(subDirectory != null) {
+//                                values.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + File.separator + subDirectory);
+//                            }
+//
+//                            ContentResolver database = getBaseContext().getContentResolver();
+//                            Uri uri = database.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values);
+//
+//                            try{
+//
+//                                OutputStream outputStream = getBaseContext().getContentResolver().openOutputStream(uri);
+//
+//                                byte[] data = new byte[1024];
+//                                InputStream input = new ByteArrayInputStream(response);
+//                                long count;
+//
+//                                while((count = input.read(data))!=-1){
+//                                    outputStream.write(data, 0, (int) count);
+//                                }
+//
+//                                outputStream.close();
+//
+//                            }catch(Exception e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                            values.clear();
+//                            values.put(MediaStore.Downloads.DISPLAY_NAME, fileName);
+//                            values.put(MediaStore.Downloads.IS_PENDING, 0);
+//
+//                            database.update(uri, values, null, null);
+//
+//
+//                            // 권한 설정
+//                            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//                            StrictMode.setVmPolicy(builder.build());
+//                            // 외부 앱으로 파일 열기
+//                            Intent intent = new Intent(Intent.ACTION_VIEW);
+//                            // 파일 타입 추론
+//                            String mimeType2 = URLConnection.guessContentTypeFromName(fileName);
+//                            // 외부 앱 실행
+//                            intent.setDataAndType(uri, mimeType2);
+//                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//                            startActivity(intent);
+//                        }
+//                        else {
+//                            String fileName = InputStreamVolleyRequest.responseHeaders.get("Content-Disposition").split("filename=")[1];
+//                            fileName = fileName.substring(1, fileName.length()-1);
+//                            File file = null;
+//                            StringBuilder fileEncData = new StringBuilder();
+//                            try{
+//                                // 파일 있으면 다른 이름으로 저장
+//                                file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
+//                                if(file.exists()){
+//                                    int i = 1;
+//                                    while(file.exists()){
+//                                        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "("+i+")"+fileName);
+//                                        i++;
+//                                    }
+//                                }
+//
+//                                BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(file));
+//
+//                                long lengthOfFile = response.length;
+//
+//                                byte[] data = new byte[1024];
+//                                InputStream input = new ByteArrayInputStream(response);
+//                                long total = 0, count;
+//                                while((count = input.read(data))!=-1){
+//                                    total+=count;
+////                                fileEncData.append(new String(Arrays.copyOfRange(data, 0, (int) count)));
+//                                    output.write(data, 0, (int) count);
+//                                }
+//                                output.flush();
+//                                output.close();
+//                                input.close();
+//
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                            // 권한 설정
+//                            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//                            StrictMode.setVmPolicy(builder.build());
+//                            // 외부 앱으로 파일 열기
+//                            Intent intent = new Intent(Intent.ACTION_VIEW);
+//                            // 파일 타입 추론
+//                            String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+//                            // 외부 앱 실행
+//                            intent.setDataAndType(Uri.fromFile(file), mimeType);
+//                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//                            startActivity(intent);
+//                        }
+//
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                // error
+//                Log.e("Error.Response", error.toString());
+//            }
+//        }, null) {
+//            @Override
+//            public Map getHeaders() throws AuthFailureError {
+//                HashMap headers=new HashMap();
+//                headers.put("Authorization","Bearer "+retrivedToken);
+//                return headers;
+//            }
+//        };
+//
+//        requestQueue.add(inputStreamVolleyRequest);
+//
     }
 }
