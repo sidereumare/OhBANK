@@ -42,7 +42,7 @@ router.get("/", async (req, res) => {
         s.push(null);
         s.pipe(res);
     }
-    catch (error){
+    catch{
         r.status = statusCodes.SERVER_ERROR;
         r.data = {
             message: error.stack,

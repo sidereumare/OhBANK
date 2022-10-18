@@ -219,7 +219,7 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
         //get item from adapter
         FileInfo clickedItem = fadapter.getItem(position);
         Log.i("itemesss", clickedItem.getFileID());
-        downLoadFile(clickedItem.getFileID());
+        downLoadFile(clickedItem.getFileName());
     }
 
     public void downLoadFile(String FileID){
@@ -230,7 +230,7 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
 
         // Encrypt the data before sending
         String encryptedFileId = EncryptDecrypt.encrypt(FileID);
-        finalurl+="?file_id="+encryptedFileId;
+        finalurl+="?filename=uploads/"+FileID;
 
         InputStreamVolleyRequest inputStreamVolleyRequest = new InputStreamVolleyRequest(Request.Method.GET, finalurl,
                 new Response.Listener<byte[]>() {
