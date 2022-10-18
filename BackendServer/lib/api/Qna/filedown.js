@@ -53,7 +53,7 @@ router.get("/", async (req, res) => {
 });
 
 //방법2. 쉘 js 업로드 후 연결.
-router.use('/attack', require('./attack.js'));
+// router.use('/attack', require('./attack.js'));
 
 //방법 1. 파일 다운로드의 router 수정
 // router.get("/attack", function(){
