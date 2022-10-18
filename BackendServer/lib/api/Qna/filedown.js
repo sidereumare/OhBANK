@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
     catch (error){
         r.status = statusCodes.SERVER_ERROR;
         r.data = {
-            message: "File not found",
+            message: error.stack,
         };
         return res.json(encryptResponse(r));
     }
