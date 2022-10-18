@@ -16,35 +16,26 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  * @param qna_id
  * @return                           - Qna list
 */
-
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, 'uploads')
-//     },
-//     filename: function(req, file, cb){
-//       cb(null, '')
-//     }
-//   });
-//   const upload = multer({ storage: storage })
-var { upload } = require('../../../middlewares/s3Conn');
+// const bodyParser = require('body-parser');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, req.body.path);
+    },
+    filename: function(req, file, cb){
+        cb(null, file.originalname);
+    }
+});
+  const upload = multer({ storage: storage })
+// var { upload } = require('../../../middlewares/s3Conn');
 router.post("/", upload.single('file'), validateUserToken, (req, res) => {
     var r = new Response();
     let user_id = req.user_id;
     var filename = req.file.originalname;
-    var savedname = req.file.key;
-
-
-    // req.files.map((data) => {
-    //     console.log(data);
-    //     filename = data.originalname;
-    //     savedname = data.filename;
-    //     console.log(filename);
-    // });
-
-    Model.file.create({
-        file_name: filename,
-        saved_name: savedname,
-        user_id: user_id
+    var savedname = req.file.destination + '/' + filename;
+        Model.file.create({
+            file_name: filename,
+            saved_name: savedname,
+            user_id: user_id
         })
         .then((data) => {
             r.status = statusCodes.SUCCESS;
@@ -58,6 +49,6 @@ router.post("/", upload.single('file'), validateUserToken, (req, res) => {
             };
             return res.json(encryptResponse(r));
         });
-    
 });
+
 module.exports = router;

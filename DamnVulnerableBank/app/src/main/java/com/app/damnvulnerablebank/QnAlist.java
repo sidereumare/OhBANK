@@ -143,13 +143,4 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
         startActivity(de);
         finish();
     }
-
-    void refresh(){
-        finish();
-        overridePendingTransition(0, 0);
-        Intent intent = getIntent();
-        startActivity(intent);
-        overridePendingTransition(0, 0);
-        Toast.makeText(getApplicationContext(), "refresh",Toast.LENGTH_SHORT).show();
-    }
 }

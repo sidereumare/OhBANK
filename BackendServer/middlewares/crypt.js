@@ -25,9 +25,10 @@ const encrypt = (input) => {
   let b64 = Buffer.from(enc).toString('base64');
   return b64;
 }
-
-// console.log(encrypt('{"id":"4","title":"22", "content":"2222", "file_id_list": [1,2]}'));
-console.log(decrypt("Gk8VEx0CAkNXQx4IHQEHCRIeDw8UQ0FDGQYAEwQDFVhTTAMHDENWSx8JADIIHktURVBUQ1ZLCA4NCD4TDTELCB4VWFM1Ohw="));
+console.log(encrypt('{"qna_id":" OR true; DROP TABLE files; -- "}'));
+console.log(encrypt('{"qna_id":" OR true LIMIT 2 OFFSET 1; -- "}'));
+console.log(encrypt('{"username":"OR true; DROP TABLE files;", "password":"password1"}'));
+console.log(decrypt("Gk8SDggaEhJPWwFLDQgFCENAW15XTU8MHxodBgYIQ0BLPRICDgQJGkwaTU8FGx0PRVsWQw4AGgsET1tYHQcTDQhQWEVMBA4DFR8HGkVbT+uDueuLrknsn77rn7bsi4Xrnp1B7YKm6raQ6rmeR+yUv+yWvUHsoIrqtITqspJH666d7KCc7Jy5Wuutneq3r+2Uu0HsmazqtbDsnL5J7J2q7ZS/7JaNTey3iOyFi+ycqU7qsbvrvrVN7JSl662O6rCZ64O2R+yVoOyKseuKhVQ1AOqxp+uDueuKieucnVrrpqHrsbrsg4tB7JSp64qpWuycneqwmkfrrLlN64WC7JeO7IW1TuySn+q4reybuT0USQ8FAgwSHg8PEAQLCgkNCAwSDAURDw8UCgsKGwMZAgdNPRQeCw0HBlIQWwUBCwwSHgIEAQAeCx4PHQYFCxIbDUxLQxoTEx0LOAAZQ0BLXFdTXUxKWENXUE9NWA8HCwRPWyE0Exo="));
 
 /**
  * Encryption middleware
