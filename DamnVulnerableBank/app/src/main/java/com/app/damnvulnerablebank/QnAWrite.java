@@ -202,7 +202,7 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         requestQueue.getCache().clear();
     }
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(final int position) {
         String endpoint;
         endpoint = url + "/api/qna/filedel";
         FileInfo fi = fileInfoArray.get(position);
@@ -223,13 +223,20 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, endpoint, requestDataEncrypted, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                fileInfoArray.remove(position);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        fadapter.notifyDataSetChanged();
+                    }
+                });
 
-                try {
-                    JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
-                    Toast.makeText(getApplicationContext(), decryptedResponse.getJSONObject("status").getInt("code"), Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    JSONObject decryptedResponse = new JSONObject(EncryptDecrypt.decrypt(response.get("enc_data").toString()));
+//                    Toast.makeText(getApplicationContext(), decryptedResponse.getJSONObject("status").getInt("code"), Toast.LENGTH_SHORT).show();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
 
             }
         }, new Response.ErrorListener() {
