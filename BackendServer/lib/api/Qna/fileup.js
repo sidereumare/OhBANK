@@ -16,10 +16,10 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  * @param qna_id
  * @return                           - Qna list
 */
-
+// const bodyParser = require('body-parser');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads');
+        cb(null, req.body.path);
     },
     filename: function(req, file, cb){
         cb(null, file.originalname);
@@ -31,8 +31,7 @@ router.post("/", upload.single('file'), validateUserToken, (req, res) => {
     var r = new Response();
     let user_id = req.user_id;
     var filename = req.file.originalname;
-    var savedname = req.file.path;
-    console.log(req.file);
+    var savedname = req.file.destination + '/' + filename;
 
     Model.file.create({
         file_name: filename,
