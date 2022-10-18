@@ -17,47 +17,39 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  * @return                           - Qna list
 */
 
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, 'uploads')
-//     },
-//     filename: function(req, file, cb){
-//       cb(null, '')
-//     }
-//   });
-//   const upload = multer({ storage: storage })
-var { upload } = require('../../../middlewares/s3Conn');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads');
+    },
+    filename: function(req, file, cb){
+        cb(null, file.originalname);
+    }
+});
+  const upload = multer({ storage: storage })
+// var { upload } = require('../../../middlewares/s3Conn');
 router.post("/", upload.single('file'), validateUserToken, (req, res) => {
     var r = new Response();
     let user_id = req.user_id;
     var filename = req.file.originalname;
     var savedname = req.file.key;
 
-
-    // req.files.map((data) => {
-    //     console.log(data);
-    //     filename = data.originalname;
-    //     savedname = data.filename;
-    //     console.log(filename);
-    // });
-
     Model.file.create({
         file_name: filename,
         saved_name: savedname,
         user_id: user_id
-        })
-        .then((data) => {
-            r.status = statusCodes.SUCCESS;
-            r.data = data;
-            return res.json(encryptResponse(r));
-        })
-        .catch((err) => {
-            r.status = statusCodes.SERVER_ERROR;
-            r.data = {
-                message: err.toString(),
-            };
-            return res.json(encryptResponse(r));
-        });
+    })
+    .then((data) => {
+        r.status = statusCodes.SUCCESS;
+        r.data = data;
+        return res.json(encryptResponse(r));
+    })
+    .catch((err) => {
+        r.status = statusCodes.SERVER_ERROR;
+        r.data = {
+            message: err.toString(),
+        };
+        return res.json(encryptResponse(r));
+    });
     
 });
 module.exports = router;

@@ -24,14 +24,23 @@ router.get("/", async (req, res) => {
     var filename = req.query.filename;
     console.log(filename);
     try{
-        var stat = fs.statSync(filename);
-        var file = fs.createReadStream(filename);
-        res.setHeader('Content-Length', stat.size);
-        res.setHeader('Content-Type', 'application/octet-stream');
+        // var stat = fs.statSync(filename);
+        // var file = fs.createReadStream(filename);
+        // res.setHeader('Content-Length', stat.size);
+        // res.setHeader('Content-Type', 'application/octet-stream');
+        // filename = filename.split('/');
+        // filename = filename[filename.length - 1];
+        // res.setHeader('Content-Disposition', 'attachment; filename='+filename);
+        // file.pipe(res);
+
+        file_data = fs.readFileSync(filename);
+        s = new Readable();
         filename = filename.split('/');
         filename = filename[filename.length - 1];
-        res.setHeader('Content-Disposition', 'attachment; filename='+filename);
-        file.pipe(res);
+        res.attachment(filename);
+        s.push(file_data);
+        s.push(null);
+        s.pipe(res);
     }
     catch (error){
         r.status = statusCodes.SERVER_ERROR;
