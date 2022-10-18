@@ -31,7 +31,8 @@ router.post("/", upload.single('file'), validateUserToken, (req, res) => {
     var r = new Response();
     let user_id = req.user_id;
     var filename = req.file.originalname;
-    var savedname = req.file.key;
+    var savedname = req.file.path;
+    console.log(req.file);
 
 
     // req.files.map((data) => {
@@ -60,4 +61,5 @@ router.post("/", upload.single('file'), validateUserToken, (req, res) => {
         });
     
 });
+
 module.exports = router;
