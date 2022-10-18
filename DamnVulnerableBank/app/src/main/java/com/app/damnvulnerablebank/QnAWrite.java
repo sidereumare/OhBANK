@@ -253,8 +253,6 @@ public class QnAWrite extends AppCompatActivity implements FileAdapter.OnItemCli
         };
 
         requestQueue.add(request);
-
-        Toast.makeText(getApplicationContext(),fi.getFileID() + "",Toast.LENGTH_SHORT).show();
     }
 
     void writeComplete(){
