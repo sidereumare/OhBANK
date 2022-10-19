@@ -5,6 +5,7 @@ var Response = require("../../Response");
 var statusCodes = require("../../statusCodes");
 var { validateUserToken } = require("../../../middlewares/validateToken");
 var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
+const { Op, literal } = require("sequelize");
 
 /**
  * QnA file list route
@@ -17,11 +18,14 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 router.post("/", decryptRequest, (req, res) => {
     var r = new Response();
     let qna_id = req.body.qna_id;
-
+    
     Model.qna.findOne({
-        where: {
-            id: qna_id
+        where : {
+            id : qna_id
         },
+        // replacements: {
+        //     qna_id: qna_id
+        // },
         attributes: ["title", "content", "write_at"],
     })
     .then((data) => {

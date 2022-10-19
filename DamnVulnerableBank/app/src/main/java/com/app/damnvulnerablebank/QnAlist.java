@@ -130,8 +130,7 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
 
     public void write(View view){
         Intent de = new Intent(this, QnAWrite.class);
-        startActivity(de);
-        finish();
+        startActivityForResult(de,1);
     }
 
     @Override
@@ -140,16 +139,15 @@ public class QnAlist extends AppCompatActivity implements Qadapter.OnItemClickLi
         QnAlistRecords cf = qrecords.get(position);
 
         de.putExtra("qna_id", cf.getId());
-        startActivity(de);
-        finish();
+        startActivityForResult(de, 1);
     }
 
-    void refresh(){
-        finish();
-        overridePendingTransition(0, 0);
-        Intent intent = getIntent();
-        startActivity(intent);
-        overridePendingTransition(0, 0);
-        Toast.makeText(getApplicationContext(), "refresh",Toast.LENGTH_SHORT).show();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        finish();//인텐트 종료
+        overridePendingTransition(0, 0);//인텐트 효과 없애기
+        Intent intent = getIntent(); //인텐트
+        startActivity(intent); //액티비티 열기
     }
 }
