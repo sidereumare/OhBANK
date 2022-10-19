@@ -81,4 +81,4 @@ INSERT INTO `qnas` values (default, "343", "ㅁ낭러ㅏㅁㅈㄷ란아차추라
 
 INSERT INTO `files` values (default, "test1.jpg", "test1.jpg", 1, 1);
 INSERT INTO `files` values (default, "test.txt", "test.txt", 1, 1);
-INSERT INTO `files` values (default, "file3", "file3", 3, 2);
+INSERT INTO `files` values (default, "abc.jpg", "abc.jpg", 2, 1);
