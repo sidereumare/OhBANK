@@ -197,7 +197,6 @@ public class QnAView extends AppCompatActivity implements FileAdapter.OnItemClic
                     public void onResponse(JSONObject response) {
                         Toast.makeText(getApplicationContext(), "QnA deleted successfully", Toast.LENGTH_SHORT).show();
                         finish();
-                        startActivity(new Intent(getApplicationContext(), QnAlist.class));
                     }
                 }, new Response.ErrorListener() {
             @Override
