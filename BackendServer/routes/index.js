@@ -6,7 +6,7 @@ const transactionsRouter = require("../lib/api/Transactions")
 const balanceRouter = require("../lib/api/Balance");
 const beneficiaryRouter = require("../lib/api/Beneficiary");
 const userRouter = require("../lib/api/User");
-const qnaRouter = require("../lib/api/QnA");
+const qnaRouter = require("../lib/api/Qna");
 
 router.use("/balance", balanceRouter);
 router.use("/transactions", transactionsRouter)
