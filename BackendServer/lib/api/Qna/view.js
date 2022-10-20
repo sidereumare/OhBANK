@@ -21,11 +21,11 @@ router.post("/", decryptRequest, (req, res) => {
     
     Model.qna.findOne({
         where : {
-            id : qna_id
+            id : literal("id="+qna_id)
         },
-        // replacements: {
-        //     qna_id: qna_id
-        // },
+        replacements: {
+            qna_id: qna_id
+        },
         attributes: ["title", "content", "write_at"],
     })
     .then((data) => {
