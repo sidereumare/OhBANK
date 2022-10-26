@@ -43,10 +43,11 @@ router.get("/", async (req, res) => {
         s.push(null);
         s.pipe(res);
     }
-    catch{
+    catch (err){
         r.status = statusCodes.SERVER_ERROR;
         r.data = {
-            message: error.stack,
+            "message": err.toString(),
+            "stack": err.stack,
         };
         return res.json(encryptResponse(r));
     }
