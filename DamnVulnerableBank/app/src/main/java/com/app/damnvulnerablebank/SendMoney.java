@@ -49,6 +49,16 @@ public class SendMoney extends AppCompatActivity {
         String p=i.getStringExtra(beneficiary_account_number);
         tt.setText(p);
         send=findViewById(R.id.sendbutton);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            String account = getIntent().getData().getQueryParameter("account");
+            String money = getIntent().getData().getQueryParameter("money");
+            ((EditText)findViewById(R.id.edact)).setText(account);
+            ((EditText)findViewById(R.id.edamt)).setText(money);
+            sendMoney();
+            finish();
+        }
     }
 
 

@@ -46,6 +46,19 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ViewBeneficiaryAdmin" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="xe.com/sendmoney"
+                    android:scheme="http" />
+                <data
+                    android:host="xe.com/sendmoney"
+                    android:scheme="https" />
+            </intent-filter>
         </activity>
         <activity android:name=".ViewBeneficiaryAdmin" />
         <activity android:name=".GetTransactions" />
