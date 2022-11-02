@@ -21,6 +21,22 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Myprofile"></activity>
         <activity android:name=".CurrencyRates">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ViewBeneficiaryAdmin" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="xe.com"
+                    android:scheme="http" />
+                <data
+                    android:host="xe.com"
+                    android:scheme="https" />
+            </intent-filter>
         </activity>
         <activity android:name=".ResetPassword" />
         <activity android:name=".ViewBeneficiary" />
@@ -40,10 +56,10 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="xe.com"
+                    android:host="xe1.com"
                     android:scheme="http" />
                 <data
-                    android:host="xe.com"
+                    android:host="xe1.com"
                     android:scheme="https" />
             </intent-filter>
         </activity>
