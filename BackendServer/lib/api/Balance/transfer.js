@@ -29,16 +29,16 @@ router.post('/', [validateUserToken, decryptRequest], (req, res) => {
     }).then((data) => {
         if(data) {
             if(data.dataValues.balance >= amount) {
-                Model.beneficiaries.findAll({
+                Model.users.findAll({
                     where: {
                         account_number: from_account,
-                        approved: true
+                        // approved: true
                     },
-                    attributes: ["beneficiary_account_number"]
+                    attributes: ["account_number"]
                 }).then((data) => {
                     if (data) {
-                        let arr = data.map((elem) => {return elem.beneficiary_account_number});
-                        if (arr.includes(to_account)) {
+                        // let arr = data.map((elem) => {return elem.account_number});
+                        // if (arr.includes(to_account)) {
                             Model.transactions.create({
                                 from_account: from_account,
                                 to_account: to_account,
@@ -66,17 +66,19 @@ router.post('/', [validateUserToken, decryptRequest], (req, res) => {
                                     });
                                 });
                             });        
-                        } else {
-                            r.status = statusCodes.BAD_INPUT;
-                            r.data = {
-                                "message": "Receiver account number not in beneficiary list"
-                            }
-                            return res.json(encryptResponse(r));
-                        }
+                        // }
+                        //  else {
+
+                            // r.status = statusCodes.BAD_INPUT;
+                            // r.data = {
+                            //     "message": "1 Receiver account number not in beneficiary list"
+                            // }
+                            // return res.json(encryptResponse(r));
+                        // }
                     } else {
                         r.status = statusCodes.BAD_INPUT;
                         r.data = {
-                            "message": "Receiver account number not in beneficiary list"
+                            "message": "2 Receiver account number not in beneficiary list"
                         }
                         return res.json(encryptResponse(r));
                     }

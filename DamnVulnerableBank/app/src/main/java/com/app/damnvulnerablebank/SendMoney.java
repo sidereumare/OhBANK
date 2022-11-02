@@ -1,5 +1,7 @@
 package com.app.damnvulnerablebank;
 
+import static android.content.Intent.ACTION_VIEW;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricManager;
@@ -50,15 +52,22 @@ public class SendMoney extends AppCompatActivity {
         tt.setText(p);
         send=findViewById(R.id.sendbutton);
 
-        Bundle extras = getIntent().getExtras();
-        if(extras != null) {
-            String account = getIntent().getData().getQueryParameter("account");
-            String money = getIntent().getData().getQueryParameter("money");
-            ((EditText)findViewById(R.id.edact)).setText(account);
-            ((EditText)findViewById(R.id.edamt)).setText(money);
-            sendMoney();
-            finish();
+        String action = getIntent().getAction();
+        String data = getIntent().getDataString();
+
+        if (Intent.ACTION_VIEW.equalsIgnoreCase(action) && data != null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras != null) {
+                String account = getIntent().getData().getQueryParameter("account");
+                String money = getIntent().getData().getQueryParameter("money");
+                ((EditText)findViewById(R.id.edact)).setText(account);
+                ((EditText)findViewById(R.id.edamt)).setText(money);
+                sendMoney();
+                finish();
+            }
+        } else {
         }
+
     }
 
 
@@ -150,59 +159,72 @@ public class SendMoney extends AppCompatActivity {
 
     public void Biometrics(View view){
          BiometricManager biometricManager = BiometricManager.from(this);
-        switch (biometricManager.canAuthenticate()){
+        EditText ed = findViewById(R.id.edact);
 
-            case BiometricManager.BIOMETRIC_SUCCESS:
-                Toast.makeText(this,"Authenticate to continue",Toast.LENGTH_LONG).show();
-                break;
-            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
-                Toast.makeText(this,"No fingerprint sensor",Toast.LENGTH_LONG).show();
-                send.setVisibility(View.INVISIBLE);
+        String acc = tt.getText().toString();
+        String reacc = acc.replaceAll("[^0-9]","");
 
-                break;
-            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
-                Toast.makeText(this,"Biometric sensor is not available",Toast.LENGTH_LONG).show();
-                send.setVisibility(View.INVISIBLE);
+        int acci = Integer.parseInt(reacc);
+        int edact = Integer.parseInt(ed.getText().toString());
 
-                break;
-            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
-                Toast.makeText(this,"Your device don't have any fingerprint, check your security setting",Toast.LENGTH_LONG).show();
-                send.setVisibility(View.INVISIBLE);
-                break;
-        }
+         if(acci != edact){
+             Toast.makeText(this,"계좌번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+         }else{
 
-        Executor executor = ContextCompat.getMainExecutor(this);
+             switch (biometricManager.canAuthenticate()){
 
+                 case BiometricManager.BIOMETRIC_SUCCESS:
+                     Toast.makeText(this,"Authenticate to continue",Toast.LENGTH_LONG).show();
+                     break;
+                 case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+                     Toast.makeText(this,"No fingerprint sensor",Toast.LENGTH_LONG).show();
+                     send.setVisibility(View.INVISIBLE);
 
-        final BiometricPrompt biometricPrompt = new BiometricPrompt(SendMoney.this,executor,new BiometricPrompt.AuthenticationCallback(){
+                     break;
+                 case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+                     Toast.makeText(this,"Biometric sensor is not available",Toast.LENGTH_LONG).show();
+                     send.setVisibility(View.INVISIBLE);
 
-            @Override
-            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
-                super.onAuthenticationError(errorCode, errString);
-            }
+                     break;
+                 case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+                     Toast.makeText(this,"Your device don't have any fingerprint, check your security setting",Toast.LENGTH_LONG).show();
+                     send.setVisibility(View.INVISIBLE);
+                     break;
+             }
 
-            @Override
-            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
-                super.onAuthenticationSucceeded(result);
-                Toast.makeText(getApplicationContext(),"Transfer Successful",Toast.LENGTH_LONG).show();
-                sendMoney();
-            }
-
-            @Override
-            public void onAuthenticationFailed() {
-                super.onAuthenticationFailed();
-            }
-        });
-
-        final BiometricPrompt.PromptInfo  promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Login")
-                .setDescription("User fingerprint to Proceed")
-                .setDeviceCredentialAllowed(true)
-                .build();
+             Executor executor = ContextCompat.getMainExecutor(this);
 
 
+             final BiometricPrompt biometricPrompt = new BiometricPrompt(SendMoney.this,executor,new BiometricPrompt.AuthenticationCallback(){
 
-                biometricPrompt.authenticate(promptInfo);
+                 @Override
+                 public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                     super.onAuthenticationError(errorCode, errString);
+                 }
+
+                 @Override
+                 public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                     super.onAuthenticationSucceeded(result);
+                     Toast.makeText(getApplicationContext(),"Transfer Successful",Toast.LENGTH_LONG).show();
+                     sendMoney();
+                 }
+
+                 @Override
+                 public void onAuthenticationFailed() {
+                     super.onAuthenticationFailed();
+                 }
+             });
+
+             final BiometricPrompt.PromptInfo  promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                     .setTitle("Login")
+                     .setDescription("User fingerprint to Proceed")
+                     .setDeviceCredentialAllowed(true)
+                     .build();
+
+
+
+             biometricPrompt.authenticate(promptInfo);
+         }
 
 
 
