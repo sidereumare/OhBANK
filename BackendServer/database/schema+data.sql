@@ -44,8 +44,7 @@ create table files(
   FOREIGN KEY(user_id) REFERENCES users(id)
 ) engine = innodb;
 
-
-INSERT INTO `users` values (default, "user1", "password1", 111111, default, default);
+INSERT INTO `users` values (default, "bgseo", "bgseopw", 111111, default, default);
 INSERT INTO `users` values (default, "user2", "password2", 222222, default, default);
 INSERT INTO `users` values (default, "user3", "password3", 333333, default, default);
 INSERT INTO `users` values (default, "user4", "password4", 444444, default, default);
@@ -60,25 +59,22 @@ INSERT INTO `beneficiaries` values (default, 111111, 222222, true);
 INSERT INTO `beneficiaries` values (default, 111111, 333333, true);
 INSERT INTO `beneficiaries` values (default, 111111, 444444, true);
 
-INSERT INTO `qnas` values (default, "title1", "나는 자랑스런 태극기 앞에 조국과 민족의 무궁한 영광을 위하여 충성은 개뿔 아무거나 씁시다.\n가나다라 마바사 아니 이건 뭘 넣어서 쓸까요\n abcasdfawefksdfksadkfaskfkajwef \nwejfk3j2kfjasdkjfasjdfsadfsad", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "title2", "ㅁ낭러ㅏㅁㅈㄷ란아차추라ㅜㄷ람ㄴ\n가다아아아아두라ㅓ차ㅓ챠챠ㅓ챠ㅓ가ㅜㅏ구ㅏㅜ라ㅜ아ㅜ냐나 \nadsfaksjfkawheibfibcivbawib sdgtwkkasdjvg a\n a fiaw9ef9awfjsadfvfj3fnasdknva df", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "134", "3243434234afdwae", 3, "2020-01-01");
-INSERT INTO `qnas` values (default, "제목이지롱", "tssaf", 3, "2020-01-01");
-INSERT INTO `qnas` values (default, "가나다람", "content2", 2, "2020-01-01");
-INSERT INTO `qnas` values (default, "tawefa", "awefewevasdf", 2, "2020-01-01");
-INSERT INTO `qnas` values (default, "title2", "content2", 2, "2020-01-01");
-INSERT INTO `qnas` values (default, "ㅇㄹ33", "content2", 2, "2020-01-01");
-INSERT INTO `qnas` values (default, "ㅌㅇㅈㄷㅍ", "content2", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "asdvcasv", "content2", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "test525", "content2", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "title3", "content2", 2, "2020-01-01");
-INSERT INTO `qnas` values (default, "333333", "content2", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "342", "content2", 1, "2020-01-01");
-INSERT INTO `qnas` values (default, "234", "content2", 2, "2020-01-01");
-INSERT INTO `qnas` values (default, "233", "ㅁ낭러ㅏㅁㅈㄷ란아차추라ㅜㄷ람ㄴ\n가다아아아아두라ㅓ차ㅓ챠챠ㅓ챠ㅓ가ㅜㅏ구ㅏㅜ라ㅜ아ㅜ냐나 \nadsfaksjfkawheibfibcivbawib sdgtwkkasdjvg a\n a fiaw9ef9awfjsadfvfj3fnasdknva df", 2, "2020-01-01");
-INSERT INTO `qnas` values (default, "343", "ㅁ낭러ㅏㅁㅈㄷ란아차추라ㅜㄷ람ㄴ\n가다아아아아두라ㅓ차ㅓ챠챠ㅓ챠ㅓ가ㅜㅏ구ㅏㅜ라ㅜ아ㅜ냐나 \nadsfaksjfkawheibfibcivbawib sdgtwkkasdjvg a\n a fiaw9ef9awfjsadfvfj3fnasdknva df", 3, "2020-01-01");
+INSERT INTO `qnas` values (default, "비밀번호 5회 오류", "비밀번호 오류로 거래제한이 되었습니다. 어떻게 해야 하나요?", 1, "2022-11-03");
+INSERT INTO `qnas` values (default, "적금 관련 문의", "적금", 1, "2022-10-01");
+INSERT INTO `qnas` values (default, "인증서 설치 오류가 뜹니다", "~", 1, "2022-10-23");
+INSERT INTO `qnas` values (default, "ARS가 오지 않습니다", "추가인증을 위한 ARS 전화가 오지 않습니다.", 1, "2022-11-03");
+INSERT INTO `qnas` values (default, "휴면계좌 해제 문의", "휴면계좌가 된 통장을 다시 이용하려면 어떻게 해야하나요?", 1, "2022-11-03");
+INSERT INTO `qnas` values (default, "적금 중도해지 관련", "적금해지~", 1, "2022-11-03");
+INSERT INTO `qnas` values (default, "수수료 면제 신청", "재직증명서 첨부합니다", 1, "2022-11-03");
+
+INSERT INTO `qnas` values (default, "비밀번호 5회 오류", "비밀번호 오류로 거래제한이 되었습니다. 어떻게 해야 하나요?", 2, "2022-11-03");
+INSERT INTO `qnas` values (default, "적금 관련 문의", "적금", 2, "2022-10-01");
+INSERT INTO `qnas` values (default, "인증서 설치 오류가 뜹니다", "~", 2, "2022-10-23");
+INSERT INTO `qnas` values (default, "ARS가 오지 않습니다", "추가인증을 위한 ARS 전화가 오지 않습니다.", 2, "2022-11-03");
+INSERT INTO `qnas` values (default, "휴면계좌 해제 문의", "휴면계좌가 된 통장을 다시 이용하려면 어떻게 해야하나요?", 2, "2022-11-03");
+INSERT INTO `qnas` values (default, "적금 중도해지 관련", "적금해지~", 2, "2022-11-03");
+INSERT INTO `qnas` values (default, "수수료 면제 신청", "재직증명서 첨부합니다", 2, "2022-11-03");
 
 
-INSERT INTO `files` values (default, "test1.jpg", "test1.jpg", 1, 1);
-INSERT INTO `files` values (default, "test.txt", "test.txt", 1, 1);
+INSERT INTO `files` values (default, "capture_2022-10-28 132549.jpg", "abc.jpg", 1, 1);
 INSERT INTO `files` values (default, "abc.jpg", "abc.jpg", 2, 1);
