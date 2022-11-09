@@ -7,15 +7,15 @@
 ---
 # 상세 가이드
 ---
-![image](https://user-images.githubusercontent.com/53963779/200763026-84f11295-bcab-43c1-a408-72873e56eb49.png)
+![루팅하고 앱 실행](https://user-images.githubusercontent.com/53963779/200763026-84f11295-bcab-43c1-a408-72873e56eb49.png)
 
 ## 루팅된 폰으로 앱 실행 시 루팅을 탐지하여 앱이 종료된다.
 
 ## jadx이용하여 apk 파일을 분석하면 
 
-![Untitled (6)](https://user-images.githubusercontent.com/53963779/200761967-567111da-6d5c-4f45-bc86-69cc4bf98254.png)
+![jadx1](https://user-images.githubusercontent.com/53963779/200761967-567111da-6d5c-4f45-bc86-69cc4bf98254.png)
 
-![Untitled (7)](https://user-images.githubusercontent.com/53963779/200762046-1b0a707a-4553-4905-abf9-3b9a2ad503d1.png)
+![jadx2](https://user-images.githubusercontent.com/53963779/200762046-1b0a707a-4553-4905-abf9-3b9a2ad503d1.png)
 
     1. MainActivity에서 RootUtil.isDeviceRooted()를 호출하여 루팅 탐지후 finish()하는 것을 확인
     2. fridaCheck.fridaCheck()에서 프리다 우회 탐지 후 finish 하는 것도 확인 가능
@@ -63,5 +63,5 @@ Java.perform(function() {
 
 #### 위의 코드를 이용하여 루팅 탐지를 우회하면 앱이 정상적으로 실행이 된다.
 
-![image](https://user-images.githubusercontent.com/53963779/200764618-c8289263-1797-4e7b-896c-ef008df06fc2.png)
+![앱 실행 화면](https://user-images.githubusercontent.com/53963779/200764618-c8289263-1797-4e7b-896c-ef008df06fc2.png)
 

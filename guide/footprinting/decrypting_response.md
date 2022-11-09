@@ -10,18 +10,18 @@
 
 
 
-![1](https://user-images.githubusercontent.com/53963779/200760339-236b07b9-0b5e-4595-b774-c542494241ba.png)
+![qna게시판](https://user-images.githubusercontent.com/53963779/200760339-236b07b9-0b5e-4595-b774-c542494241ba.png)
 
 
 #### Burp Suite에서 인터셉트 기능을 켠 상태에서 “Qna 게시판”의 임의의 게시글을 확인해 봄
 
 
-![Untitled (8)](https://user-images.githubusercontent.com/53963779/200765947-f73bb9d0-4311-4e87-b230-2ff2262616f4.png)
+![qna게시판-burpsuite](https://user-images.githubusercontent.com/53963779/200765947-f73bb9d0-4311-4e87-b230-2ff2262616f4.png)
 
 #### 요청값과 응답값이 암호화된걸 확인. 
 #### jadx를 통해 소스를 분석하던 중 “EncryptDecrypt”라는 암호화와 관련이 있어 보이는 클래스 확인.
 
-![Untitled (9)](https://user-images.githubusercontent.com/53963779/200766723-a6a09d62-1ff1-458e-8619-be920ef15362.png)
+![jadx](https://user-images.githubusercontent.com/53963779/200766723-a6a09d62-1ff1-458e-8619-be920ef15362.png)
 
 
 아래와 같이 위 클래스를 js코드로 컨버팅(converting)함
@@ -82,12 +82,12 @@ Java.perform(function() {
 });
 ```
 
-![Untitled (10)](https://user-images.githubusercontent.com/53963779/200767028-35929f01-0f27-42e2-8042-faae3e986a96.png)
+![복호화된 값 확인](https://user-images.githubusercontent.com/53963779/200767028-35929f01-0f27-42e2-8042-faae3e986a96.png)
 복호화된 값 확인.
 
-![Untitled (11)](https://user-images.githubusercontent.com/53963779/200767115-29e51579-0c37-4293-b925-e99f564212be.png)
+![qna bupr 값 수정](https://user-images.githubusercontent.com/53963779/200767115-29e51579-0c37-4293-b925-e99f564212be.png)
 
 Qna 게시판에서 게시글을 클릭할 때 Burp Suite를 통해 값을 수정하여 다른 사용자의 게시글을 확인 가능함.
 
-![Untitled (12)](https://user-images.githubusercontent.com/53963779/200767272-44fef888-4f04-4f1b-a0cf-1bb39952568a.png)
+![다른 사용자 qna 확인](https://user-images.githubusercontent.com/53963779/200767272-44fef888-4f04-4f1b-a0cf-1bb39952568a.png)
 
