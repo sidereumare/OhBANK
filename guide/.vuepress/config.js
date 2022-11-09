@@ -27,9 +27,8 @@ function getSidebarArr() {
             // NOT directory
             // title is '/' children is file
             HomeFilelist.push(file);
-        }
-});
-sidebarArr.unshift(makeSidebarObject("", HomeFilelist));
+        }});
+    sidebarArr.unshift(makeSidebarObject("", HomeFilelist));
     return sidebarArr;
 }
 function makeSidebarObject(folder, mdfileList) {
@@ -40,7 +39,7 @@ function makeSidebarObject(folder, mdfileList) {
     mdfileList.forEach(function(mdfile) {
         if (mdfile.substr(-3) === ".md") {
             mdfile = mdfile.slice(0, -3) === "README" ? "" : mdfile.slice(0, -3);
-            tmpMdfileList.push(path + mdfile);
+            tmpMdfileList.push(path + mdfile + ".md");
         }
     });
     mdfileList = tmpMdfileList;
