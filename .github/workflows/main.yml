@@ -1,9 +1,8 @@
 name: github pages
 
 on:
-  push:
-    branches:
-      - guideline
+  label:
+    types: [created, deleted]
 
 jobs:
   build-deploy:
