@@ -1,0 +1,1100 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  Five Team template: ohBank backend cloud auto configuration for AWS
+Parameters:
+  WebInstanceType:
+    Type: String
+    Default: t3.medium
+    AllowedValues:
+      - t3.micro
+      - t3.small
+      - t3.medium
+      - t3.large
+      - t3.xlarge
+      - t3.2xlarge
+  BasInstanceType:
+    Type: String
+    Default: t3.small
+    AllowedValues:
+      - t3.micro
+      - t3.small
+      - t3.medium
+      - t3.large
+      - t3.xlarge
+      - t3.2xlarge
+  # AZprivate1:
+  #   Description: AvailabilityZone for private
+  #   Type: AWS::EC2::AvailabilityZone::Name
+  # AZprivate2:
+  #   Description: AvailabilityZone for private
+  #   Type: AWS::EC2::AvailabilityZone::Name    
+  # DBInstanceID:
+  #   Default: dbinstance
+  #   Description: Database Instance Name
+  #   Type: String
+  #   MinLength: 1
+  #   MaxLength: 64
+  #   AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
+  #   ConstraintDescription: Must begin with a letter, Contain Only alphanumeric
+    
+  # DBName:
+  #   Default: db1
+  #   Description: Database Name
+  #   Type: String
+  #   MinLength: 1
+  #   MaxLength: 64
+  #   AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
+  #   ConstraintDescription: Must begin with a letter, Contain Only alphanumeric
+    
+  DBInstanceClass:
+    Default: db.t3.medium
+    Description: DB instance class
+    Type: String
+    AllowedValues:
+      - db.m5.large
+      - db.m5.xlarge
+      - db.m5.2xlarge
+      - db.m5.4xlarge
+      - db.m5.8xlarge
+      - db.t3.micro
+      - db.t3.small
+      - db.t3.medium
+      - db.t3.large
+      - db.t3.xlarge
+      - db.t3.2xlarge
+    
+  DBUsername:
+    Description: Username for DB Access
+    Type: String
+    MinLength: 1
+    MaxLength: 64
+    AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
+    ConstraintDescription: Must begin with a letter, Contain Only alphanumeric 
+
+  DBPassword:
+    NoEcho: true
+    Description: Password for DB Access
+    Type: String
+    MinLength: 8
+    MaxLength: 40
+    AllowedPattern: '[a-zA-Z0-9]*'
+    ConstraintDescription: Contain Only alphanumeric
+ 
+  DBAllocatedStorage:
+    Default: 50
+    Description: Size of Database (GiB)
+    Type: Number
+    MinValue: 5
+    MaxValue: 1024
+    ConstraintDescription: between 20 and 65536 GiB
+
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instances
+    Type: 'AWS::EC2::KeyPair::KeyName'
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
+
+  ServerCertificateArn:
+    Description: The ARN of the server certificate
+    Type: String
+    ConstraintDescription: must be the ARN of an existing IAM Server Certificate.
+  ClientRootCertificateChainArn:
+    Description: The ARN of the client root certificate chain
+    Type: String
+    ConstraintDescription: must be the ARN of an existing IAM Server Certificate.
+Mappings:
+  AWSInstanceType2Arch:
+    t1.micro:
+      Arch: HVM64
+    t2.nano:
+      Arch: HVM64
+    t2.micro:
+      Arch: HVM64
+    t2.small:
+      Arch: HVM64
+    t2.medium:
+      Arch: HVM64
+    t2.large:
+      Arch: HVM64
+    t3.micro:
+      Arch: HVM64
+    t3.small:
+      Arch: HVM64
+    t3.medium:
+      Arch: HVM64
+    t3.large:
+      Arch: HVM64
+    m1.small:
+      Arch: HVM64
+    m1.medium:
+      Arch: HVM64
+    m1.large:
+      Arch: HVM64
+    m1.xlarge:
+      Arch: HVM64
+    m2.xlarge:
+      Arch: HVM64
+    m2.2xlarge:
+      Arch: HVM64
+    m2.4xlarge:
+      Arch: HVM64
+    m3.medium:
+      Arch: HVM64
+    m3.large:
+      Arch: HVM64
+    m3.xlarge:
+      Arch: HVM64
+    m3.2xlarge:
+      Arch: HVM64
+    m4.large:
+      Arch: HVM64
+    m4.xlarge:
+      Arch: HVM64
+    m4.2xlarge:
+      Arch: HVM64
+    m4.4xlarge:
+      Arch: HVM64
+    m4.10xlarge:
+      Arch: HVM64
+    c1.medium:
+      Arch: HVM64
+    c1.xlarge:
+      Arch: HVM64
+    c3.large:
+      Arch: HVM64
+    c3.xlarge:
+      Arch: HVM64
+    c3.2xlarge:
+      Arch: HVM64
+    c3.4xlarge:
+      Arch: HVM64
+    c3.8xlarge:
+      Arch: HVM64
+    c4.large:
+      Arch: HVM64
+    c4.xlarge:
+      Arch: HVM64
+    c4.2xlarge:
+      Arch: HVM64
+    c4.4xlarge:
+      Arch: HVM64
+    c4.8xlarge:
+      Arch: HVM64
+    g2.2xlarge:
+      Arch: HVMG2
+    g2.8xlarge:
+      Arch: HVMG2
+    r3.large:
+      Arch: HVM64
+    r3.xlarge:
+      Arch: HVM64
+    r3.2xlarge:
+      Arch: HVM64
+    r3.4xlarge:
+      Arch: HVM64
+    r3.8xlarge:
+      Arch: HVM64
+    i2.xlarge:
+      Arch: HVM64
+    i2.2xlarge:
+      Arch: HVM64
+    i2.4xlarge:
+      Arch: HVM64
+    i2.8xlarge:
+      Arch: HVM64
+    d2.xlarge:
+      Arch: HVM64
+    d2.2xlarge:
+      Arch: HVM64
+    d2.4xlarge:
+      Arch: HVM64
+    d2.8xlarge:
+      Arch: HVM64
+    hi1.4xlarge:
+      Arch: HVM64
+    hs1.8xlarge:
+      Arch: HVM64
+    cr1.8xlarge:
+      Arch: HVM64
+    cc2.8xlarge:
+      Arch: HVM64
+  AWSInstanceType2NATArch:
+    t1.micro:
+      Arch: NATHVM64
+    t2.nano:
+      Arch: NATHVM64
+    t2.micro:
+      Arch: NATHVM64
+    t2.small:
+      Arch: NATHVM64
+    t2.medium:
+      Arch: NATHVM64
+    t2.large:
+      Arch: NATHVM64
+    t3.small:
+      Arch: NATHVM64
+    t3.medium:
+      Arch: NATHVM64
+    t3.large:
+      Arch: NATHVM64
+    m1.small:
+      Arch: NATHVM64
+    m1.medium:
+      Arch: NATHVM64
+    m1.large:
+      Arch: NATHVM64
+    m1.xlarge:
+      Arch: NATHVM64
+    m2.xlarge:
+      Arch: NATHVM64
+    m2.2xlarge:
+      Arch: NATHVM64
+    m2.4xlarge:
+      Arch: NATHVM64
+    m3.medium:
+      Arch: NATHVM64
+    m3.large:
+      Arch: NATHVM64
+    m3.xlarge:
+      Arch: NATHVM64
+    m3.2xlarge:
+      Arch: NATHVM64
+    m4.large:
+      Arch: NATHVM64
+    m4.xlarge:
+      Arch: NATHVM64
+    m4.2xlarge:
+      Arch: NATHVM64
+    m4.4xlarge:
+      Arch: NATHVM64
+    m4.10xlarge:
+      Arch: NATHVM64
+    c1.medium:
+      Arch: NATHVM64
+    c1.xlarge:
+      Arch: NATHVM64
+    c3.large:
+      Arch: NATHVM64
+    c3.xlarge:
+      Arch: NATHVM64
+    c3.2xlarge:
+      Arch: NATHVM64
+    c3.4xlarge:
+      Arch: NATHVM64
+    c3.8xlarge:
+      Arch: NATHVM64
+    c4.large:
+      Arch: NATHVM64
+    c4.xlarge:
+      Arch: NATHVM64
+    c4.2xlarge:
+      Arch: NATHVM64
+    c4.4xlarge:
+      Arch: NATHVM64
+    c4.8xlarge:
+      Arch: NATHVM64
+    g2.2xlarge:
+      Arch: NATHVMG2
+    g2.8xlarge:
+      Arch: NATHVMG2
+    r3.large:
+      Arch: NATHVM64
+    r3.xlarge:
+      Arch: NATHVM64
+    r3.2xlarge:
+      Arch: NATHVM64
+    r3.4xlarge:
+      Arch: NATHVM64
+    r3.8xlarge:
+      Arch: NATHVM64
+    i2.xlarge:
+      Arch: NATHVM64
+    i2.2xlarge:
+      Arch: NATHVM64
+    i2.4xlarge:
+      Arch: NATHVM64
+    i2.8xlarge:
+      Arch: NATHVM64
+    d2.xlarge:
+      Arch: NATHVM64
+    d2.2xlarge:
+      Arch: NATHVM64
+    d2.4xlarge:
+      Arch: NATHVM64
+    d2.8xlarge:
+      Arch: NATHVM64
+    hi1.4xlarge:
+      Arch: NATHVM64
+    hs1.8xlarge:
+      Arch: NATHVM64
+    cr1.8xlarge:
+      Arch: NATHVM64
+    cc2.8xlarge:
+      Arch: NATHVM64
+  AWSRegionArch2AMI:
+    ap-northeast-2:
+      HVM64: ami-0e9bfdb247cc8de84
+Resources:
+  CUSTOMVPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: 'true'
+      EnableDnsHostnames: 'true'
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-VPC'
+  IAMEC2ROLE:
+    Type: AWS::IAM::Role
+    Properties: 
+      Description: WEB SERVER ROLE
+      RoleName: !Sub '${AWS::StackName}-WEB-Role'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - 
+            Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+    DependsOn:
+      - CUSTOMVPC
+  IAMEC2PROFILE:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: !Sub '${AWS::StackName}-WEB-Profile'
+      Path: /
+      Roles:
+        - !Ref IAMEC2ROLE
+    DependsOn:
+      - IAMEC2ROLE
+  IAMEC2POLICY:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: !Sub '${AWS::StackName}-WEB-Policy'
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Action: '*'
+            Resource: '*'
+      Roles:
+        - !Ref IAMEC2ROLE
+    DependsOn:
+      - IAMEC2ROLE
+      
+  PUBLICSUBNET1:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      AvailabilityZone: !Select [2, !GetAZs '']
+      CidrBlock: 10.0.1.0/24
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-public-bas01'
+    DependsOn:
+      - CUSTOMVPC
+  PUBLICSUBNET2:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      AvailabilityZone: !Select [1, !GetAZs '']
+      CidrBlock: 10.0.2.0/24
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-public-bas02'
+    DependsOn:
+      - CUSTOMVPC
+  PRIVATESUBNET1:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      AvailabilityZone: !Select [3, !GetAZs '']
+      CidrBlock: 10.0.10.0/24
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-private-dev01'
+    DependsOn:
+      - CUSTOMVPC
+  PRIVATESUBNET2:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      AvailabilityZone: !Select [3, !GetAZs '']
+      CidrBlock: 10.0.20.0/24
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-private-dev02'
+    DependsOn:
+      - CUSTOMVPC
+  PRIVATESUBNET3:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      AvailabilityZone: !Select [0, !GetAZs '']
+      CidrBlock: 10.0.30.0/24
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-private-int01'
+    DependsOn:
+      - CUSTOMVPC
+  PRIVATESUBNET4:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      AvailabilityZone: !Select [0, !GetAZs '']
+      CidrBlock: 10.0.40.0/24
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-private-int02'
+    DependsOn:
+      - CUSTOMVPC
+  PRIVATESUBNET5:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      AvailabilityZone: !Select [2, !GetAZs '']
+      CidrBlock: 10.0.50.0/24
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-private-web01'
+    DependsOn:
+      - CUSTOMVPC
+  PRIVATESUBNET6:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      AvailabilityZone: !Select [2, !GetAZs '']
+      CidrBlock: 10.0.100.0/24
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-private-rds01'
+    DependsOn:
+      - CUSTOMVPC
+  PRIVATESUBNET7:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      AvailabilityZone: !Select [1, !GetAZs '']
+      CidrBlock: 10.0.150.0/24
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-private-web02'
+    DependsOn:
+      - CUSTOMVPC
+  PRIVATESUBNET8:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      AvailabilityZone: !Select [1, !GetAZs '']
+      CidrBlock: 10.0.200.0/24
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-private-rds02'
+    DependsOn:
+      - CUSTOMVPC
+  INTERNETGATEWAY:
+    Type: 'AWS::EC2::InternetGateway'
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-IGW'
+    DependsOn:
+      - CUSTOMVPC
+  INTERNETGATEWAYATTACHMENT:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      InternetGatewayId: !Ref INTERNETGATEWAY
+    DependsOn:
+      - INTERNETGATEWAY
+  NATGatewayEIP:
+    Type: AWS::EC2::EIP
+    Properties:
+        Domain: CUSTOMVPC
+    DependsOn: 
+      - INTERNETGATEWAYATTACHMENT
+  NATGateway:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NATGatewayEIP.AllocationId
+      SubnetId: !Ref PUBLICSUBNET1
+      Tags:
+      - Key: Name
+        Value: !Sub '${AWS::StackName}-NGW'
+    DependsOn:
+      - PUBLICSUBNET1
+      - NATGatewayEIP
+  RouteNATGateway:
+    Type: AWS::EC2::Route
+    Properties:
+        RouteTableId: !Ref PrivateRT
+        DestinationCidrBlock: '0.0.0.0/0'
+        NatGatewayId: !Ref NATGateway
+    DependsOn: NATGateway
+  PublicRT:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      Tags:
+        - Key: Name
+          Value: Public RT
+    DependsOn: CUSTOMVPC
+  PublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: INTERNETGATEWAY
+    Properties:
+      RouteTableId: !Ref PublicRT
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref INTERNETGATEWAY
+  PublicSubnetRTAssociation1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRT
+      SubnetId: !Ref PUBLICSUBNET1
+    DependsOn: PUBLICSUBNET1 
+  PublicSubnetRTAssociation2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRT
+      SubnetId: !Ref PUBLICSUBNET2
+    DependsOn: PUBLICSUBNET2
+  PrivateRT:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref CUSTOMVPC
+      Tags:
+        - Key: Name
+          Value: Private RT
+    DependsOn: CUSTOMVPC
+  PrivateRoute:
+    Type: AWS::EC2::Route
+    DependsOn:
+      - INTERNETGATEWAY
+      - NATGateway
+      - PrivateRT
+    Properties:
+      RouteTableId: !Ref PrivateRT
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NATGateway
+  PrivateSubnetRTAssociation1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRT
+      SubnetId: !Ref PRIVATESUBNET1
+    DependsOn: PRIVATESUBNET1
+  PrivateSubnetRTAssociation2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRT
+      SubnetId: !Ref PRIVATESUBNET2
+    DependsOn: PRIVATESUBNET2
+  PrivateSubnetRTAssociation3:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRT
+      SubnetId: !Ref PRIVATESUBNET3
+    DependsOn: PRIVATESUBNET3
+  PrivateSubnetRTAssociation4:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRT
+      SubnetId: !Ref PRIVATESUBNET4
+    DependsOn: PRIVATESUBNET4
+  PrivateSubnetRTAssociation5:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRT
+      SubnetId: !Ref PRIVATESUBNET5
+    DependsOn: PRIVATESUBNET5      
+  PrivateSubnetRTAssociation6:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRT
+      SubnetId: !Ref PRIVATESUBNET6
+    DependsOn: PRIVATESUBNET6
+  PrivateSubnetRTAssociation7:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRT
+      SubnetId: !Ref PRIVATESUBNET7
+    DependsOn: PRIVATESUBNET7
+  PrivateSubnetRTAssociation8:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRT
+      SubnetId: !Ref PRIVATESUBNET8
+    DependsOn: PRIVATESUBNET8
+  BASTIONSG:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Bastion Security Group
+      VpcId: !Ref CUSTOMVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-BASTIONSG'
+    DependsOn:
+      - CUSTOMVPC
+  BASTION:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: !FindInMap 
+        - AWSRegionArch2AMI
+        - !Ref 'AWS::Region'
+        - !FindInMap 
+          - AWSInstanceType2Arch
+          - !Ref BasInstanceType
+          - Arch
+      InstanceType: !Ref BasInstanceType
+      KeyName: !Ref KeyName
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet:
+            - !Ref BASTIONSG
+          SubnetId: !Ref PUBLICSUBNET1
+      IamInstanceProfile: !Ref IAMEC2PROFILE
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-Public-bas01'
+    DependsOn:
+      - PUBLICSUBNET1
+      - BASTIONSG
+      - INTERNETGATEWAYATTACHMENT
+  
+  DBEC2G:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Open database for access
+      VpcId: !Ref CUSTOMVPC
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 3306
+        ToPort: 3306
+        CidrIp: "0.0.0.0/0"
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-DBEC2G'
+    DependsOn:
+      - CUSTOMVPC
+
+  DBSUBNET:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Subnet group for RDS
+      DBSubnetGroupName: !Sub '${AWS::StackName}-private-dbsubnet'
+      SubnetIds:
+        - !Ref PRIVATESUBNET1
+        - !Ref PRIVATESUBNET2
+        - !Ref PRIVATESUBNET3
+        - !Ref PRIVATESUBNET4
+        - !Ref PRIVATESUBNET5
+        - !Ref PRIVATESUBNET6
+        - !Ref PRIVATESUBNET7
+        - !Ref PRIVATESUBNET8
+    DependsOn:
+          - PRIVATESUBNET8
+
+  DBINSTANCE:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBName: !Sub '${AWS::StackName}rds01'
+      Engine: MySQL
+      EngineVersion: 8.0.30
+      MultiAZ: true
+      MasterUsername:
+        Ref: DBUsername
+      DBInstanceClass:
+        Ref: DBInstanceClass
+      AllocatedStorage:
+        Ref: DBAllocatedStorage
+      MasterUserPassword:
+        Ref: DBPassword
+      VPCSecurityGroups:
+        - !GetAtt DBEC2G.GroupId
+      DBSubnetGroupName:
+        Ref: DBSUBNET
+    DependsOn:
+      - DBEC2G
+      - DBSUBNET
+
+  WEBSG:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Web Security Group
+      VpcId: !Ref CUSTOMVPC
+      SecurityGroupIngress:
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
+    DependsOn:
+      - CUSTOMVPC
+
+  WEB01:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: !FindInMap 
+        - AWSRegionArch2AMI
+        - !Ref 'AWS::Region'
+        - !FindInMap 
+          - AWSInstanceType2Arch
+          - !Ref WebInstanceType
+          - Arch
+      InstanceType: !Ref BasInstanceType
+      KeyName: !Ref KeyName
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: "false"
+          DeviceIndex: "0"
+          GroupSet:
+            - !Ref WEBSG
+          SubnetId: !Ref PRIVATESUBNET5
+      IamInstanceProfile: !Ref IAMEC2PROFILE
+      UserData: 
+        Fn::Base64: !Sub |
+            #!/bin/bash
+            apt-get update -y
+            apt-get install -y nodejs \
+                    npm \
+                    git \
+                    mysql-client
+            cd /home/ubuntu
+            git clone https://github.com/sidereumare/OhBANK.git
+            cd OhBANK/BackendServer
+            mysql -h ${DBINSTANCE.Endpoint.Address} -u ${DBUsername} -p${DBPassword} < database/schema+data.sql
+            npm install
+            npm install -g pm2
+            cd config
+            echo '{' > config.json
+            echo '  "development": {' >> config.json
+            echo '    "username": "${DBUsername}",' >> config.json
+            echo '    "password": "${DBPassword}",' >> config.json
+            echo '    "database": "dvba",' >> config.json
+            echo '    "host": "${DBINSTANCE.Endpoint.Address}",' >> config.json
+            echo '    "dialect": "mysql"' >> config.json
+            echo '  },' >> config.json
+            echo '  "test": {' >> config.json
+            echo '    "username": "${DBUsername}",' >> config.json
+            echo '    "password": "${DBPassword}",' >> config.json
+            echo '    "database": "dvba",' >> config.json
+            echo '    "host": "${DBINSTANCE.Endpoint.Address}",' >> config.json
+            echo '    "dialect": "mysql"' >> config.json
+            echo '  },' >> config.json
+            echo '  "production": {' >> config.json
+            echo '    "username": "${DBUsername}",' >> config.json
+            echo '    "password": "${DBPassword}",' >> config.json
+            echo '    "database": "dvba",' >> config.json
+            echo '    "host": "${DBINSTANCE.Endpoint.Address}",' >> config.json
+            echo '    "dialect": "mysql"' >> config.json
+            echo '  }' >> config.json
+            echo '}' >> config.json
+            echo '{' > s3.json
+            echo '  "accessKeyId": "s3-access-key",' >> s3.json
+            echo '  "secretAccessKey": "s3-secret-key",' >> s3.json
+            echo '  "region": "${AWS::Region}"' >> s3.json
+            echo '}' >> s3.json
+            cd ../
+            pm2 start ./bin/www
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-Public-web01'
+    DependsOn:
+      - PRIVATESUBNET5
+      - WEBSG
+      - RouteNATGateway
+      - DBINSTANCE
+      - IAMEC2ROLE
+
+  WEB02:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: !FindInMap 
+        - AWSRegionArch2AMI
+        - !Ref 'AWS::Region'
+        - !FindInMap 
+          - AWSInstanceType2Arch
+          - !Ref WebInstanceType
+          - Arch
+      InstanceType: !Ref BasInstanceType
+      KeyName: !Ref KeyName
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: "false"
+          DeviceIndex: "0"
+          GroupSet:
+            - !Ref WEBSG
+          SubnetId: !Ref PRIVATESUBNET7
+      IamInstanceProfile: !Ref IAMEC2PROFILE
+      UserData: 
+        Fn::Base64: !Sub |
+            #!/bin/bash
+            apt-get update -y
+            apt-get install -y nodejs \
+                    npm \
+                    git \
+                    mysql-client
+            cd /home/ubuntu
+            git clone https://github.com/sidereumare/OhBANK.git
+            cd OhBANK/BackendServer
+            npm install
+            npm install -g pm2
+            cd config
+            echo '{' > config.json
+            echo '  "development": {' >> config.json
+            echo '    "username": "${DBUsername}",' >> config.json
+            echo '    "password": "${DBPassword}",' >> config.json
+            echo '    "database": "dvba",' >> config.json
+            echo '    "host": "${DBINSTANCE.Endpoint.Address}",' >> config.json
+            echo '    "dialect": "mysql"' >> config.json
+            echo '  },' >> config.json
+            echo '  "test": {' >> config.json
+            echo '    "username": "${DBUsername}",' >> config.json
+            echo '    "password": "${DBPassword}",' >> config.json
+            echo '    "database": "dvba",' >> config.json
+            echo '    "host": "${DBINSTANCE.Endpoint.Address}",' >> config.json
+            echo '    "dialect": "mysql"' >> config.json
+            echo '  },' >> config.json
+            echo '  "production": {' >> config.json
+            echo '    "username": "${DBUsername}",' >> config.json
+            echo '    "password": "${DBPassword}",' >> config.json
+            echo '    "database": "dvba",' >> config.json
+            echo '    "host": "${DBINSTANCE.Endpoint.Address}",' >> config.json
+            echo '    "dialect": "mysql"' >> config.json
+            echo '  }' >> config.json
+            echo '}' >> config.json
+            echo '{' > s3.json
+            echo '  "accessKeyId": "s3-access-key",' >> s3.json
+            echo '  "secretAccessKey": "s3-secret-key",' >> s3.json
+            echo '  "region": "${AWS::Region}"' >> s3.json
+            echo '}' >> s3.json
+            cd ../
+            pm2 start ./bin/www
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-Public-web02'
+    DependsOn:
+      - PRIVATESUBNET7
+      - WEBSG
+      - RouteNATGateway
+      - DBINSTANCE
+      - WEB01
+  
+  TARGETGROUP:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckEnabled: true
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /api/health/check
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 5
+      Matcher:
+        HttpCode: 200
+      Name: !Sub '${AWS::StackName}-TG'
+      Port: 3000
+      Protocol: HTTP
+      ProtocolVersion: HTTP1
+      UnhealthyThresholdCount: 2
+      VpcId: !Ref CUSTOMVPC
+      TargetType: instance
+      Targets:
+        - Id: !Ref WEB01
+          Port: 3000
+        - Id: !Ref WEB02
+          Port: 3000
+    DependsOn:
+      - CUSTOMVPC
+      - WEB01
+      - WEB02
+
+  ELASTICLB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub '${AWS::StackName}-ELB'
+      IpAddressType: ipv4
+      Scheme: internet-facing
+      Subnets:
+        - !Ref PUBLICSUBNET1
+        - !Ref PUBLICSUBNET2
+      SecurityGroups:
+        - !Ref WEBSG
+      Type: application
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: '60'
+    DependsOn:
+      - PUBLICSUBNET1
+      - PUBLICSUBNET2
+      - WEBSG
+      - RouteNATGateway
+
+  LISTENERS:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - TargetGroupArn: !Ref TARGETGROUP
+          Type: forward
+      LoadBalancerArn: !Ref ELASTICLB
+      Port: 3000
+      Protocol: HTTP
+    DependsOn:
+      - ELASTICLB
+      - TARGETGROUP
+
+  CLIENTVPNENDPOINT:
+    Type: AWS::EC2::ClientVpnEndpoint
+    Properties:
+      AuthenticationOptions:
+        - Type: certificate-authentication
+          MutualAuthentication:
+            ClientRootCertificateChainArn: !Ref ClientRootCertificateChainArn
+      ConnectionLogOptions:
+        Enabled: false
+      ClientCidrBlock: 10.0.0.0/22
+      ServerCertificateArn: !Ref ServerCertificateArn
+      VpnPort: 443
+      VpcId: !Ref CUSTOMVPC
+      # Tags:
+      #   - Key: Name
+      #     Value: !Sub '${AWS::StackName}-ClientVPN'
+    DependsOn:
+      - CUSTOMVPC
+
+  CLIENTVPNSUBNETASSOCIATION:
+    Type: AWS::EC2::ClientVpnTargetNetworkAssociation
+    Properties:
+      ClientVpnEndpointId: !Ref CLIENTVPNENDPOINT
+      SubnetId: !Ref PRIVATESUBNET1
+    DependsOn:
+      - CLIENTVPNENDPOINT
+      - PRIVATESUBNET1
+
+  FTPSG:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: FTP Security Group - allow vpn access
+      VpcId: !Ref CUSTOMVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 10.0.0.0/22
+  FTP01:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: !FindInMap 
+        - AWSRegionArch2AMI
+        - !Ref 'AWS::Region'
+        - !FindInMap 
+          - AWSInstanceType2Arch
+          - !Ref WebInstanceType
+          - Arch
+      InstanceType: !Ref BasInstanceType
+      KeyName: !Ref KeyName
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: "false"
+          DeviceIndex: "0"
+          GroupSet:
+            - !Ref FTPSG
+          SubnetId: !Ref PRIVATESUBNET3
+      UserData: 
+        Fn::Base64: !Sub |
+            #!/bin/bash
+            apt-get update -y
+            apt-get install -y wget \
+                    tar \
+                    gcc \
+                    make
+            mkdir -p /usr/local/src/ftpd
+            cd /usr/local/src/ftpd
+            wget https://security.appspot.com/downloads/vsftpd-3.0.3.tar.gz
+            tar xzf vsftpd-3.0.3.tar.gz
+            cd vsftpd-3.0.3
+            useradd nobody
+            mkdir -p /usr/share/empty
+            mkdir -p /var/ftp
+            useradd -d /var/ftp ftp
+            chown root.root /var/ftp
+            chmod og-w /var/ftp
+            sed -e "s/kVSFSysStrOpenUnknown;/(enum EVSFSysUtilOpenMode)&/" -i sysstr.c
+            cd /usr/local/src/ftpd/vsftpd-3.0.3
+            make
+            echo 'anonymous_enable=YES' > vsftpd.conf
+            echo 'local_enable=YES' >> vsftpd.conf
+            echo 'write_enable=YES' >> vsftpd.conf
+            echo 'local_umask=022' >> vsftpd.conf
+            echo 'anon_upload_enable=YES' >> vsftpd.conf
+            echo 'anon_mkdir_write_enable=YES' >> vsftpd.conf
+            echo 'dirmessage_enable=YES' >> vsftpd.conf
+            echo 'xferlog_enable=YES' >> vsftpd.conf
+            echo 'connect_from_port_20=YES' >> vsftpd.conf
+            echo 'chown_uploads=YES' >> vsftpd.conf
+            echo 'chown_username=whoever' >> vsftpd.conf
+            echo 'xferlog_std_format=YES' >> vsftpd.conf
+            echo 'ascii_upload_enable=YES' >> vsftpd.conf
+            echo 'ascii_download_enable=YES' >> vsftpd.conf
+            echo 'chroot_local_user=YES' >> vsftpd.conf
+            echo 'allow_writeable_chroot=YES' >> vsftpd.conf
+            echo 'ls_recurse_enable=YES' >> vsftpd.conf
+            echo 'listen=YES' >> vsftpd.conf
+            echo 'pam_service_name=vsftpd' >> vsftpd.conf
+            echo 'userlist_enable=yes' >> vsftpd.conf
+            echo 'tcp_wrappers=yes' >> vsftpd.conf
+            echo 'seccomp_sandbox=NO' >> vsftpd.conf
+            echo 'local_root=/home/ftpuser/ftp' >> vsftpd.conf
+            echo 'pasv_enable=Yes' >> vsftpd.conf
+            mkdir -p /usr/local/man/man8
+            mkdir -p /usr/local/man/man5
+            cp /usr/local/src/ftpd/vsftpd-3.0.3/vsftpd.conf /etc
+            cp vsftpd /usr/local/sbin/vsftpd
+            cp vsftpd.conf.5 /usr/local/man/man5
+            cp vsftpd.8 /usr/local/man/man8
+            make install
+            /usr/local/sbin/vsftpd &
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-Private-ftp01'
+    DependsOn:
+      - PRIVATESUBNET3
+      - FTPSG
+      - RouteNATGateway
+    
+
+Outputs:
+  WebsiteURL:
+    Description: health check url
+    Value: !Sub 'http://${ELASTICLB.DNSName}:3000/api/health/check'
+  BastionIP:
+    Description: Bastion IP
+    Value: !GetAtt BASTION.PublicIp
+  Web01IP:
+    Description: Web01 IP
+    Value: !GetAtt WEB01.PrivateIp
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      -
+        Label:
+          default: "EC2 Instance Configuration"
+        Parameters:
+          - WebInstanceType
+          - BasInstanceType
+          - KeyName
+      -
+        Label:
+          default: "DB Configuration"
+        Parameters:
+          - DBInstanceClass
+          - DBUsername
+          - DBPassword
+          - DBAllocatedStorage
+      -
+        Label:
+          default: "VPN Configuration"
+        Parameters:
+          - ServerCertificateArn
+          - ClientRootCertificateChainArn
