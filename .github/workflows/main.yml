@@ -1,19 +1,19 @@
 name: github pages
 
-on: [push]
+on: [label]
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.5.0
+      - uses: actions/checkout@v3
+        with:
+          ref: guideline
 
       - name: Setup Node
         uses: actions/setup-node@v3.5.1
         with:
           node-version: '12.x'
-          
-      - run: git checkout guideline
 
       - run: npm install -D vuepress
 
