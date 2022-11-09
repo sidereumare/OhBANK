@@ -1,8 +1,6 @@
 name: github pages
 
-on:
-  label:
-    types: [created, deleted]
+on: [push]
 
 jobs:
   build-deploy:
