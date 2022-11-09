@@ -5,7 +5,7 @@ module.exports = {
         sidebar: getSidebarArr()
     },
     //레파지토리의 이름을 아래에 넣어주면된다.
-    base: "/CodingTest/"
+    base: "/OhBANK/"
 };
 
 function getSidebarArr() {
