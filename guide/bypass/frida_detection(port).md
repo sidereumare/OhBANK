@@ -1,12 +1,27 @@
-#안티 디버깅이란?
+# 안티 디버깅 우회
+---
+# 안티 디버깅이란?
 
-##디버깅을 방지하여 소스코드 분석을 하지 못하도록 하는 기술이다
+## 디버깅을 방지하여 소스코드 분석을 하지 못하도록 하는 기술이다
 
 ---
 
-#상세 가이드
+# 상세 가이드
 
 메서드 후킹 감지를 찾는 코드 조각을 찾으려면 frida의 흔적에 대한 코드를 살펴보십시오.
+
+디컴파일하여 구한 소스코드에서 "libfrida-check.so"파일을 확인한다
+![so 파일](https://user-images.githubusercontent.com/53963779/200975846-a569e0d0-dfce-42a3-a175-34b8ed9757ad.png)
+
+![ghidra 화면](https://user-images.githubusercontent.com/53963779/200976776-42ec84c2-6797-4df3-a39a-f5a5175eb5e1.png)
+
+![adb 포트 포워딩](https://user-images.githubusercontent.com/53963779/200977079-35271620-98b1-4e59-bdc1-3e11d5ea4b04.png)
+
+![frida-server 포트 포워딩](https://user-images.githubusercontent.com/53963779/200977207-576d4b1c-f986-44c8-926b-210630ec9691.png)
+
+![포트포워딩 프리다 코드](https://user-images.githubusercontent.com/53963779/200977351-6a8e607b-3de8-4fcf-9944-fbf3d30b8355.png)
+
+![앱 실행 성공](https://user-images.githubusercontent.com/53963779/200977562-960b1f1e-f41f-4d43-8bdd-f050193041ee.png)
 
 
 grep -r -i frida
