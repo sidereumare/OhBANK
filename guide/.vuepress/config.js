@@ -1,7 +1,12 @@
 module.exports = {
     title: "모의해킹 가이드",
     description: "desc",
+    theme: "yuu",
     themeConfig: {
+        yuu: {
+            defaultDarkTheme: true,
+            defaultColorTheme: "blue"
+        },
         logo: 'https://user-images.githubusercontent.com/114275157/201018069-4a95e05a-d781-4f5d-9601-b41c519a2dd9.png', // logo 이미지
         sidebar: getSidebarArr(),
         smoothScroll: true // 부드러운 스크롤 사용 여부
