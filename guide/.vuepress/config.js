@@ -1,8 +1,10 @@
 module.exports = {
-    title: "title",
+    title: "모의해킹 가이드",
     description: "desc",
     themeConfig: {
-        sidebar: getSidebarArr()
+        logo: 'https://user-images.githubusercontent.com/114275157/201018069-4a95e05a-d781-4f5d-9601-b41c519a2dd9.png', // logo 이미지
+        sidebar: getSidebarArr(),
+        smoothScroll: true // 부드러운 스크롤 사용 여부
     },
     //레파지토리의 이름을 아래에 넣어주면된다.
     base: "/OhBANK/"
