@@ -28,3 +28,8 @@
 
 
  2. Burp Suite 인증서 가상 에뮬레이터에 설치
+
+
+
+![인터페이스 추가](https://user-images.githubusercontent.com/53963779/201027646-8fbb70cf-21e5-4500-b801-f427bb0a1484.png)
+
