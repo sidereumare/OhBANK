@@ -28,3 +28,5 @@ DamnVulnerableBank/.idea/compiler.xml
 DamnVulnerableBank/.idea/misc.xml
 DamnVulnerableBank/.idea/gradle.xml
 DamnVulnerableBank/.idea/runConfigurations.xml
+
+package-lock.json
