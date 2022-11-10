@@ -1,6 +1,6 @@
 name: github pages
 
-on: [label]
+on: [label, push]
 
 jobs:
   build-deploy:
