@@ -18,6 +18,7 @@
 
 ![qna게시판-burpsuite](https://user-images.githubusercontent.com/53963779/200765947-f73bb9d0-4311-4e87-b230-2ff2262616f4.png)
 
+<!--#하드코딩 목차 이동-->
 #### 요청값과 응답값이 암호화된걸 확인. 
 #### jadx를 통해 소스를 분석하던 중 “EncryptDecrypt”라는 암호화와 관련이 있어 보이는 클래스 확인.
 
