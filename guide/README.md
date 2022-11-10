@@ -1,2 +1,132 @@
+<!-- 제목 가운데 정렬  -->
 
-# OhBank pentest app
+<div align="center">
+    <h1>OhBank pentest app</h1>
+</div>
+
+
+
+<!-- 개발 언어 -->
+
+<div align="center">
+    <h2>개발 언어, 도구, 환경 및 사용 도구</h2>
+</div>
+
+<div align="center">
+    <h5>언어</h5>
+</div>
+<div align="center">
+    <!-- java -->
+    <img src="https://img.shields.io/badge/Java-red?logo=Java&logoColor=white">
+    <!-- javascript -->
+    <img src="https://img.shields.io/badge/JavaScript-yellow?logo=JavaScript&logoColor=white">
+    <!-- python-->
+    <img src="https://img.shields.io/badge/Python-blue?logo=Python&logoColor=white">
+</div>
+
+<div align="center">
+    <h5>개발 툴</h5>
+</div>
+<div align="center">
+    <!-- android studio -->
+    <img src="https://img.shields.io/badge/AndroidStudio-blue?logo=AndroidStudio&logoColor=white">
+    <!-- gradle -->
+    <img src="https://img.shields.io/badge/Gradle-blue?logo=Gradle&logoColor=white">
+    <!-- vscode -->
+    <img src="https://img.shields.io/badge/VSCode-blue?logo=VisualStudioCode&logoColor=white">
+    <!-- npm -->
+    <img src="https://img.shields.io/badge/NPM-blue?logo=NPM&logoColor=white">
+</div>
+
+<div align="center">
+    <h5>환경</h5>
+</div>
+<div align="center">
+    <!-- kali -->
+    <img src="https://img.shields.io/badge/Kali-blue?logo=Kali&logoColor=white">
+    <!-- windows -->
+    <img src="https://img.shields.io/badge/Windows-blue?logo=Windows&logoColor=white">
+    <!-- ubuntu -->
+    <img src="https://img.shields.io/badge/Ubuntu-blue?logo=Ubuntu&logoColor=white">
+    <!-- android -->
+    <img src="https://img.shields.io/badge/Android-blue?logo=Android&logoColor=white">
+    <!-- aws -->
+    <img src="https://img.shields.io/badge/AWS-orange?logo=AmazonAWS&logoColor=white">
+    <!-- mysql -->
+    <img src="https://img.shields.io/badge/MySQL-blue?logo=MySQL&logoColor=white">
+    <!-- nodejs -->
+    <img src="https://img.shields.io/badge/Node.js-green?logo=Node.js&logoColor=white">
+    <!-- express -->
+    <img src="https://img.shields.io/badge/Express-red?logo=Express&logoColor=white">
+</div>
+
+<div align="center">
+    <h5>테스트 도구</h5>
+</div>
+<div align="center">
+    <!-- jadx -->
+    <img src="https://img.shields.io/badge/Jadx-blue?logo=Jadx&logoColor=white">
+    <!-- Frida -->
+    <img src="https://img.shields.io/badge/Frida-blue?logo=Frida&logoColor=white">
+    <!-- BurpSuite -->
+    <img src="https://img.shields.io/badge/BurpSuite-blue?logo=BurpSuite&logoColor=white">
+    <!-- Ghidra -->
+    <img src="https://img.shields.io/badge/Ghidra-blue?logo=Ghidra&logoColor=white">
+</div>
+
+<div align="center">
+    <h5>협업도구</h5>
+</div>
+<div align="center">
+    <!-- git -->
+    <img src="https://img.shields.io/badge/Git-blue?logo=Git&logoColor=white">
+    <!-- github -->
+    <img src="https://img.shields.io/badge/GitHub-blue?logo=GitHub&logoColor=white">
+    <!-- notion -->
+    <img src="https://img.shields.io/badge/Notion-blue?logo=Notion&logoColor=white">
+</div>
+
+---
+
+<!-- 개발 기간 -->
+
+<div align="center">
+    <h2>개발 기간</h2>
+</div>
+
+<div align="center">
+    <img src="https://img.shields.io/badge/2020.07.01-2020.07.31-blue">
+</div>
+
+---
+
+<!-- 개발 인원 -->
+
+<div align="center">
+    <h2>개발 인원</h2>
+</div>
+
+### 10AM 팀
+- 고경표 ([@GyeongPyoKo](https://github.com/GyeongPyoKo))
+- 김병현 ([@sidereumare](https://github.com/sidereumare))
+- 김진형 ([@musicmanposture](https://github.com/musicmanposture))
+- 김현진 ([@hyunjin423](https://github.com/hyunjin423))
+- 박건웅 ([@shboan08](https://github.com/shboan08))
+- 서보금 ([@bgmmmm](https://github.com/bgmmmm))
+- 이현우 ([@uwwual](https://github.com/uwwual))
+- 임영재 ([@Young-Jae-Lim](https://github.com/Young-Jae-Lim))
+- 채하늘 ([@sky302](https://github.com/sky302))
+- 홍지원 ([@hjw961004](https://github.com/hjw961004))
+
+
+
+
+---
+
+<!-- 개발 목적 -->
+
+<div align="center">
+    <h2>개발 목적</h2>
+</div>
+
+---
