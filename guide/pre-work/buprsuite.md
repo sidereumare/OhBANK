@@ -1,5 +1,5 @@
-#Burp Suite
-
+# Burp Suite 설치
+---
  
  1. Bupr Suite 설치
     1_1) 아래 경로로 접속합니다.
