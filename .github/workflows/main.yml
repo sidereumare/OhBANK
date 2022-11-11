@@ -5,7 +5,6 @@ on: [label, push]
 env:
   CACHED_DEPENDENCY_PATHS: ${{ github.workspace }}/node_modules
   CACHED_BUILD_PATHS: ${{ github.workspace }}/guide/.vuepress/dist
-  BUILD_CACHE_KEY: ${{ github.sha }}
 
 jobs:
   job_install_dependencies:
@@ -63,19 +62,11 @@ jobs:
           path: ${{ env.CACHED_DEPENDENCY_PATHS }}
           key: ${{ needs.job_install_dependencies.outputs.dependency_cache_key }}
           
-      - name: Check build cache
-        uses: actions/cache@v3
-        id: cache_built_packages
-        with:
-          path: ${{ env.CACHED_BUILD_PATHS }}
-          key: ${{ env.BUILD_CACHE_KEY }}
           
       - name: Build packages
-        if: steps.cache_built_packages.outputs.cache-hit == ''
         run: npm run guide:build
 
       - name: Deploy
-        if: steps.cache_built_packages.outputs.cache-hit == ''
         uses: peaceiris/actions-gh-pages@v3.9.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
