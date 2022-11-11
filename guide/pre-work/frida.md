@@ -42,7 +42,7 @@ cd /system/priv-app
 ./[frida 서버 파일명]
 ```
 
-![frida-ps -U]](https://user-images.githubusercontent.com/53963779/201240491-8d8b2730-4ef6-4833-9610-23d0d415819a.png)
+![frida-ps-U](https://user-images.githubusercontent.com/53963779/201240491-8d8b2730-4ef6-4833-9610-23d0d415819a.png)
 
 ```
 frida-ps -U
@@ -50,4 +50,3 @@ frida-ps -U
 로 잘 설치됬는지 확인
 
 
-참조사이트: https://kk-7790.tistory.com/97
