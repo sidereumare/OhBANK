@@ -1,6 +1,12 @@
 
-참조사이트: https://kk-7790.tistory.com/97
 
+
+
+
+
+
+
+Frida 설치
 https://github.com/frida/frida/releases
 
 ![Untitled (13)](https://user-images.githubusercontent.com/53963779/201031056-06bc0b5b-7a76-4076-9ecf-99ab81fae4dc.png)
@@ -55,3 +61,4 @@ frida-ps -U
 로 잘 설치됬는지 확인
 
 
+참조사이트: https://kk-7790.tistory.com/97

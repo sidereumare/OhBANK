@@ -1,5 +1,4 @@
-참조사이트:https://securityspecialist.tistory.com/113
-#Burp Suite
+Burp Suite
 
  
  1. Bupr Suite 설치

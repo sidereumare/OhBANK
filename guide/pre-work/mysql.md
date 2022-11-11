@@ -1,4 +1,6 @@
-참조사이트: https://goddaehee.tistory.com/277
+# MySQL 설치
+---
+
 https://dev.mysql.com/downloads/installer/
 
 ![설치 1](https://user-images.githubusercontent.com/53963779/201035397-a336d93d-86c2-41e3-b9b1-b85aced77921.png)

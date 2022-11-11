@@ -1,4 +1,5 @@
-참조사이트: https://omoknooni.tistory.com/25
+# Nox 설치
+---
 
 https://kr.bignox.com/
 에서 녹스 다운로드
@@ -18,7 +19,7 @@ root켜기 설정
 
 설치 후 nox 매니저에서 실행하여 핸드폰 모드 설정, root 권한 부여
 
- ---
+ 
 
  # 에뮬레이터 프록시로 잡기
 
@@ -99,3 +100,5 @@ mv [파일명] /system/etc/security/cacerts
 ![image](https://user-images.githubusercontent.com/53963779/201246185-dd8d1176-03e3-4c08-8cb4-1f1d2cbb9018.png)
 
 프록시가 잘 잡히는 것 확인
+
+참조사이트: https://omoknooni.tistory.com/25
