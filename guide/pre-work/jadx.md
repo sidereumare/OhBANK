@@ -2,21 +2,21 @@
 ---
 
 
-1. 사이트 접속  후 최신 버전 다운로드
+사이트 접속  후 최신 버전 다운로드
 
-https://github.com/skylot/jadx
+
 
 https://github.com/skylot/jadx/releases
-2. 윈도우 환경인 경우, jre-windows로 끝나는 파일 다운
+윈도우 환경인 경우, jre-windows로 끝나는 파일 다운
 
-![image](https://user-images.githubusercontent.com/53963779/201239146-a12f18cd-2f04-4954-bdc6-0435574c8f32.png)
+![image](https://user-images.githubusercontent.com/53963779/201268802-d38ab934-89a2-48dc-a124-6386612047ca.png)
 
 
-3. 압축을 해제하고 jadx-gui.bat 실행
+압축을 해제하고 jadx-gui.bat 실행
 
 
 ![jadx로 apk 열기](https://user-images.githubusercontent.com/53963779/201239659-edbd29ea-483e-4bad-8623-83a6c02a97bb.png)
-4. apk나 zip 파일 열기
+apk나 zip 파일 열기
 
  
 
