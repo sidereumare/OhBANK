@@ -2,11 +2,19 @@ name: github pages
 
 on: [label, push]
 
+env:
+  CACHED_DEPENDENCY_PATHS: ${{ github.workspace }}/node_modules
+  CACHED_BUILD_PATHS: ${{ github.workspace }}/guide/.vuepress/dist
+  BUILD_CACHE_KEY: ${{ github.sha }}
+
 jobs:
-  build-deploy:
+  job_install_dependencies:
+    name: Install Dependencies
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out current commit (${{ github.sha }})
+        uses: actions/checkout@v3
         with:
           ref: guideline
 
@@ -15,9 +23,56 @@ jobs:
         with:
           node-version: '12.x'
 
-      - run: npm install
+      - name: Compute dependency cache key
+        id: compute_lockfile_hash
+        run: echo "::set-output name=hash::${{ hashFiles('package-lock.json') }}"
 
-      - run: npm run guide:build
+      - name: Check dependency cache
+        uses: actions/cache@v3
+        id: cache_dependencies
+        with:
+          path: ${{ env.CACHED_DEPENDENCY_PATHS }}
+          key: ${{ steps.compute_lockfile_hash.outputs.hash }}
+
+      - name: Install dependencies
+        # 하이픈 변수에는 '[]'가 아니라 '.'을 사용하세요
+        # https://github.com/nektos/act/issues/104#issuecomment-592892249
+        if: steps.cache_dependencies.outputs.cache-hit == ''
+        run: npm install
+    outputs:
+      dependency_cache_key: ${{ steps.compute_lockfile_hash.outputs.hash }}
+      
+  build-deploy:
+    name: build and deploy
+    needs: job_install_dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out current commit (${{ github.sha }})
+        uses: actions/checkout@v3
+        with:
+          ref: guideline
+
+      - name: Setup Node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: '12.x'
+          
+      - name: Check dependency cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.CACHED_DEPENDENCY_PATHS }}
+          key: ${{ needs.job_install_dependencies.outputs.dependency_cache_key }}
+          
+      - name: Check build cache
+        uses: actions/cache@v3
+        id: cache_built_packages
+        with:
+          path: ${{ env.CACHED_BUILD_PATHS }}
+          key: ${{ env.BUILD_CACHE_KEY }}
+          
+      - name: Build packages
+        if: steps.cache_built_packages.outputs.cache-hit == ''
+        run: npm run guide:build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.9.0
