@@ -1,5 +1,5 @@
 
-#Frida 설치
+# Frida 설치
 ---
 https://github.com/frida/frida/releases
 
