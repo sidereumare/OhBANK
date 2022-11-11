@@ -26,3 +26,4 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./guide/.vuepress/dist
           cname: ohbank.online
+          force_orphan: true
