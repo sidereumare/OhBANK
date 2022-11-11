@@ -1,5 +1,5 @@
 
-
+참조사이트: https://kk-7790.tistory.com/97
 
 https://github.com/frida/frida/releases
 
@@ -40,14 +40,17 @@ cp frida-server-14.2.13-android-arm64 /system/priv-app/
 ```
 
 
+![image](https://user-images.githubusercontent.com/53963779/201240170-d0feb32e-c6ff-48d6-9987-66a843411610.png)
+
 ```
-cd /systemp/priv-app
+cd /system/priv-app
 ./[frida 서버 파일명]
 ```
 
+![frida-ps -U]](https://user-images.githubusercontent.com/53963779/201240491-8d8b2730-4ef6-4833-9610-23d0d415819a.png)
 
 ```
-frida-ps U
+frida-ps -U
 ```
 로 잘 설치됬는지 확인
 

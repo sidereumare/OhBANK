@@ -1,15 +1,16 @@
+참조사이트:https://securityspecialist.tistory.com/113
 #Burp Suite
 
  
  1. Bupr Suite 설치
-    1_1) 아래 경로로 접속합니다.
+     
 
-    경로 : https://portswigger.net/burp/releases/professional-community-2022-9-5?requestededition=community&requestedplatform=
+    https://portswigger.net/burp/releases/professional-community-2022-9-5?requestededition=community&requestedplatform=
  
 ![Bupr Suite 페이지](https://user-images.githubusercontent.com/53963779/201017737-f256aac5-1f8a-4bf4-921d-5842c057be01.png)
 
 
-1_3) 본인의 운영체제에 맞게 선택 후 Download를 클릭합니다.
+    본인의 운영체제에 맞게 선택 후 Download를 클릭
 
 설치 파일 실행
 
@@ -31,5 +32,4 @@
 
 
 
-![인터페이스 추가](https://user-images.githubusercontent.com/53963779/201027646-8fbb70cf-21e5-4500-b801-f427bb0a1484.png)
 
