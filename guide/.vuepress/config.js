@@ -19,7 +19,7 @@ module.exports = {
         smoothScroll: true // 부드러운 스크롤 사용 여부
     },
     //레파지토리의 이름을 아래에 넣어주면된다.
-    base: "/OhBANK/"
+    // base: "/OhBANK/"
 };
 
 function getSidebarArr() {

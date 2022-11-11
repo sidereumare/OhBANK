@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '12.x'
 
-      - run: npm install -D vuepress
+      - run: npm install
 
       - run: npm run guide:build
 
@@ -25,3 +25,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./guide/.vuepress/dist
+          cname: ohbank.online
+          force_orphan: true
