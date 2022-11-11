@@ -5,7 +5,8 @@
 
 
 ![image](https://user-images.githubusercontent.com/53963779/201042045-89dd8f7c-1d24-426d-8cf6-fc0c2875348f.png)
-https://github.com/NationalSecurityAgency/ghidra/releases
+
+[ghidra 설치 링크](https://github.com/NationalSecurityAgency/ghidra/releases)
 위 링크에서 최신 버전 ghidra를 다운
 
 ![image](https://user-images.githubusercontent.com/53963779/201263359-c881766f-73f4-463f-bac8-5d181344f277.png)
