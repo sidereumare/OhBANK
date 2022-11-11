@@ -4,7 +4,6 @@
     <h1>OhBank pentest app</h1>
 </div>
 
----
 <div align="center">
     <!-- java -->
     <img src="https://img.shields.io/badge/Java-red?logo=Java&logoColor=white">
@@ -84,12 +83,10 @@
 
 
 
----
 ## 개발 목적
 
 소개***
 
----
 ## Contributors
 ### 10AM 팀
 - 고경표 ([@GyeongPyoKo](https://github.com/GyeongPyoKo))
