@@ -8,5 +8,8 @@
   "scripts": {
     "guide:dev": "vuepress dev guide",
     "guide:build": "vuepress build guide"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.9.7"
   }
 }

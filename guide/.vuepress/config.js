@@ -1,4 +1,7 @@
 module.exports = {
+    plugins: [
+        ['@vuepress/plugin-back-to-top', true],
+    ],
     title: "모의해킹 가이드",
     description: "desc",
     theme: "yuu",
