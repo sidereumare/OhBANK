@@ -75,6 +75,7 @@ jobs:
         run: npm run guide:build
 
       - name: Deploy
+        if: steps.cache_built_packages.outputs.cache-hit == ''
         uses: peaceiris/actions-gh-pages@v3.9.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
