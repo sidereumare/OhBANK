@@ -4,13 +4,7 @@
     <h1>OhBank pentest app</h1>
 </div>
 
-
-
-<!-- 프로젝트 개요 -->
-
-<!-- <div align="center">
-    <h5>언어</h5>
-</div> -->
+---
 <div align="center">
     <!-- java -->
     <img src="https://img.shields.io/badge/Java-red?logo=Java&logoColor=white">
@@ -88,24 +82,15 @@
     <img src="https://img.shields.io/badge/2022.08.11-2020.11.22-blue">
 </div>
 
----
 
-<!-- 개발 인원 -->
-
-
-<div align="center">
-    <h2>Contributors</h2>
-</div>
----
-
-<!-- 개발 목적 -->
-
-<div align="center">
-    <h2>개발 목적</h2>
-</div>
 
 ---
+## 개발 목적
 
+소개***
+
+---
+## Contributors
 ### 10AM 팀
 - 고경표 ([@GyeongPyoKo](https://github.com/GyeongPyoKo))
 - 김병현 ([@sidereumare](https://github.com/sidereumare))

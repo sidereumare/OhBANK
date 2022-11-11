@@ -1,105 +1,108 @@
-<h1 align="center">Damn Vulnerable Bank</h1>
+<!-- 제목 가운데 정렬  -->
 
-<p align="center">
-  <a href="https://github.com/rewanthtammana/Damn-Vulnerable-Bank/fork">
-    <img src="https://img.shields.io/github/forks/rewanthtammana/Damn-Vulnerable-Bank">
-  </a>
-  <a href="https://github.com/rewanthtammana/Damn-Vulnerable-Bank/stargazers">
-    <img src="https://img.shields.io/github/stars/rewanthtammana/Damn-Vulnerable-Bank">
-  </a>
-  <a href="https://github.com/rewanthtammana/Damn-Vulnerable-Bank/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/rewanthtammana/Damn-Vulnerable-Bank">
-  </a>
-  <a href="https://twitter.com/intent/tweet?text=Damn%20Vulnerable%20Bank%20Guide:&url=https%3A%2F%2Fgithub.com%2Frewanthtammana%2FDamn-Vulnerable-Bank">
-    <img src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Frewanthtammana%2FDamn-Vulnerable-Bank">
-  </a>
-</p>
+<div align="center">
+    <h1>OhBank pentest app</h1>
+</div>
 
-<p align="center">
-  <b>Guide: https://rewanthtammana.com/damn-vulnerable-bank/</b>
-</p>
-
-## About application
-[Damn Vulnerable Bank](https://github.com/rewanthtammana/Damn-Vulnerable-Bank) is designed to be an intentionally vulnerable android application. All the details are documented in the guide, [here](https://rewanthtammana.com/damn-vulnerable-bank/).
-
-![Guide overview](./images/damn-vulnerable-bank-guide.png)
-
-<!-- <img src="https://github.com/rewanthtammana/Damn-Vulnerable-Bank/blob/master/images/screen1.jpg" align="centre" height="600" width="395"><img src="https://github.com/rewanthtammana/Damn-Vulnerable-Bank/blob/master/images/screen2.jpg" align="centre" height="600" width="395"> -->
-
-## Upcoming Sessions
-
-### NoNameCon
-
-* [https://cfp.nonamecon.org/nnc2021/talk/WCKLTN/](https://cfp.nonamecon.org/nnc2021/talk/WCKLTN/)
-
-### Black Hat Europe
-
-* [TBD](https://www.blackhat.com/eu-21/)
-
-## Features
-- [x] Sign up
-- [x] Login
-- [x] My profile interface
-- [x] Change password
-- [x] Settings interface to update backend URL
-- [x] Add fingerprint check before transferring/viewing funds
-- [x] Add pin check before transferring/viewing funds
-- [x] View balance
-- [x] Transfer money
-  - [x] Via manual entry
-  - [ ] Via QR scan
-- [x] Add beneficiary
-- [x] Delete beneficiary
-- [x] View beneficiary
-- [x] View transactions history
-- [ ] Download transactions history
-
-## List of vulnerabilities in the application
-
-To keep things crisp and interesting, we hidden this section. Do not toggle this button if you want a fun and challenging experience. Try to explore the application, find all the possible vulnerabilities and then cross check your findings with this list.
-
-<details>
-  <summary>Spoiler Alert</summary>
-
-- [x] Root and emulator detection
-- [x] Anti-debugging checks (prevents hooking with frida, jdb, etc)
-- [ ] SSL pinning - pin the certificate/public key
-- [x] Obfuscate the entire code
-- [x] Encrypt all requests and responses
-- [x] Hardcoded sensitive information
-- [x] Logcat leakage
-- [ ] Insecure storage (saved credit card numbers maybe)
-- [x] Exported activities
-- [ ] JWT token
-- [x] Webview integration
-- [x] Deep links
-- [ ] IDOR
-</details>
-
-## Backend to-do
-
-- [x] Add profile and change-password routes
-- [ ] Create different secrets for admin and other users
-- [ ] Add dynamic generation of secrets to verify JWT tokens
-- [ ] Introduce bug in jwt verification
-- [x] Find a way to store database and mount it while using docker
-- [X] Dockerize environment
-
-## Core Team
-
-[Damn Vulnerable Bank](https://rewanthtammana.com/damn-vulnerable-bank/) was created by 
-
-|   |   |   |
-|---|---|---|
-| Rewanth Tammana (Rest API)  | [Github](https://github.com/rewanthtammana/)  | [LinkedIn](https://www.linkedin.com/in/rewanthtammana/)  |
-| Akshansh Jaiswal (Android App)  | [Github](https://github.com/jaiswalakshansh)  | [LinkedIn](https://www.linkedin.com/in/akshanshjaiswal/)  |
-| Hrushikesh Kakade (Android App)  | [Github](https://github.com/HrushikeshK/)  | [LinkedIn](https://www.linkedin.com/in/hrushikeshkakade/)  |
+---
+<div align="center">
+    <!-- java -->
+    <img src="https://img.shields.io/badge/Java-red?logo=Java&logoColor=white">
+    <!-- javascript -->
+    <img src="https://img.shields.io/badge/JavaScript-yellow?logo=JavaScript&logoColor=white">
+    <!-- python-->
+    <img src="https://img.shields.io/badge/Python-3873A1?logo=Python&logoColor=white">
+</div>
+<!-- 
+<div align="center">
+    <h5>개발 툴</h5>
+</div> -->
+<div align="center">
+    <!-- android studio -->
+    <img src="https://img.shields.io/badge/AndroidStudio-green?logo=AndroidStudio&logoColor=white">
+    <!-- gradle -->
+    <img src="https://img.shields.io/badge/Gradle-limegreen?logo=Gradle&logoColor=white">
+    <!-- vscode -->
+    <img src="https://img.shields.io/badge/VSCode-46AAE9?logo=VisualStudioCode&logoColor=white">
+    <!-- npm -->
+    <img src="https://img.shields.io/badge/NPM-crimson?logo=NPM&logoColor=white">
+</div>
+<!-- 
+<div align="center">
+    <h5>환경</h5>
+</div> -->
+<div align="center">
+    <!-- kali -->
+    <img src="https://img.shields.io/badge/Kali-silver?logo=Kali&logoColor=white">
+    <!-- windows -->
+    <img src="https://img.shields.io/badge/Windows-0173D4?logo=Windows&logoColor=white">
+    <!-- ubuntu -->
+    <img src="https://img.shields.io/badge/Ubuntu-E95420?logo=Ubuntu&logoColor=white">
+    <!-- android -->
+    <img src="https://img.shields.io/badge/Android-73BB56?logo=Android&logoColor=white">
+    <!-- aws -->
+    <img src="https://img.shields.io/badge/AWS-orange?logo=AmazonAWS&logoColor=white">
+    <!-- mysql -->
+    <img src="https://img.shields.io/badge/MySQL-00718B?logo=MySQL&logoColor=white">
+    <!-- nodejs -->
+    <img src="https://img.shields.io/badge/Node.js-green?logo=Node.js&logoColor=white">
+    <!-- express -->
+    <img src="https://img.shields.io/badge/Express-83C13B?logo=Express&logoColor=white">
+</div>
+<!-- 
+<div align="center">
+    <h5>테스트 도구</h5>
+</div> -->
+<div align="center">
+    <!-- jadx -->
+    <img src="https://img.shields.io/badge/Jadx-9E1F63?logo=Jadx&logoColor=white">
+    <!-- Ghidra -->
+    <img src="https://img.shields.io/badge/Ghidra-DB2625?logo=Ghidra&logoColor=white">
+    <!-- Frida -->
+    <img src="https://img.shields.io/badge/Frida-E86153?logo=Frida&logoColor=white">
+    <!-- BurpSuite -->
+    <img src="https://img.shields.io/badge/BurpSuite-F76331?logo=BurpSuite&logoColor=white">
+</div>
+<!-- 
+<div align="center">
+    <h5>협업도구</h5>
+</div> -->
+<div align="center">
+    <!-- git -->
+    <img src="https://img.shields.io/badge/Git-E84D31?logo=Git&logoColor=white">
+    <!-- github -->
+    <img src="https://img.shields.io/badge/GitHub-808080?logo=GitHub&logoColor=white">
+    <!-- notion -->
+    <img src="https://img.shields.io/badge/Notion-333333?logo=Notion&logoColor=white">
+</div>
+<!-- <div align="center">
+    <h2>개발 기간</h2>
+</div> -->
+<div align="center">
+    <img src="https://img.shields.io/badge/2022.08.11-2020.11.22-blue">
+</div>
 
 
-Read more, [here](https://rewanthtammana.com/damn-vulnerable-bank/authors.html).
 
+---
+## 개발 목적
+
+소개***
+
+---
 ## Contributors
+### 10AM 팀
+- 고경표 ([@GyeongPyoKo](https://github.com/GyeongPyoKo))
+- 김병현 ([@sidereumare](https://github.com/sidereumare))
+- 김진형 ([@musicmanposture](https://github.com/musicmanposture))
+- 김현진 ([@hyunjin423](https://github.com/hyunjin423))
+- 박건웅 ([@shboan08](https://github.com/shboan08))
+- 서보금 ([@bgmmmm](https://github.com/bgmmmm))
+- 이현우 ([@uwwual](https://github.com/uwwual))
+- 임영재 ([@Young-Jae-Lim](https://github.com/Young-Jae-Lim))
+- 채하늘 ([@sky302](https://github.com/sky302))
+- 홍지원 ([@hjw961004](https://github.com/hjw961004))
 
-<a href = "https://github.com/rewanthtammana/damn-vulnerable-bank/contributors">
-  <img src = "https://contrib.rocks/image?repo=rewanthtammana/damn-vulnerable-bank"/>
-</a>
+
+
+
