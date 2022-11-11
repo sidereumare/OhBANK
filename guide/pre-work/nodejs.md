@@ -1,7 +1,7 @@
 # Nodejs 설치
 ---
 
-https://nodejs.org/ko/download/releases/
+[nodejs 설치 링크](https://nodejs.org/ko/download/releases/)
 
 ![version 선택](https://user-images.githubusercontent.com/53963779/201024550-c8fa9c9c-a4cf-4292-87d1-f821a9a3dc17.png)
 

@@ -3,7 +3,8 @@
 
 [android studio 설치 링크](https://developer.android.com/studio)
 
-![studio 설치](https://user-images.githubusercontent.com/53963779/201026129-dce35533-a345-4d77-9990-f4c4aca64d40.png)
+![image](https://user-images.githubusercontent.com/53963779/201301266-018865d8-89e0-4a20-b172-4e6489b34a29.png)
+
 
 download android studio 버튼 클릭해 설치 파일 다운
 
