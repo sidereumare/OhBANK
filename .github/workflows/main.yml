@@ -1,0 +1,27 @@
+name: github pages
+
+on: [label, push]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: guideline
+
+      - name: Setup Node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: '12.x'
+
+      - run: npm install -D vuepress
+
+      - run: npm run guide:build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3.9.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./guide/.vuepress/dist
