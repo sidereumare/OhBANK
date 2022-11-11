@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "vue": "^2.7.14",
+    "vue-server-renderer": "^2.7.14",
+    "vuepress": "^1.9.7",
+    "vuepress-theme-yuu": "^3.1.1"
+  },
+  "scripts": {
+    "guide:dev": "vuepress dev guide",
+    "guide:build": "vuepress build guide"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.9.7"
+  }
+}

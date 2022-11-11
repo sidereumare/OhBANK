@@ -1,46 +1,108 @@
-<meta property='twitter:title' content="Damn Vulnerable Bank Guide"/>
-<meta property='twitter:image' content="https://raw.githubusercontent.com/rewanthtammana/Damn-Vulnerable-Bank/master/images/damn-vulnerable-bank-guide.png"/>
-<meta name="twitter:card" content="summary_large_image"/>
+<!-- 제목 가운데 정렬  -->
 
-## About Damn Vulnerable Bank
+<div align="center">
+    <h1>OhBank pentest app</h1>
+</div>
 
-[Damn Vulnerable Bank](https://github.com/rewanthtammana/Damn-Vulnerable-Bank) is designed to be an intentionally vulnerable android application. Numerous resources are available on the internet to get started with android application security. This application provides an interface to assess the security knowledge you gained over time. There are multiple vulnerabilities in the application and we documented all of them in this [guide](https://rewanthtammana.com/damn-vulnerable-bank/). Take your own sweet time to explore the application and detect all the vulnerabilities.
+---
+<div align="center">
+    <!-- java -->
+    <img src="https://img.shields.io/badge/Java-red?logo=Java&logoColor=white">
+    <!-- javascript -->
+    <img src="https://img.shields.io/badge/JavaScript-yellow?logo=JavaScript&logoColor=white">
+    <!-- python-->
+    <img src="https://img.shields.io/badge/Python-3873A1?logo=Python&logoColor=white">
+</div>
+<!-- 
+<div align="center">
+    <h5>개발 툴</h5>
+</div> -->
+<div align="center">
+    <!-- android studio -->
+    <img src="https://img.shields.io/badge/AndroidStudio-green?logo=AndroidStudio&logoColor=white">
+    <!-- gradle -->
+    <img src="https://img.shields.io/badge/Gradle-limegreen?logo=Gradle&logoColor=white">
+    <!-- vscode -->
+    <img src="https://img.shields.io/badge/VSCode-46AAE9?logo=VisualStudioCode&logoColor=white">
+    <!-- npm -->
+    <img src="https://img.shields.io/badge/NPM-crimson?logo=NPM&logoColor=white">
+</div>
+<!-- 
+<div align="center">
+    <h5>환경</h5>
+</div> -->
+<div align="center">
+    <!-- kali -->
+    <img src="https://img.shields.io/badge/Kali-silver?logo=Kali&logoColor=white">
+    <!-- windows -->
+    <img src="https://img.shields.io/badge/Windows-0173D4?logo=Windows&logoColor=white">
+    <!-- ubuntu -->
+    <img src="https://img.shields.io/badge/Ubuntu-E95420?logo=Ubuntu&logoColor=white">
+    <!-- android -->
+    <img src="https://img.shields.io/badge/Android-73BB56?logo=Android&logoColor=white">
+    <!-- aws -->
+    <img src="https://img.shields.io/badge/AWS-orange?logo=AmazonAWS&logoColor=white">
+    <!-- mysql -->
+    <img src="https://img.shields.io/badge/MySQL-00718B?logo=MySQL&logoColor=white">
+    <!-- nodejs -->
+    <img src="https://img.shields.io/badge/Node.js-green?logo=Node.js&logoColor=white">
+    <!-- express -->
+    <img src="https://img.shields.io/badge/Express-83C13B?logo=Express&logoColor=white">
+</div>
+<!-- 
+<div align="center">
+    <h5>테스트 도구</h5>
+</div> -->
+<div align="center">
+    <!-- jadx -->
+    <img src="https://img.shields.io/badge/Jadx-9E1F63?logo=Jadx&logoColor=white">
+    <!-- Ghidra -->
+    <img src="https://img.shields.io/badge/Ghidra-DB2625?logo=Ghidra&logoColor=white">
+    <!-- Frida -->
+    <img src="https://img.shields.io/badge/Frida-E86153?logo=Frida&logoColor=white">
+    <!-- BurpSuite -->
+    <img src="https://img.shields.io/badge/BurpSuite-F76331?logo=BurpSuite&logoColor=white">
+</div>
+<!-- 
+<div align="center">
+    <h5>협업도구</h5>
+</div> -->
+<div align="center">
+    <!-- git -->
+    <img src="https://img.shields.io/badge/Git-E84D31?logo=Git&logoColor=white">
+    <!-- github -->
+    <img src="https://img.shields.io/badge/GitHub-808080?logo=GitHub&logoColor=white">
+    <!-- notion -->
+    <img src="https://img.shields.io/badge/Notion-333333?logo=Notion&logoColor=white">
+</div>
+<!-- <div align="center">
+    <h2>개발 기간</h2>
+</div> -->
+<div align="center">
+    <img src="https://img.shields.io/badge/2022.08.11-2020.11.22-blue">
+</div>
 
-<style>
-img.resize {
-  max-width:50%;
-  max-height:50%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-img {
-  border: 5px solid #555;
-}
-</style>
 
 
-<img class="resize" align="center" src="https://rewanthtammana.com/damn-vulnerable-bank/images/ui.jpg" alt="Splash screen here">
+---
+## 개발 목적
 
-## Outline
+소개***
 
-<!-- - [About Damn Vulnerable Bank](about.md) -->
-<!-- - [Introduction](README.md) -->
-- [Authors](authors.md)
-- [Tools](tools.md)
-- [Installation](installation/index.md)
-    - [Bypass](installation/bypass/index.md)
-        - [GPU detection](installation/bypass/gpu-detection.md)
-        - [Root Detection](installation/bypass/root-detection.md)
-        - [Frida detection with Ghidra](installation/bypass/frida-detection-with-ghidra.md)
-- [Footprinting](footprinting/index.md)
-    - [Decrypting response](footprinting/decrypt-response.md)
-    - [Recreating crypto functions](footprinting/crypto.md)
-- [Exploits](exploits/index.md)
-    - [REST API vulnerabilities](exploits/exploit-1.md)
-    - [Sensitive Information Disclosure](exploits/exploit-2.md)
-    - [Exported activities](exploits/exploit-3.md)
-    - [Webview via deeplink](exploits/exploit-4.md)
-- [Contribute](contribution.md)
-- [Additional Resources](additional-resources.md)
+---
+## Contributors
+### 10AM 팀
+- 고경표 ([@GyeongPyoKo](https://github.com/GyeongPyoKo))
+- 김병현 ([@sidereumare](https://github.com/sidereumare))
+- 김진형 ([@musicmanposture](https://github.com/musicmanposture))
+- 김현진 ([@hyunjin423](https://github.com/hyunjin423))
+- 박건웅 ([@shboan08](https://github.com/shboan08))
+- 서보금 ([@bgmmmm](https://github.com/bgmmmm))
+- 이현우 ([@uwwual](https://github.com/uwwual))
+- 임영재 ([@Young-Jae-Lim](https://github.com/Young-Jae-Lim))
+- 채하늘 ([@sky302](https://github.com/sky302))
+- 홍지원 ([@hjw961004](https://github.com/hjw961004))
+
+
+
+
