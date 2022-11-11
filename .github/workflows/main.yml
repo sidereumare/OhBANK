@@ -44,6 +44,7 @@ jobs:
       
   build-deploy:
     name: build and deploy
+    needs: job_install_dependencies
     runs-on: ubuntu-latest
     steps:
       - name: Check out current commit (${{ github.sha }})
