@@ -5,7 +5,7 @@
      
 ![Bupr Suite 페이지](https://user-images.githubusercontent.com/53963779/201017737-f256aac5-1f8a-4bf4-921d-5842c057be01.png)
 
-https://portswigger.net/burp/releases/professional-community-2022-9-5?requestededition=community&requestedplatform=
+[Burp Suite 설치 링크](https://portswigger.net/burp/releases/professional-community-2022-9-5?requestededition=community&requestedplatform=)  
 위 링크에 들어가 운영체제에 맞게 선택 후 Download를 클릭
 
 설치 파일 실행

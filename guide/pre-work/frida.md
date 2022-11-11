@@ -1,7 +1,7 @@
 
 # Frida 설치
 ---
-https://github.com/frida/frida/releases
+[frida 설치 링크](https://github.com/frida/frida/releases)
 
 ![Untitled (13)](https://user-images.githubusercontent.com/53963779/201031056-06bc0b5b-7a76-4076-9ecf-99ab81fae4dc.png)
 

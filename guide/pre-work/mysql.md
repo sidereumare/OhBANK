@@ -4,7 +4,7 @@
 
 
 ![설치 1](https://user-images.githubusercontent.com/53963779/201035397-a336d93d-86c2-41e3-b9b1-b85aced77921.png)
-https://dev.mysql.com/downloads/installer/
+[mysql 설치 링크](https://dev.mysql.com/downloads/installer/)
 위 링크에 들어가 두번째 파일 다운
 
 ![2](https://user-images.githubusercontent.com/53963779/201035655-ea2603f8-2bd3-4843-bbcc-00f33b2ffac2.png)
