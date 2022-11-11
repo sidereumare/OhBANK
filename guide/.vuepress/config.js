@@ -40,6 +40,9 @@ function getSidebarArr() {
             HomeFilelist.push(file);
         }});
     sidebarArr.unshift(makeSidebarObject("", HomeFilelist));
+
+    // home 페이지 이름 강제 설정
+    sidebarArr[0].children[0] = ['/.md', 'Introcuion'];
     return sidebarArr;
 }
 function makeSidebarObject(folder, mdfileList) {
