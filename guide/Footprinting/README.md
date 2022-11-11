@@ -1,3 +1,0 @@
-# Introduction footprinting
-
-testtest
