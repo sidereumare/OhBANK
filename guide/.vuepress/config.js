@@ -27,7 +27,8 @@ function getSidebarArr() {
     var docsPath = __dirname + "/../";
     var sidebarArr = [];
     var HomeFilelist = [];
-    var filelist = fs.readdirSync(docsPath);
+    // var filelist = fs.readdirSync(docsPath);
+    var filelist = ['.vuepress', 'PreWork', 'Bypass', 'Footprinting', 'Exploits', 'Etc', 'README.md']
     filelist.forEach(function(file) {
         if (file === ".vuepress") return;
         var stat = fs.lstatSync(docsPath + "/" + file);
