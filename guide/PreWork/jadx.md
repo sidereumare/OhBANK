@@ -2,11 +2,11 @@
 ---
 
 
-사이트 접속  후 최신 버전 다운로드
+링크 접속  후 최신 버전 다운로드
 
 
 
-https://github.com/skylot/jadx/releases
+[jadx 설치 링크](https://github.com/skylot/jadx/releases)
 윈도우 환경인 경우, jre-windows로 끝나는 파일 다운
 
 ![image](https://user-images.githubusercontent.com/53963779/201268802-d38ab934-89a2-48dc-a124-6386612047ca.png)

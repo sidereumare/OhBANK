@@ -1,7 +1,7 @@
 # Nox 설치
 ---
 
-https://kr.bignox.com/
+[nox 설치 링크](https://kr.bignox.com/)
 에서 녹스 다운로드
 
 ![image](https://user-images.githubusercontent.com/53963779/201028139-2dfca496-4dec-4aac-85e0-54740382b8e4.png)
