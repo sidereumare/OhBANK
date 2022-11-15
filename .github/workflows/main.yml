@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3.5.1
         with:
-          node-version: '12.x'
+          node-version: '16.x'
       
       - name: Compute dependency cache key
         id: compute_lockfile_hash
