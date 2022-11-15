@@ -26,7 +26,7 @@ export default hopeTheme({
       // sidebar
       sidebar: koSidebar,
 
-      footer: 'Default footer',
+      footer: '10AM Team',
 
       displayFooter: true,
 
