@@ -17,7 +17,7 @@ export default hopeTheme({
   docsDir: 'guide',
 
   pageInfo: ['Original', 'Date', 'Category', 'Tag'],
-
+  darkmode: 'enable',
   locales: {
     '/': {
       // navbar
