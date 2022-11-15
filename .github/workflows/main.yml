@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3.5.1
         with:
-          node-version: '12.x'
+          node-version: '16.x'
       
       - name: Compute dependency cache key
         id: compute_lockfile_hash
@@ -46,6 +46,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./guide/.vuepress/dist
+          publish_dir: ./dist
           cname: ohbank.online
           force_orphan: true
