@@ -4,7 +4,6 @@
     <h1>OhBank pentest app</h1>
 </div>
 
----
 <div align="center">
     <!-- java -->
     <img src="https://img.shields.io/badge/Java-red?logo=Java&logoColor=white">
@@ -85,11 +84,11 @@
 
 
 ## 개발 목적
----
+
 [OhBank](https://github.com/sidereumare/OhBANK)은 [Damn Bulnerable Bank](https://github.com/rewanthtammana/Damn-Vulnerable-Bank)를 기반으로 의도적으로 취약하게 만들어진 앱입니다. 이 앱을 통해 안드로이드 어플리케이션과 API서버, (클라우드|로컬)의 취약점을 찾아내고, 그 취약점을 이용해 공격하는 방법을 배울 수 있습니다. 해당 취약점들에 대한 자세한 설명은 [OhBank Guide](https://ohbank.online/)를 참고해주세요.
 
 ## 취약점 목록
----
+
 다음은 이 앱을 통해 배울 수 있는 취약점들입니다.
 <!-- 토글 -->
 <details>
@@ -107,7 +106,7 @@
 
 
 ## Contributors
----
+
 ### 10AM 팀
 - 고경표 ([@GyeongPyoKo](https://github.com/GyeongPyoKo))
 - 김병현 ([@sidereumare](https://github.com/sidereumare))
