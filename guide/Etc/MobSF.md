@@ -7,7 +7,7 @@ MobSF(Mobile Security Framework)는 **정적 및 동적 분석**을 수행할 �
 ### **설치 방법**
 
 - [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF) 다운로드
-    - Python 3.8 / 3.9 버전에서만 빌드 가능 ( 3.10 에선 안됐음)
+    - Python 3.8 / 3.9 버전에서만 빌드 가능 ( 3.10 에선 불가능)
     
 - 추가 설치 필요한 항목
     - OpenSSL
