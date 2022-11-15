@@ -29,11 +29,8 @@ export default hopeTheme({
       footer: '10AM Team',
 
       displayFooter: true,
-
-      metaLocales: {
-        editLink: 'Edit this page on GitHub',
-      },
     },
+    
   },
 
   plugins: {
@@ -42,6 +39,11 @@ export default hopeTheme({
     // To avoid disturbing the theme developer and consuming his resources, please DO NOT use the following config directly in your production environment!!!!!
 
     // Disable features you don’t want here
+    git: {
+      createdTime: false,
+      updatedTime: false,
+      contributors: false,
+    },
     mdEnhance: {
       align: true,
       attrs: true,
