@@ -23,6 +23,8 @@ function makeSidebarObject(folder, mdfileList) {
           mdfile = mdfile.slice(0, -3) === "README" ? "" : mdfile.slice(0, -3);
           if(mdfile !== "") {
             tmpMdfileList.push(path + mdfile + ".md");
+          }else{
+            tmpMdfileList.push(path+'README.md');
           }
       }
   });
@@ -36,13 +38,15 @@ function makeSidebarObject(folder, mdfileList) {
   } else {
     return {
       text: "Home",
-      link: path
+      link: path,
+      collapsable: true
     }
   }
   return {
       text: title,
-      link: path,
-      children: mdfileList
+      // link: path,
+      children: mdfileList,
+      collapsable: true
   };
 }
 function getSidebarArr() {
