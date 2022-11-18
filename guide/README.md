@@ -79,7 +79,7 @@
     <h2>개발 기간</h2>
 </div> -->
 <div align="center">
-    <img src="https://img.shields.io/badge/2022.08.11-2020.11.22-blue">
+    <img src="https://img.shields.io/badge/2022.10.08-2022.11.22-blue">
 </div>
 
 
