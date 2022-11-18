@@ -4,7 +4,7 @@
     "vuepress-theme-hope": "2.0.0-beta.121"
   },
   "scripts": {
-    "guide:dev": "SET NODE_OPTIONS=--openssl-legacy-provider && vuepress dev guide",
+    "guide:dev": "vuepress dev guide",
     "guide:build": "vuepress build guide"
   }
 }
