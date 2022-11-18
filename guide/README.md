@@ -86,7 +86,7 @@
 
 ## 개발 목적
 
-[OhBank](https://github.com/sidereumare/OhBANK)은 [Damn Bulnerable Bank](https://github.com/rewanthtammana/Damn-Vulnerable-Bank)를 기반으로 의도적으로 취약하게 만들어진 앱입니다. 이 앱을 통해 안드로이드 어플리케이션과 API서버, (클라우드|로컬)의 취약점을 찾아내고, 그 취약점을 이용해 공격하는 방법을 배울 수 있습니다. 해당 취약점들에 대한 자세한 설명은 [OhBank Guide](https://ohbank.online/)를 참고해주세요.
+[OhBank](https://github.com/sidereumare/OhBANK)은 [Damn Vulnerable Bank](https://github.com/rewanthtammana/Damn-Vulnerable-Bank)를 기반으로 의도적으로 취약하게 만들어진 앱입니다. 이 앱을 통해 안드로이드 어플리케이션과 API서버, (클라우드|로컬)의 취약점을 찾아내고, 그 취약점을 이용해 공격하는 방법을 배울 수 있습니다. 해당 취약점들에 대한 자세한 설명은 [OhBank Guide](https://ohbank.online/)를 참고해주세요.
 
 ## 취약점 목록
 
