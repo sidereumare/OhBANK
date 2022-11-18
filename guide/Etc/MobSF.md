@@ -1,13 +1,13 @@
-### **MobSF란?**
+# **MobSF란?**
 
 MobSF(Mobile Security Framework)는 **정적 및 동적 분석**을 수행할 수 있는 **자동화**된 일체형 **모바일 애플리케이션**(Android/iOS/Windows) 침투 테스트, 악성 프로그램 분석 및 보안 평가 **프레임워크**이다
 
----
+
 
 ### **설치 방법**
 
 - [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF) 다운로드
-    - Python 3.8 / 3.9 버전에서만 빌드 가능 ( 3.10 에선 안됐음)
+    - Python 3.8 / 3.9 버전에서만 빌드 가능 ( 3.10 에선 불가능)
     
 - 추가 설치 필요한 항목
     - OpenSSL
@@ -19,7 +19,7 @@ MobSF(Mobile Security Framework)는 **정적 및 동적 분석**을 수행할 �
 - Windows : MobSF 하위 경로에서 setup.bat 실행
     - 중간에 많은 오류들이 발생됨, 발생할 때마다 하나씩 해결하면서 설치해야 함
 
----
+
 
 ### **실행 방법**
 
@@ -42,7 +42,7 @@ MobSF(Mobile Security Framework)는 **정적 및 동적 분석**을 수행할 �
 
 ![Untitled 3](https://user-images.githubusercontent.com/53963779/201275757-f07caad5-bae6-4f5f-b6e4-626ce697c9cd.png)
 
----
+
 
 ### MobSF를 통한 OHBank 앱 정적 분석
 
