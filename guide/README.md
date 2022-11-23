@@ -96,11 +96,14 @@
 <summary>취약점 목록</summary>
 <div markdown="1">
 
-- [x] [딥링크 취약점](/Exploits/deeplink)
-- [x] [Activity 설정 취약점](/Exploits/file_and_export)
-- [x] [파일 다운로드 취약점](/Exploits/file_download)
-- [x] [파일 업로드 취약점](/Exploits/file_upload)
-- [x] [하드코딩된 민감정보 취약점](/Exploits/hardcoded)
+- [x] [딥링크 취약점](https://ohbank.online/Exploits/deeplink.html)
+- [x] [Activity 설정 취약점](https://ohbank.online/Exploits/file_and_export.html)
+- [x] [파일 다운로드 취약점](https://ohbank.online/Exploits/file_download.html)
+- [x] [파일 업로드 취약점](https://ohbank.online/Exploits/file_upload.html)
+- [x] [하드코딩된 민감정보 취약점](https://ohbank.online/Exploits/file_hardcoded.html)
+- [x] [SQL 인젝션 취약점](https://ohbank.online/Exploits/SQLI.html)
+- [x] [민감 정보 노출 취약점](https://ohbank.online/Exploits/logcat.html)
+- [x] [웹뷰 취약점](https://ohbank.online/Exploits/webview.html)
 
 </div>
 </details>
