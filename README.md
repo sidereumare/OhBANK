@@ -111,7 +111,7 @@
 ### 10AM 팀
 - 고경표 ([@GyeongPyoKo](https://github.com/GyeongPyoKo))
 - 김병현 ([@sidereumare](https://github.com/sidereumare))
-- 김진형 ([@musicmanposture](https://github.com/jinhyeongkimm))
+- 김진형 ([@jinhyeongkimm](https://github.com/jinhyeongkimm))
 - 김현진 ([@hyunjin423](https://github.com/hyunjin423))
 - 박건웅 ([@shboan08](https://github.com/shboan08))
 - 서보금 ([@bgmmmm](https://github.com/bgmmmm))
