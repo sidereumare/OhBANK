@@ -2,8 +2,7 @@ import { hopeTheme } from 'vuepress-theme-hope';
 import { koNavbar } from './navbar/index.js';
 import { koSidebar } from './sidebar/index.js';
 
-const hostname =
-  process.env.HOSTNAME || 'https://sidereumare.github.io/OhBANK/';
+const hostname = process.env.HOSTNAME || 'https://sidereumare.github.io';
 
 export default hopeTheme({
   hostname,
@@ -12,7 +11,7 @@ export default hopeTheme({
 
   logo: 'https://user-images.githubusercontent.com/114275157/201018069-4a95e05a-d781-4f5d-9601-b41c519a2dd9.png',
 
-  repo: '/sidereumare/OhBANK',
+  repo: 'sidereumare/OhBANK',
 
   docsDir: 'guide',
 

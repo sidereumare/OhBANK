@@ -1,7 +1,7 @@
 import { defineUserConfig } from '@vuepress/cli';
 import theme from './theme.js';
 
-const base = <'/' | `/${string}/`>process.env.BASE || '/';
+const base = <'/' | `/${string}/`>process.env.BASE || '/OhBANK/';
 
 export default defineUserConfig({
   base,

@@ -1,6 +1,9 @@
 name: github pages
 
-on: [label, push]
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
 
 env:
   CACHED_DEPENDENCY_PATHS: ${{ github.workspace }}/node_modules
@@ -13,8 +16,6 @@ jobs:
     steps:
       - name: Check out current commit (${{ github.sha }})
         uses: actions/checkout@v3
-        with:
-          ref: guideline
 
       - name: Setup Node
         uses: actions/setup-node@v3.5.1
@@ -35,7 +36,7 @@ jobs:
       - name: Install dependencies
         # 하이픈 변수에는 '[]'가 아니라 '.'을 사용하세요
         # https://github.com/nektos/act/issues/104#issuecomment-592892249
-        if: steps.cache_dependencies.outputs.cache-hit == ''
+        if: steps.cache_dependencies.outputs.cache-hit != 'true'
         run: npm install
         
       - name: Build packages

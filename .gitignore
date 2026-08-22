@@ -30,3 +30,7 @@ DamnVulnerableBank/.idea/gradle.xml
 DamnVulnerableBank/.idea/runConfigurations.xml
 
 # package-lock.json
+# VuePress 빌드 결과물
+dist/
+guide/.vuepress/.cache/
+guide/.vuepress/.temp/
