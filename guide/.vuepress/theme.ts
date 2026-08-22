@@ -3,7 +3,7 @@ import { koNavbar } from './navbar/index.js';
 import { koSidebar } from './sidebar/index.js';
 
 const hostname =
-  process.env.HOSTNAME || 'https://ohbank.online/';
+  process.env.HOSTNAME || 'https://sidereumare.github.io/OhBANK/';
 
 export default hopeTheme({
   hostname,
