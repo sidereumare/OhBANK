@@ -96,11 +96,11 @@
 <summary>취약점 목록</summary>
 <div markdown="1">
 
-- [x] [딥링크 취약점](/Exploits/deeplink)
-- [x] [Activity 설정 취약점](/Exploits/file_and_export)
-- [x] [파일 다운로드 취약점](/Exploits/file_download)
-- [x] [파일 업로드 취약점](/Exploits/file_upload)
-- [x] [하드코딩된 민감정보 취약점](/Exploits/hardcoded)
+- [x] [딥링크 취약점](/Exploits/deeplink.md)
+- [x] [Activity 설정 취약점](/Exploits/file_and_export.md)
+- [x] [파일 다운로드 취약점](/Exploits/file_download.md)
+- [x] [파일 업로드 취약점](/Exploits/file_upload.md)
+- [x] [하드코딩된 민감정보 취약점](/Exploits/file_hardcoded.md)
 
 </div>
 </details>
